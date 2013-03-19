@@ -7,7 +7,7 @@
     class ExpensesController extends AppController{
         
         public function index(){
-           die("hai saras cantik");
+           die("hai");
         }
     }
 ?>
