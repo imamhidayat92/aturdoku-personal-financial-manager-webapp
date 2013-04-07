@@ -1,0 +1,42 @@
+body {
+    background-color: #ebebeb;
+}
+
+/* Overridden Foundation Styles */
+.row {
+    background-color: #ffffff;
+}
+
+.top-bar {
+    margin-bottom: 0;
+}
+
+.special-font {
+    font-family: 'Yanone Kaffeesatz', 'Arial Narrow', Arial;
+}
+
+.underline {
+    border-bottom: solid 2px #000000;
+}
+
+/* Custom Styles */
+.aturdoku-nav-head {
+    font-family: 'Yanone Kaffeesatz', 'Arial Narrow', Arial;
+    width: 100%;
+    padding: 0 0 0 20px;
+}
+
+.aturdoku-bg-red {
+    background-color: red;
+    color: white;
+}
+
+.aturdoku-bg-green {
+    background-color: green;
+    color: white;
+}
+
+.aturdoku-news-box h1 {
+    line-height: none;
+    font-size: 2em;
+}
