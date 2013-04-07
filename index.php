@@ -1,6 +1,5 @@
 <?php
 /**
- * hai saras
  * Requests collector.
  *
  *  This file collects requests if:
