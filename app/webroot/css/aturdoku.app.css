@@ -7,9 +7,6 @@ body {
     background-color: #ffffff;
 }
 
-.top-bar {
-    margin-bottom: 0;
-}
 
 .special-font {
     font-family: 'Yanone Kaffeesatz', 'Arial Narrow', Arial;
@@ -33,6 +30,11 @@ body {
 
 .aturdoku-bg-green {
     background-color: green;
+    color: white;
+}
+
+.aturdoku-bg-orange {
+    background-color: #ffd013;
     color: white;
 }
 

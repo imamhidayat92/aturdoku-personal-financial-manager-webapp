@@ -20,10 +20,17 @@
     </div>
     <div class="large-5 columns">
         <h1 class="special-font">Selamat datang, User. :)</h1>
+        <h3 class="subheader">Anda sedang berada di <em>Dashboard</em>.</h3>
     </div>
     <div class="large-7 columns">
+        <h3 class="special-font aturdoku-bg-orange" align="center">Suguhan dari blog.aturdoku.com >></h3>
         <div class="large-6 columns aturdoku-news-box">
-            <h1>Judul Tulisan #1</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                ultricies leo et erat vulputate ultricies. Phasellus id
+                laoreet dolor. </p>
+            <a class="small success button">Selengkapnya</a>
+        </div>
+        <div class="large-6 columns aturdoku-news-box">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
                 ultricies leo et erat vulputate ultricies. Phasellus id
                 laoreet dolor. </p>
@@ -42,20 +49,61 @@
         <h2 class="special-font underline">Fluktuasi Pengeluaran</h2>
         <p style="margin: 0">Hari ini tanggal: <?php echo date('Y-m-d') ?></p>
         <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="width: 30%"></span></div>
-        <div id="plot">
-            
-        </div>
-        <h2 class="special-font underline">Ringkasan Singkat</h2>
-        <p></p>
+        <div id="plot"></div>
+        <p>Rata-rata pengeluaran bulan ini: Rp ###.###,##</p>
+        <p>Pengeluaran terbesar pada tanggal 2 April 2013 sejumlah: Rp ###.###,##</p>
+        
+        <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
+        
+        <table>
+        <thead>
+            <tr>
+                <th width="40">No.</th>
+                <th width="150">Tanggal</th>
+                <th width="400">Deskripsi Pengeluaran</th>
+                <th width="150">Nominal</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>7 April 2013</td>
+                    <td>Belanja bulanan</td>
+                    <td>Rp ###.###,##</td>
+                </tr>
+            </tbody>
+        </table>
+        
     </div>
     
     <div class="large-3 columns">
         <h2 class="aturdoku-nav-head aturdoku-bg-green">PEMASUKAN</h2>
-        <p>Aksi: <a href="#" class="small secondary expand button">Tambah Data</a></p>
+        <p>Aksi: <a href="#" class="small secondary expand button" data-reveal-id="add-asset-data">Tambah Data Aset</a></p>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
-        <p></p>
+        <h3 class="subheader">Isi dompet Anda: Rp ###,###.##</h3>
+        <h2 class="special-font underline">Data Aset Terkini</h2>
+        
+        <table>
+        <thead>
+            <tr>
+                <th width="40">No.</th>
+                <th width="150">Tanggal</th>
+                <th width="400">Nama Aset</th>
+                <th width="150">Nilai</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>8 April 2013</td>
+                    <td><em>nama aset di sini</em></td>
+                    <td>Rp ###.###,##</td>
+                </tr>
+            </tbody>
+        </table>
+        
     </div>
     
 </div>
@@ -122,9 +170,16 @@
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
                 <div class="large-4 columns">
-                    <label>Nominal</label>
-                    <input type="text"/>
-                    <label>Tags</label>
+                    <div class="row collapse">
+                        <label>Nominal</label>
+                        <div class="large-9 columns">
+                            <input type="text"/>
+                        </div>
+                        <div class="large-3 columns">
+                            <span class="postfix">Rupiah</span>
+                        </div>
+                    </div>
+                    <label><em>Tags</em></label>
                     <input type="text"/>
                 </div>
                 <div class="large-8 columns">
@@ -144,6 +199,39 @@
                     <label>Tempat (<a href="#">Lacak dengan Google Maps</a>)</label>
                     <input type="text"/>
                 </div>
+            </div>
+        </fieldset>
+        <input type="submit" class="success button" value="Simpan Data"/>
+    </form>
+  
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="add-asset-data" class="reveal-modal">
+    <h2 class="special-font">Tambah Data Aset</h2>
+    <p class="lead">Isi formulir di bawah ini untuk menambahkan data aset Anda.</p>
+  
+    <form action="" method="">
+        <fieldset>
+            <legend>Nama dan Nilai</legend>
+            <div class="row">
+                <div class="large-8 columns">
+                    <label>Nama Aset</label>
+                    <input type="text"/>
+                </div>
+                <div class="large-4 columns">
+                    <div class="row collapse">
+                        <label>Nominal</label>
+                        <div class="large-9 columns">
+                            <input type="text"/>
+                        </div>
+                        <div class="large-3 columns">
+                            <span class="postfix">Rupiah</span>
+                        </div>
+                    </div>
+                    <label><em>Tags</em></label>
+                    <input type="text"/>
+                </div>                
             </div>
         </fieldset>
         <input type="submit" class="success button" value="Simpan Data"/>
