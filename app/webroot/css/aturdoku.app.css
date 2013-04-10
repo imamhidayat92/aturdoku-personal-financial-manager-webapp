@@ -23,6 +23,19 @@ body {
     padding: 0 0 0 20px;
 }
 
+.aturdoku-nav-subhead {
+    font-family: 'Yanone Kaffeesatz', 'Arial Narrow', Arial;
+    width: 100%;
+    margin: 0 0 10px 0;
+    padding: 0 0 0 10px;
+    font-size: 1.7em;
+    border-left: solid 13px #FFFB00;
+}
+
+.aturdoku-button {
+    margin: 0;
+}
+
 .aturdoku-bg-red {
     background-color: red;
     color: white;
@@ -41,4 +54,13 @@ body {
 .aturdoku-news-box h1 {
     line-height: none;
     font-size: 2em;
+}
+
+/* Miscellaneous */
+.separator {
+    background-color: #ebebeb;
+    clear: both;
+    height: 30px;
+    display: block;
+    width: 100%;
 }

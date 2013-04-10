@@ -60,8 +60,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
+		'password' => '',
+		'database' => 'db_aturdoku',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);

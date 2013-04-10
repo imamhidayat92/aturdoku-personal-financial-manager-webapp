@@ -37,21 +37,27 @@
             <a class="small success button">Selengkapnya</a>
         </div>
     </div>
+    <div class="separator"></div>
     
+    <!-- Pengeluaran -->
     <div class="large-3 columns">
         <h2 class="aturdoku-nav-head aturdoku-bg-red">PENGELUARAN</h2>
-        <p>Aksi:
-        <a href="#" class="small alert expand button" data-reveal-id="add-expense-data">Tambah Data</a>
-        <a href="#" class="small secondary expand button">Lihat Laporan</a>
+        <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
+        <p>
+        <a href="#" class="small alert expand button aturdoku-button" data-reveal-id="add-expense-data">Tambah Data</a>
         </p>
+        <h3 class="aturdoku-nav-subhead">Kategori</h3>
+        <p>Klasifikasikan jenis pengeluaran Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
+        <a href="#" class="small secondary expand button aturdoku-button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Fluktuasi Pengeluaran</h2>
+        <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>
         <p style="margin: 0">Hari ini tanggal: <?php echo date('Y-m-d') ?></p>
         <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="width: 30%"></span></div>
         <div id="plot"></div>
         <p>Rata-rata pengeluaran bulan ini: Rp ###.###,##</p>
         <p>Pengeluaran terbesar pada tanggal 2 April 2013 sejumlah: Rp ###.###,##</p>
+        <a href="#" class="secondary expand button aturdoku-button">Lihat Laporan Selengkapnya >></a>
         
         <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
         
@@ -72,13 +78,20 @@
                     <td>Rp ###.###,##</td>
                 </tr>
             </tbody>
-        </table>
-        
+        </table>  
     </div>
+    <div class="separator"></div>
     
+    <!-- Pemasukan -->
     <div class="large-3 columns">
         <h2 class="aturdoku-nav-head aturdoku-bg-green">PEMASUKAN</h2>
-        <p>Aksi: <a href="#" class="small secondary expand button" data-reveal-id="add-asset-data">Tambah Data Aset</a></p>
+        <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
+        <p>
+            <a href="#" class="small success expand button">Tambah Data Pemasukan</a>
+        </p>
+        <h3 class="aturdoku-nav-subhead">Kategori</h3>
+        <p>Klasifikasikan jenis pemasukan Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
+        <a href="#" class="small secondary expand button aturdoku-button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
@@ -102,10 +115,41 @@
                     <td>Rp ###.###,##</td>
                 </tr>
             </tbody>
-        </table>
-        
+        </table>    
     </div>
+    <div class="separator"></div>
     
+    <!-- Aset -->
+    <div class="large-3 columns">
+        <h2 class="aturdoku-nav-head aturdoku-bg-orange">ASET</h2>
+        <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
+        <p>
+            <a href="#" class="small secondary expand button" data-reveal-id="add-asset-data">Tambah Data Aset</a>
+        </p>
+    </div>
+    <div class="large-9 columns">
+        <h2 class="special-font underline">Data Aset Terkini</h2>
+        
+        <table>
+        <thead>
+            <tr>
+                <th width="40">No.</th>
+                <th width="150">Tanggal</th>
+                <th width="400">Nama Aset</th>
+                <th width="150">Nilai</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>8 April 2013</td>
+                    <td><em>nama aset di sini</em></td>
+                    <td>Rp ###.###,##</td>
+                </tr>
+            </tbody>
+        </table>  
+    </div>
+    <div class="separator"></div>
 </div>
 
 <?php
