@@ -1,23 +1,7 @@
 <div class="row">
     
-    <div class="large-12 columns">
-        <nav class="top-bar">
-            <ul class="title-area">
-                <li class="name">
-                    <h1><a href="#">Aturdoku.com</a></h1>
-                </li>
-            </ul>
-            <section class="top-bar-section">
-                <ul class="right">
-                    <li class="has-dropdown"><a href="#">Halo User!</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Keluar</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </section>            
-        </nav>
-    </div>
+    <?php echo $this->Element('user-navigation'); ?>
+    
     <div class="large-5 columns">
         <h1 class="special-font">Selamat datang, User. :)</h1>
         <h3 class="subheader">Anda sedang berada di <em>Dashboard</em>.</h3>
@@ -48,7 +32,7 @@
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
         <p>Klasifikasikan jenis pengeluaran Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
-        <a href="#" class="small secondary expand button aturdoku-button">Atur Kategori</a>
+        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small secondary expand button aturdoku-button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>
@@ -62,14 +46,14 @@
         <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
         
         <table>
-        <thead>
-            <tr>
-                <th width="40">No.</th>
-                <th width="150">Tanggal</th>
-                <th width="400">Deskripsi Pengeluaran</th>
-                <th width="150">Nominal</th>
-            </tr>
-        </thead>
+            <thead>
+                <tr>
+                    <th width="40">No.</th>
+                    <th width="150">Tanggal</th>
+                    <th width="400">Deskripsi Pengeluaran</th>
+                    <th width="150">Nominal</th>
+                </tr>
+            </thead>
             <tbody>
                 <tr>
                     <td>1</td>
@@ -91,12 +75,12 @@
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
         <p>Klasifikasikan jenis pemasukan Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
-        <a href="#" class="small secondary expand button aturdoku-button">Atur Kategori</a>
+        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small secondary expand button aturdoku-button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
         <h3 class="subheader">Isi dompet Anda: Rp ###,###.##</h3>
-        <h2 class="special-font underline">Data Aset Terkini</h2>
+        <h2 class="special-font underline">Data Pemasukan Terkini</h2>
         
         <table>
         <thead>
@@ -115,8 +99,9 @@
                     <td>Rp ###.###,##</td>
                 </tr>
             </tbody>
-        </table>    
+        </table>
     </div>
+    <p class="clearfix"></p>
     <div class="separator"></div>
     
     <!-- Aset -->
@@ -223,8 +208,13 @@
                             <span class="postfix">Rupiah</span>
                         </div>
                     </div>
-                    <label><em>Tags</em></label>
-                    <input type="text"/>
+                    <label>Kategori</label>
+                    <select class="medium">
+                        <option value="#">Makanan</option>
+                        <option value="#">Bahan Makanan</option>
+                        <option value="#">Asuransi/Kesehatan</option>
+                        <option value="#">Keperluan 1 Kali</option>
+                    </select>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
@@ -273,8 +263,13 @@
                             <span class="postfix">Rupiah</span>
                         </div>
                     </div>
-                    <label><em>Tags</em></label>
-                    <input type="text"/>
+                    <label>Kategori</label>
+                    <select class="medium">
+                        <option value="#">Makanan</option>
+                        <option value="#">Bahan Makanan</option>
+                        <option value="#">Asuransi/Kesehatan</option>
+                        <option value="#">Keperluan 1 Kali</option>
+                    </select>
                 </div>                
             </div>
         </fieldset>

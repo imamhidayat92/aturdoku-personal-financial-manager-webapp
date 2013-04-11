@@ -51,6 +51,11 @@ body {
     color: white;
 }
 
+.aturdoku-bg-black {
+    background-color: black;
+    color: white;
+}
+
 .aturdoku-news-box h1 {
     line-height: none;
     font-size: 2em;
