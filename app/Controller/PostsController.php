@@ -15,5 +15,9 @@
         public function edit($post_id) {
             
         }
+        
+        public function delete($post_id) {
+            
+        }
     }
 ?>

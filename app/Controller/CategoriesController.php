@@ -5,6 +5,18 @@ class CategoriesController extends AppController {
         
     }
     
+    public function add() {
+        
+    }
+    
+    public function edit($category_id) {
+        
+    }
+    
+    public function delete($category_id) {
+        
+    }
+    
     public function expense() {
         
     }

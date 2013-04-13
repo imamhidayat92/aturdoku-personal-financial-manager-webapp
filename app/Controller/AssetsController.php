@@ -1,19 +1,19 @@
 <?php
 
-class ExpensesController extends AppController{
+class AssetsController extends AppController {
     public function index() {
-
+        
     }
     
     public function add() {
         
     }
     
-    public function edit($expense_id) {
+    public function edit($asset_id) {
         
     }
     
-    public function delete($expense_id) {
+    public function delete($asset_id) {
         
     }
 }

@@ -7,7 +7,19 @@ class UsersController extends AppController {
     }
     
     public function index() {
-        die('atur yuuuhuu');
-    }    
+        
+    }
+    
+    public function login() {
+        
+    }
+    
+    public function logout() {
+        
+    }
+    
+    public function profile() {
+        
+    }
 }
 ?>
