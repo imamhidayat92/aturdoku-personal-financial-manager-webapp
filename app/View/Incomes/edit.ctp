@@ -1,12 +1,12 @@
 <div class="row">
     
     <div class="large-8 large-offset-2 columns">
-        <h2 class="special-font">Tambah Data Pendapatan</h2>
-        <p class="lead">Isi formulir di bawah ini untuk menambahkan data pendapataan Anda.</p>
+        <h2 class="special-font">Edit Data Pendapatan</h2>
+        <p class="lead">Ubah formulir di bawah ini untuk melakukan edit data pendapatan Anda.</p>
         
-        <!-- Form Tambah -->
+        <!-- Form Edit -->
         
-        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'add'))?>" method="POST">
+        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'edit'))?>" method="POST">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -14,7 +14,7 @@
                     <div class="row collapse">
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Income][amount]"/>
+                            <input type="text" name="data[Income][amount]" value="<?php echo $data['Income']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rupiah</span>
@@ -28,12 +28,12 @@
                     </select>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Income][date]"/>
+                  <input type="text" name="data[Income][date]" value="<?php echo $data['Income']['date']?>"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
                     <!-- ini harus di benerin -->
-                    <textarea name="data[Income][description]" style="height: 30px; display: block;"></textarea>
+                    <textarea name="data[Income][description]" value="<?php echo $data['Income']['description']?>" style="height: 30px; display: block;"></textarea>
                 </div>
             </div>
         </fieldset>
