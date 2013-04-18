@@ -5,7 +5,7 @@ class ExpensesController extends AppController{
     public $paginate = array(
         'limit' => 25,
         'order' => array(
-            '?' => 'asc'
+            'date' => 'ASC'
         )
     );
     
@@ -15,25 +15,25 @@ class ExpensesController extends AppController{
     }
     
     public function add() {
-        if($this->request->isPost()){
-            if($this->Expense->save($this->request->data)){
+        if ($this->request->isPost()) {
+            if ($this->Expense->save($this->request->data)) {
                 $this->Session->setFlash('Data Pengeluaran Telah Tersimpan', 'flash_custom');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
-            else{
+            else {
                 $this->Session->setFlash('Data Pengeluaran Gagal Tersimpan', 'flash_custom');
             }
         }
     }
     
     public function edit($expense_id) {
-        if($this->request->isPost()){
+        if ($this->request->isPost()) {
             $this->request->data['Expense']['id'] = $expense_id;
-            if($this->Expense->save($this->request->data)){
+            if ($this->Expense->save($this->request->data)) {
                 $this->Session->setFlash('Ubah Data Pengeluaran Telah Tersimpan', 'flash_custom');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
-            else{
+            else {
                 $this->Session->setFlash('Ubah Data Pengeluaran Gagal Tersimpan', 'flash_custom');
             }
         }

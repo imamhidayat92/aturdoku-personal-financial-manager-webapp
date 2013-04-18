@@ -36,9 +36,9 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>
-        <p style="margin: 0">Hari ini tanggal: <?php echo date('Y-m-d') ?></p>
-        <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="width: 30%"></span></div>
+        <?php echo $this->Aturdoku->print_date_progress(); ?>
         <div id="plot"></div>
+        <p>&nbsp;</p>
         <p>Rata-rata pengeluaran bulan ini: Rp ###.###,##</p>
         <p>Pengeluaran terbesar pada tanggal 2 April 2013 sejumlah: Rp ###.###,##</p>
         <a href="#" class="secondary expand button aturdoku-button">Lihat Laporan Selengkapnya >></a>
@@ -133,6 +133,8 @@
                 </tr>
             </tbody>
         </table>  
+        
+        <a href="<?php echo Router::url(array('controller' => 'assets', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Aset Lengkap</a>
     </div>
     <div class="separator"></div>
 </div>

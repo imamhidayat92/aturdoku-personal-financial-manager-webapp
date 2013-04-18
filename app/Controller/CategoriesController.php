@@ -6,7 +6,9 @@ class CategoriesController extends AppController {
     }
     
     public function add() {
-        
+        if ($this->request->isPost()) {
+            
+        }
     }
     
     public function edit($category_id) {

@@ -33,6 +33,10 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     
+    public $helpers = array(
+        'Aturdoku'
+    );
+    
     public function beforeFilter() {
         parent::beforeFilter();
         $this->layout = "default_foundation";
