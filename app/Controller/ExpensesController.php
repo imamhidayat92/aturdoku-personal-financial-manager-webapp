@@ -10,13 +10,13 @@ class ExpensesController extends AppController{
     );
     
     public function index() {
-       $expenses = $this->paginate('Expense');
+       $expenses = $this->paginate('Transaction');
        $this->set('expenses', $expenses);
     }
     
     public function add() {
         if ($this->request->isPost()) {
-            if ($this->Expense->save($this->request->data)) {
+            if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash('Data Pengeluaran Telah Tersimpan', 'flash_custom');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
@@ -28,8 +28,8 @@ class ExpensesController extends AppController{
     
     public function edit($expense_id) {
         if ($this->request->isPost()) {
-            $this->request->data['Expense']['id'] = $expense_id;
-            if ($this->Expense->save($this->request->data)) {
+            $this->request->data['Transaction']['id'] = $expense_id;
+            if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash('Ubah Data Pengeluaran Telah Tersimpan', 'flash_custom');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }

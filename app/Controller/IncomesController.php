@@ -10,13 +10,13 @@ class IncomesController extends AppController {
     );
     
     public function index() {
-       $incomes = $this->paginate('Income');
+       $incomes = $this->paginate('Transaction');
        $this->set('incomes', $incomes);
     }
     
     public function add() {
         if($this->request->isPost()){
-            if($this->Income->save($this->request->data)){
+            if($this->Transaction->save($this->request->data)){
                 $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_cutom');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
@@ -29,8 +29,8 @@ class IncomesController extends AppController {
     
     public function edit($income_id) {
         if($this->request->isPost()){
-            $this->request->data['Income']['id'] = $income_id;
-            if($this->Income->save($this->request->data)){
+            $this->request->data['Transaction']['id'] = $income_id;
+            if($this->Transaction->save($this->request->data)){
                 $this->Session->setFlash('Ubah Data Pemasukan Telah Tersimpan', 'flash_custom');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
