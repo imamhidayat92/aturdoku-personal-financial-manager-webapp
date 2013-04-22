@@ -30,12 +30,12 @@
                 <tr>
                     <?php $nomor++; ?>
                     <td><?php echo $nomor; ?></td>
-                    <td><?php echo $income['Income']['date']?></td>
-                    <td><?php echo $income['Income']['description']?></td>
-                    <td><?php echo $income['Income']['amount']?></td>
+                    <td><?php echo $income['Transaction']['date']?></td>
+                    <td><?php echo $income['Transaction']['description']?></td>
+                    <td><?php echo $income['Transaction']['amount']?></td>
                     <td>
-                        <?php echo $this->Html->link('Edit', array('action' => 'edit', $income['Income']['id'])); ?>
-                        <?php echo $this->Html->link('Hapus', array('action' => 'delete', $income['Income']['id'])); ?>
+                        <?php echo $this->Html->link('Edit', array('action' => 'edit', $income['Transaction']['id'])); ?>
+                        <?php echo $this->Html->link('Hapus', array('action' => 'delete', $income['Transaction']['id'])); ?>
                     </td>
                     
                 </tr>

@@ -27,12 +27,12 @@
                 <tr>
                     <?php $nomor++; ?>
                     <td><?php echo $nomor; ?></td>
-                    <td><?php echo $expense['Expense']['date']?></td>
-                    <td><?php echo $expense['Expense']['description']?></td>
-                    <td><?php echo $expense['Expense']['amount']?></td>
+                    <td><?php echo $expense['Transaction']['date']?></td>
+                    <td><?php echo $expense['Transaction']['description']?></td>
+                    <td><?php echo $expense['Transaction']['amount']?></td>
                     <td>
-                        <?php echo $this->Html->link('Edit', array('action' => 'edit', $expense['Expense']['id'])); ?>
-                        <?php echo $this->Html->link('Hapus', array('action' => 'delete', $expense['Expense']['id'])); ?>
+                        <?php echo $this->Html->link('Edit', array('action' => 'edit', $expense['Transaction']['id'])); ?>
+                        <?php echo $this->Html->link('Hapus', array('action' => 'delete', $expense['Transaction']['id'])); ?>
                     </td>
                     
                 </tr>

@@ -14,7 +14,7 @@
                     <div class="row collapse">
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Expense][amount]" value="<?php echo $data['Expense']['amount']?>"/>
+                            <input type="text" name="data[Transaction][amount]" value="<?php echo $data['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rupiah</span>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
-                    <textarea name="data[Expense][description]" value="<?php echo $data['Expense']['description']?>"></textarea>
+                    <textarea name="data[Transaction][description]" value="<?php echo $data['Transaction']['description']?>"></textarea>
                 </div>
             </div>
         </fieldset>
@@ -38,11 +38,11 @@
             <div class="row">
                 <div class="large-4 columns">
                     <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Expense][date]" value="<?php echo $data['Expense']['date']?>"/>
+                    <input type="text" name="data[Transaction][date]" value="<?php echo $data['Transaction']['date']?>"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Tempat (<a href="#">Lacak dengan Google Maps</a>)</label>
-                    <input type="text" name="data[Expense][place]" value="<?php echo $data['Expense']['place']?>"/>
+                    <input type="text" name="data[Transaction][place]" value="<?php echo $data['Transaction']['place']?>"/>
                 </div>
             </div>
         </fieldset>

@@ -14,7 +14,7 @@
                     <div class="row collapse">
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Income][amount]" value="<?php echo $data['Income']['amount']?>"/>
+                            <input type="text" name="data[Transaction][amount]" value="<?php echo $data['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rupiah</span>
@@ -28,12 +28,12 @@
                     </select>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                  <input type="text" name="data[Income][date]" value="<?php echo $data['Income']['date']?>"/>
+                  <input type="text" name="data[Transaction][date]" value="<?php echo $data['Transaction']['date']?>"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
                     <!-- ini harus di benerin -->
-                    <textarea name="data[Income][description]" value="<?php echo $data['Income']['description']?>" style="height: 30px; display: block;"></textarea>
+                    <textarea name="data[Transaction][description]" value="<?php echo $data['Transaction']['description']?>" style="height: 30px; display: block;"></textarea>
                 </div>
             </div>
         </fieldset>
