@@ -8,6 +8,11 @@ class IncomesController extends AppController {
             'id' => 'asc'
         )
     );
+
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->loadModel('Transaction');
+    }
     
     public function index() {
        $incomes = $this->paginate('Transaction');
@@ -23,8 +28,7 @@ class IncomesController extends AppController {
             else{
                 $this->Session->setFlash('Data Pemasukan Gagal Tersimpan', 'flash_custom');
             }
-        }
-        
+        }        
     }
     
     public function edit($income_id) {

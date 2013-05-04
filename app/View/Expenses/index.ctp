@@ -6,7 +6,8 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-red">PENGELUARAN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <a href="expenses/add" class="small alert expand button aturdoku-button">Tambah Data</a> 
+            <?php echo $this->Html->link('Tambah Data', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
+   
         </p>
     </div>
     <div class="large-9 columns">

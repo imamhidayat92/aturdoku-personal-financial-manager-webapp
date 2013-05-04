@@ -9,6 +9,11 @@ class ExpensesController extends AppController{
         )
     );
     
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->loadModel('Transaction');
+    }
+    
     public function index() {
        $expenses = $this->paginate('Transaction');
        $this->set('expenses', $expenses);
