@@ -9,7 +9,9 @@
     <div class="large-3 columns">
         <h1 class="aturdoku-nav-head aturdoku-bg-orange">ASET</h1>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <a href="#" class="small secondary expand button aturdoku-button">Tambah Data Aset</a>
+        <p>
+            <?php echo $this->Html->link('Tambah Data', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small secondary expand button aturdoku-button'))?>
+        </p>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Data Aset Lengkap</h2>
@@ -17,18 +19,27 @@
             <thead>
                 <tr>
                     <th width="40">No.</th>
-                    <th width="150">Tanggal</th>
-                    <th width="400">Nama Aset</th>
+                    <th width="150">Tahun</th>
+                    <th width="300">Nama Aset</th>
                     <th width="150">Nilai</th>
+                    <th width="100">Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                <?php $nomor = 0; foreach ($assets as $asset) { ?>
                 <tr>
-                    <td>1</td>
-                    <td>8 April 2013</td>
-                    <td><em>nama aset di sini</em></td>
-                    <td>Rp ###.###,##</td>
+                    <?php $nomor++; ?>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $asset['Asset']['year']?></td>
+                    <td><?php echo $asset['Asset']['name']?></td>
+                    <td><?php echo $asset['Asset']['value']?></td>
+                    <td>
+                        <?php echo $this->Html->link('Edit', array('action' => 'edit', $asset['Asset']['id'])); ?>
+                        <?php echo $this->Html->link('Hapus', array('action' => 'delete', $asset['Asset']['id'])); ?>
+                    </td>
+                    
                 </tr>
+             <?php } ?>
             </tbody>
         </table>
     </div>

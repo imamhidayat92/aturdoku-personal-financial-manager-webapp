@@ -28,7 +28,7 @@
                     </select>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                  <input type="text" name="data[Transaction][date]" value="<?php echo $data['Transaction']['date']?>"/>
+                  <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $data['Transaction']['date']?>"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
@@ -42,3 +42,8 @@
     </div>
    
 </div>
+<script>
+    $(function() {
+        $('#datepicker').datepicker();
+    });
+</script>

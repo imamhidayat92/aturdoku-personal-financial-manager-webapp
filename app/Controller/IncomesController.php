@@ -25,7 +25,7 @@ class IncomesController extends AppController {
     public function add() {
         if($this->request->isPost()){
             if($this->Transaction->save($this->request->data)){
-                $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_cutom');
+                $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_custom');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else{

@@ -7,7 +7,6 @@
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
             <?php echo $this->Html->link('Tambah Data', array('controller' => 'incomes', 'action' => 'add'), array('class' => 'small success expand button'))?>
-            <!--<a href="#" class="small success expand button">Tambah Data</a> -->
         </p>
     </div>
     <div class="large-9 columns">

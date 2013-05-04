@@ -28,7 +28,7 @@
                     </select>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]"/>
+                    <input type="text" name="data[Transaction][date]" id="datepicker"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
@@ -42,3 +42,9 @@
     </div>
    
 </div>
+
+<script>
+    $(function() {
+        $('#datepicker').datepicker();
+    });
+</script>
