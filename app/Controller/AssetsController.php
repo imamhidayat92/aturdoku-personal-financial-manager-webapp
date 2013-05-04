@@ -37,7 +37,7 @@ class AssetsController extends AppController {
     public function edit($asset_id) {
         if($this->request->isPost()){
             $this->request->data['Asset']['id'] = $asset_id;
-            if($this->Transaction->save($this->request->data)){
+            if($this->Asset->save($this->request->data)){
                 $this->Session->setFlash('Ubah Data Aset Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
@@ -45,6 +45,11 @@ class AssetsController extends AppController {
                 $this->Session->setFlash('Ubah Data Aset Gagal Tersimpan', 'flash_fail');
             }
         }
+        
+        $this->set('title_for_layout', "Edit Data Aset");
+        
+        $data = $this->Asset->findByid($asset_id);
+        $this->set('data', $data);
     }
     
     public function delete($asset_id) {

@@ -25,7 +25,7 @@
                 </div>
                 <div class="large-8 columns">
                     <label>Nama Aset</label>
-                    <input name="data[Transaction][description]" value="<?php echo $data['Transaction']['description']?>"/>
+                    <input name="data[Asset][name]" value="<?php echo $data['Asset']['name']?>"/>
                 </div>
             </div>
         </fieldset>
