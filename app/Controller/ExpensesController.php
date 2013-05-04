@@ -6,17 +6,23 @@ class ExpensesController extends AppController{
         'limit' => 25,
         'order' => array(
             'date' => 'ASC'
+        ),
+        'conditions' => array(
+            'User.id' => 0 // TODO: Put User.id from AuthComponent here.
         )
     );
     
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->loadModel('Transaction');
+        
+        $this->loadModel('Category');
+        $this->loadModel('Transaction');        
+        $this->loadModel('User');
     }
     
     public function index() {
-       $expenses = $this->paginate('Transaction');
-       $this->set('expenses', $expenses);
+        $expenses = $this->paginate('Transaction');              
+        $this->set('expenses', $expenses);
     }
     
     public function add() {
@@ -29,6 +35,14 @@ class ExpensesController extends AppController{
                 $this->Session->setFlash('Data Pengeluaran Gagal Tersimpan', 'flash_custom');
             }
         }
+        
+        $this->set('title_for_layout', "Tambah Data Pengeluaran");
+        $categories = $this->Category->find('all', array(
+           'conditions' => array(
+               'User.id' => 0 // TODO: Put User.id from AuthComponent here.
+           )
+        ));
+        $this->set('categories', $categories);
     }
     
     public function edit($expense_id) {
@@ -42,6 +56,14 @@ class ExpensesController extends AppController{
                 $this->Session->setFlash('Ubah Data Pengeluaran Gagal Tersimpan', 'flash_custom');
             }
         }
+        
+        $this->set('title_for_layout', "Edit Data Pengeluaran");
+        $categories = $this->Category->find('all', array(
+           'conditions' => array(
+               'User.id' => 0 // TODO: Put User.id from AuthComponent here.
+           )
+        ));
+        $this->set('categories', $categories);
     }
     
     public function delete($expense_id) {
