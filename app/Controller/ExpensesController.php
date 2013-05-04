@@ -28,11 +28,11 @@ class ExpensesController extends AppController{
     public function add() {
         if ($this->request->isPost()) {
             if ($this->Transaction->save($this->request->data)) {
-                $this->Session->setFlash('Data Pengeluaran Telah Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Data Pengeluaran Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else {
-                $this->Session->setFlash('Data Pengeluaran Gagal Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Data Pengeluaran Gagal Tersimpan', 'flash_fail');
             }
         }
         
@@ -49,11 +49,11 @@ class ExpensesController extends AppController{
         if ($this->request->isPost()) {
             $this->request->data['Transaction']['id'] = $expense_id;
             if ($this->Transaction->save($this->request->data)) {
-                $this->Session->setFlash('Ubah Data Pengeluaran Telah Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Ubah Data Pengeluaran Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else {
-                $this->Session->setFlash('Ubah Data Pengeluaran Gagal Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Ubah Data Pengeluaran Gagal Tersimpan', 'flash_fail');
             }
         }
         

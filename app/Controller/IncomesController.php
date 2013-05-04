@@ -25,11 +25,11 @@ class IncomesController extends AppController {
     public function add() {
         if($this->request->isPost()){
             if($this->Transaction->save($this->request->data)){
-                $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else{
-                $this->Session->setFlash('Data Pemasukan Gagal Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Data Pemasukan Gagal Tersimpan', 'flash_fail');
             }
         }        
         
@@ -46,11 +46,11 @@ class IncomesController extends AppController {
         if($this->request->isPost()){
             $this->request->data['Transaction']['id'] = $income_id;
             if($this->Transaction->save($this->request->data)){
-                $this->Session->setFlash('Ubah Data Pemasukan Telah Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Ubah Data Pemasukan Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else{
-                $this->Session->setFlash('Ubah Data Pemasukan Gagal Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Ubah Data Pemasukan Gagal Tersimpan', 'flash_fail');
             }
         }
         

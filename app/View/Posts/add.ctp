@@ -1,7 +1,19 @@
-<?php
+<div class="posts form">
+<?php echo $this->Form->create('Post'); ?>
+	<fieldset>
+		<legend><?php echo __('Add Post'); ?></legend>
+	<?php
+		echo $this->Form->input('name');
+		echo $this->Form->input('isi');
+		echo $this->Form->input('user_id');
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Submit')); ?>
+</div>
+<div class="actions">
+	<h3><?php echo __('Actions'); ?></h3>
+	<ul>
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+		<li><?php echo $this->Html->link(__('List Posts'), array('action' => 'index')); ?></li>
+	</ul>
+</div>

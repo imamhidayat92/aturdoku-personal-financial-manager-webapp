@@ -14,6 +14,7 @@ class AssetsController extends AppController {
     
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->loadModel('User');
     }
     
     public function index() {
@@ -24,11 +25,11 @@ class AssetsController extends AppController {
     public function add() {
         if($this->request->isPost()){
             if($this->Asset->save($this->request->data)){
-                $this->Session->setFlash('Data Aset Telah Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Data Aset Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else{
-                $this->Session->setFlash('Data Aset Gagal Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Data Aset Gagal Tersimpan', 'flash_fail');
             }
         }
     }
@@ -37,11 +38,11 @@ class AssetsController extends AppController {
         if($this->request->isPost()){
             $this->request->data['Asset']['id'] = $asset_id;
             if($this->Transaction->save($this->request->data)){
-                $this->Session->setFlash('Ubah Data Aset Telah Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Ubah Data Aset Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else{
-                $this->Session->setFlash('Ubah Data Aset Gagal Tersimpan', 'flash_custom');
+                $this->Session->setFlash('Ubah Data Aset Gagal Tersimpan', 'flash_fail');
             }
         }
     }

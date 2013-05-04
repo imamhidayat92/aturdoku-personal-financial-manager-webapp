@@ -25,7 +25,7 @@
 SET app=%0
 SET lib=%~dp0
 
-php -q "%lib%cake.php" -working "%CD% " %*
+"E:\xampp-win32-1.8.1-VC9_2\xampp\php\php.exe" -q "%lib%cake.php" -working "%CD% " %*
 
 echo.
 
