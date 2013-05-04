@@ -1,23 +1,16 @@
 <?php
-    class PostsController extends AppController {
-        public function index() {
-            
-        }
-        
-        public function view($post_unique_title) {
-            
-        }
-        
-        public function add() {
-            
-        }
-        
-        public function edit($post_id) {
-            
-        }
-        
-        public function delete($post_id) {
-            
-        }
-    }
-?>
+App::uses('AppController', 'Controller');
+/**
+ * Posts Controller
+ *
+ */
+class PostsController extends AppController {
+
+/**
+ * Scaffold
+ *
+ * @var mixed
+ */
+	public $scaffold;
+
+}
