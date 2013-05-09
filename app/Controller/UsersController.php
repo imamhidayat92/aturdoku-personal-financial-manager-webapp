@@ -7,6 +7,10 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+    public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('add');
+    }
 /**
  * index method
  *
@@ -96,11 +100,18 @@ class UsersController extends AppController {
 	}
     
     public function login() {
-        
+        if ($this->request->isPost()) {
+            if ($this->Auth->login()) {
+                $this->redirect($this->Auth->redirect());
+            }
+            else {
+                $this->Session->setFlash('Login Error', 'flash_fail');
+            }
+        }
     }
     
     public function logout() {
-        
+        $this->redirect($this->Auth->logout());
     }
     
     public function dashboard() {
