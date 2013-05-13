@@ -36,6 +36,16 @@ class UsersController extends AppController {
 		$this->set('user', $this->User->find('first', $options));
 	}
 
+    private $defaultCategories = array(
+        0 => array(
+            'name' => '',
+            'description' => '',
+            'type' => '',
+            'user_id' => '',
+        ),
+        // TODO: Add another
+    );
+    
 /**
  * add method
  *
@@ -45,6 +55,17 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
+                $newId = $this->User->getInsertID();
+                
+                // Generate initial category.
+                $this->loadModel('Category');
+                
+                foreach ($this->defaultCategories as $category) {
+                    $this->Category->create();
+                    $category['user_id'] = $newId;
+                    $this->Category->save($category);
+                }
+                
 				$this->Session->setFlash(__('The user has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
@@ -102,7 +123,13 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->isPost()) {
             if ($this->Auth->login()) {
-                $this->redirect($this->Auth->redirect());
+                if ($this->Auth->user('is_active')) {
+                    $this->redirect($this->Auth->redirect());
+                }
+                else {
+                    $this->Session->setFlash('Akun Anda belum diaktivasi.', 'flash_fail');
+                    $this->logout();
+                }
             }
             else {
                 $this->Session->setFlash('Login Error', 'flash_fail');
