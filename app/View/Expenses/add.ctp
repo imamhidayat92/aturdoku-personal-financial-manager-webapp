@@ -21,9 +21,9 @@
                         </div>
                     </div>
                     <label>Kategori</label>
-                    <select class="medium">
+                    <select class="medium" name="data[Transaction][category_id]">
                         <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo $data['Category']['id']?>"><?php echo $data['Category']['name']?></option>
+                        <option value="<?php echo $category['Category']['id']?>"><?php echo $category['Category']['name']?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

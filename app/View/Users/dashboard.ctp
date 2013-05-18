@@ -28,7 +28,7 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-red">PENGELUARAN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-        <a href="#" class="small alert expand button aturdoku-button" data-reveal-id="add-expense-data">Tambah Data</a>
+            <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
         <p>Klasifikasikan jenis pengeluaran Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
@@ -71,7 +71,7 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-green">PENDAPATAN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <a href="#" class="small success expand button">Tambah Data Pemasukan</a>
+            <?php echo $this->Html->link('Tambah Data Pemasukan', array('controller' => 'incomes', 'action' => 'add'), array('class' => 'small success expand button'))?>
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
         <p>Klasifikasikan jenis pemasukan Anda. <a href="#">(Pelajari Selengkapnya)</a></p>

@@ -21,9 +21,9 @@
                         </div>
                     </div>
                     <label>Kategori</label>
-                    <select class="medium">
+                    <select class="medium" name="data[Transaction][category_id]">
                         <?php foreach($categories as $category): ?>
-                        <option value="<?php echo $data['Category']['id']?>"><?php echo $data['Category']['name']?></option>
+                        <option value="<?php echo $category['Category']['id']?>"><?php echo $category['Category']['name']?></option>
                         <?php endforeach;?>
                     </select>
                     <p class="clear10px">  </p>
@@ -31,7 +31,7 @@
                     <input type="text" name="data[Transaction][date]" id="datepicker"/>
                 </div>
                 <div class="large-8 columns">
-                    <label>Keperluan</label>
+                    <label>Deskripsi</label>
                     <!-- ini harus di benerin -->
                     <textarea name="data[Transaction][description]" style="height: 30px; display: block;"></textarea>
                 </div>

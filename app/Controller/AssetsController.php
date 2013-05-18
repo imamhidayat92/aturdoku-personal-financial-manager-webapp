@@ -24,6 +24,7 @@ class AssetsController extends AppController {
     
     public function add() {
         if($this->request->isPost()){
+            $this->request->data['Asset']['user_id'] = $this->Auth->user('id');
             if($this->Asset->save($this->request->data)){
                 $this->Session->setFlash('Data Aset Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));

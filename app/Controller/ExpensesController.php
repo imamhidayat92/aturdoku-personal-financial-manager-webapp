@@ -7,9 +7,6 @@ class ExpensesController extends AppController{
         'order' => array(
             'date' => 'ASC'
         ),
-        'conditions' => array(
-            'User.id' => 0 // TODO: Put User.id from AuthComponent here.
-        )
     );
     
     public function beforeFilter() {
@@ -21,12 +18,18 @@ class ExpensesController extends AppController{
     }
     
     public function index() {
+        $this->paginate['conditions'] = array(
+            'User.id' => $this->Auth->user('id'),
+            'type' => 0
+        );
         $expenses = $this->paginate('Transaction');              
         $this->set('expenses', $expenses);
     }
     
     public function add() {
         if ($this->request->isPost()) {
+            $this->request->data['Transaction']['type'] = 0;
+            $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
             if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash('Data Pengeluaran Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -39,7 +42,8 @@ class ExpensesController extends AppController{
         $this->set('title_for_layout', "Tambah Data Pengeluaran");
         $categories = $this->Category->find('all', array(
            'conditions' => array(
-               'User.id' => 0 // TODO: Put User.id from AuthComponent here.
+               'User.id' => $this->Auth->user('id'),
+               'type' => 0
            )
         ));
         $this->set('categories', $categories);
@@ -60,7 +64,8 @@ class ExpensesController extends AppController{
         $this->set('title_for_layout', "Edit Data Pengeluaran");
         $categories = $this->Category->find('all', array(
            'conditions' => array(
-               'User.id' => 0 // TODO: Put User.id from AuthComponent here.
+               'User.id' => $this->Auth->user('id'),
+               'type' => 0
            )
         ));
         $this->set('categories', $categories);
