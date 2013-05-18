@@ -30,6 +30,7 @@ class IncomesController extends AppController {
         if($this->request->isPost()){
             $this->request->data['Transaction']['type'] = 1;
             $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
+            $this->request->data['Transaction']['date'] = date('Y-m-d');
             if($this->Transaction->save($this->request->data)){
                 $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -51,7 +52,8 @@ class IncomesController extends AppController {
     
     public function edit($income_id) {
         if($this->request->isPost()){
-            $this->request->data['Transaction']['id'] = $income_id;
+            $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
+            $this->request->date['Transaction']['type'] = 1;
             if($this->Transaction->save($this->request->data)){
                 $this->Session->setFlash('Ubah Data Pemasukan Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -62,6 +64,10 @@ class IncomesController extends AppController {
         }
         
         $this->set('title_for_layout', "Edit Data Pemasukan");
+        
+        $income = $this->Transaction->findByid($income_id);
+        $this->set('income', $income);
+        
         $categories = $this->Category->find('all', array(
            'conditions' => array(
                'User.id' => $this->Auth->user('id'),

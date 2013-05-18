@@ -2,6 +2,21 @@
 App::uses('AppHelper', 'View/Helper');
 
 class AturdokuHelper extends AppHelper {
+    private $months = array(
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    );
+    
     public function get_number_of_day($month) {
         $number_of_day = array(
             1  => 31,
@@ -43,6 +58,11 @@ class AturdokuHelper extends AppHelper {
         else {
             return 0;
         }
+    }
+    
+    public function getGraphDateFormat($date) {
+        $dateElements = explode('-', $date);
+        return $dateElements[2] . "-" . $this->months[$dateElements[1]-1] . "-" . $dateElements[0];
     }
 }
 ?>

@@ -6,9 +6,6 @@ class AssetsController extends AppController {
         'limit' => 25,
         'order' => array(
             'id' => 'asc'
-        ),
-        'conditions' => array(
-            'User.id' => 0 // TODO: Put User.id from AuthComponent here.
         )
     );
     
@@ -18,7 +15,11 @@ class AssetsController extends AppController {
     }
     
     public function index() {
-         $assets = $this->paginate('Asset');
+        $this->paginate['conditions'] = array(
+            'User.id' => $this->Auth->user('id')
+        );
+        
+        $assets = $this->paginate('Asset');
          $this->set('assets', $assets);
     }
     

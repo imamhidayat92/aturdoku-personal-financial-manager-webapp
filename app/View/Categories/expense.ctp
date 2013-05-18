@@ -17,48 +17,26 @@
             <thead>
                 <tr>
                     <th width="40">No.</th>
-                    <th width="150">Nama</th>
-                    <th width="400">Deskripsi</th>
+                    <th width="200">Nama</th>
+                    <th width="350">Deskripsi</th>
                     <th width="150">Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                <?php $nomor = 0; foreach ($categories as $category) { ?>
                 <tr>
-                    <td>1</td>
-                    <td>Makanan</td>
-                    <td>Belanja makanan</td>
+                    <?php 
+                        $nomor++;
+                    ?>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $category['Category']['name']; ?></td>
+                    <td><?php echo $category['Category']['description']; ?></td>
                     <td style="text-align: center;">
-                        <a href="#" class="small secondary button aturdoku-button">Edit</a>
-                        <a href="#" class="small alert button aturdoku-button">Hapus</a>
+                        <?php echo $this->Html->link('Edit', array('controller' => 'categories','action' => 'edit', $category['Category']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                        <?php echo $this->Html->link('Hapus', array('controller' => 'categories','action' => 'delete', $category['Category']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Bahan Makanan</td>
-                    <td>Belanja bahan makanan</td>
-                    <td  style="text-align: center;">
-                        <a href="#" class="small secondary button aturdoku-button">Edit</a>
-                        <a href="#" class="small alert button aturdoku-button">Hapus</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Asuransi/Kesehatan</td>
-                    <td>Pengeluaran terkait asuransi atau biaya kesehatan</td>
-                    <td style="text-align: center;">
-                        <a href="#" class="small secondary button aturdoku-button">Edit</a>
-                        <a href="#" class="small alert button aturdoku-button">Hapus</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Keperluan 1 Kali</td>
-                    <td>Pengeluaran biaya yang hanya 1 kali atau spontan</td>
-                    <td style="text-align: center;">
-                        <a href="#" class="small secondary button aturdoku-button">Edit</a>
-                        <a href="#" class="small alert button aturdoku-button">Hapus</a>
-                    </td>
-                </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>

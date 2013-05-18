@@ -30,6 +30,7 @@ class ExpensesController extends AppController{
         if ($this->request->isPost()) {
             $this->request->data['Transaction']['type'] = 0;
             $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
+            $this->request->data['Transaction']['date'] = strlen($this->request->data['Transaction']['date']) == 0 ? date('Y-m-d') : $this->request->data['Transaction']['date'];
             if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash('Data Pengeluaran Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -51,7 +52,8 @@ class ExpensesController extends AppController{
     
     public function edit($expense_id) {
         if ($this->request->isPost()) {
-            $this->request->data['Transaction']['id'] = $expense_id;
+            $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
+            $this->request->date['Transaction']['type'] = 0;
             if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash('Ubah Data Pengeluaran Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
@@ -62,6 +64,10 @@ class ExpensesController extends AppController{
         }
         
         $this->set('title_for_layout', "Edit Data Pengeluaran");
+        
+        $expense = $this->Transaction->findByid($expense_id);
+        $this->set('expense', $expense);
+        
         $categories = $this->Category->find('all', array(
            'conditions' => array(
                'User.id' => $this->Auth->user('id'),

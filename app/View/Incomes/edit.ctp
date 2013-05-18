@@ -12,9 +12,12 @@
             <div class="row">
                 <div class="large-4 columns">
                     <div class="row collapse">
+                        
+                        <input type="hidden" name="data[Transaction][id]" value="<?php echo $income['Transaction']['id']; ?>"/>
+                        
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Transaction][amount]" value="<?php echo $data['Transaction']['amount']?>"/>
+                            <input type="text" name="data[Transaction][amount]" value="<?php echo $income['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rupiah</span>
@@ -23,17 +26,17 @@
                     <label>Kategori</label>
                     <select class="medium">
                         <?php foreach($categories as $category): ?>
-                        <option value="<?php echo $data['Category']['id']?>"><?php echo $data['Category']['name']?></option>
+                        <option value="<?php echo $category['Category']['id']?>"<?php if ($category['Category']['id'] == $income['Transaction']['category_id']) echo " selected" ?>><?php echo $category['Category']['name']?></option>
                         <?php endforeach;?>
                     </select>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                  <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $data['Transaction']['date']?>"/>
+                  <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $income['Transaction']['date']?>"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
                     <!-- ini harus di benerin -->
-                    <textarea name="data[Transaction][description]" value="<?php echo $data['Transaction']['description']?>" style="height: 30px; display: block;"></textarea>
+                    <textarea name="data[Transaction][description]" style="height: 30px; display: block;"><?php echo $income['Transaction']['description']?></textarea>
                 </div>
             </div>
         </fieldset>

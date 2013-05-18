@@ -1,3 +1,8 @@
+<?php
+    $totalExpense = 0;
+    $maxExpense = 0;
+    $averageExpense = 0;
+?>
 <div class="row">
     
     <?php echo $this->Element('user-navigation'); ?>
@@ -39,8 +44,24 @@
         <?php echo $this->Aturdoku->print_date_progress(); ?>
         <div id="plot"></div>
         <p>&nbsp;</p>
-        <p>Rata-rata pengeluaran bulan ini: Rp ###.###,##</p>
-        <p>Pengeluaran terbesar pada tanggal 2 April 2013 sejumlah: Rp ###.###,##</p>
+        
+        <?php        
+            $numberOfExpense = 0;
+            foreach ($expenses as $expense) {
+                $totalExpense += $expense['Transaction']['amount']; 
+                
+                if ($maxExpense < $expense['Transaction']['amount']) {
+                    $maxExpense = $expense;
+                }
+                
+                $numberOfExpense++;
+            }
+            
+            $averageExpense = $totalExpense / $numberOfExpense;
+        ?>
+        
+        <p>Rata-rata pengeluaran bulan ini: <?php echo $averageExpense ?></p>
+        <p>Pengeluaran terbesar pada tanggal <?php echo $this->Aturdoku->getGraphDateFormat($maxExpense['Transaction']['date']) ?> sejumlah: <?php echo $maxExpense['Transaction']['amount']; ?></p>
         <a href="#" class="secondary expand button aturdoku-button">Lihat Laporan Selengkapnya >></a>
         
         <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
@@ -49,18 +70,28 @@
             <thead>
                 <tr>
                     <th width="40">No.</th>
-                    <th width="150">Tanggal</th>
-                    <th width="400">Deskripsi Pengeluaran</th>
+                    <th width="120">Tanggal</th>
+                    <th width="300">Deskripsi Pendapatan</th>
                     <th width="150">Nominal</th>
+                    <th width="130">Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                <?php $nomor = 0; foreach ($expenses as $expense) { ?>
                 <tr>
-                    <td>1</td>
-                    <td>7 April 2013</td>
-                    <td>Belanja bulanan</td>
-                    <td>Rp ###.###,##</td>
+                    <?php 
+                        $nomor++;
+                    ?>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $expense['Transaction']['date']?></td>
+                    <td><?php echo $expense['Transaction']['description']?></td>
+                    <td><?php echo $expense['Transaction']['amount']?></td>
+                    <td>
+                        <?php echo $this->Html->link('Edit', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                        <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                    </td>                    
                 </tr>
+             <?php } ?>
             </tbody>
         </table>  
     </div>
@@ -79,25 +110,34 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
-        <h3 class="subheader">Isi dompet Anda: Rp ###,###.##</h3>
+        <h3 class="subheader">Isi dompet Anda: </h3>
         <h2 class="special-font underline">Data Pendapatan Terkini</h2>
         
         <table>
         <thead>
             <tr>
                 <th width="40">No.</th>
-                <th width="150">Tanggal</th>
-                <th width="400">Nama Aset</th>
-                <th width="150">Nilai</th>
+                <th width="120">Tanggal</th>
+                <th width="300">Deskripsi Pendapatan</th>
+                <th width="150">Nominal</th>
+                <th width="130">Aksi</th>
             </tr>
         </thead>
             <tbody>
+                <?php $nomor = 0; foreach ($incomes as $income) { ?>
                 <tr>
-                    <td>1</td>
-                    <td>8 April 2013</td>
-                    <td><em>nama aset di sini</em></td>
-                    <td>Rp ###.###,##</td>
+                    <?php $nomor++; ?>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $income['Transaction']['date']?></td>
+                    <td><?php echo $income['Transaction']['description']?></td>
+                    <td><?php echo $income['Transaction']['amount']?></td>
+                    <td>
+                        <?php echo $this->Html->link('Edit', array('controller' => 'incomes','action' => 'edit', $income['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                        <?php echo $this->Html->link('Hapus', array('controller' => 'incomes','action' => 'delete', $income['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                    </td>
+                    
                 </tr>
+             <?php } ?>
             </tbody>
         </table>
     </div>
@@ -109,7 +149,7 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-orange">ASET</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <a href="#" class="small secondary expand button" data-reveal-id="add-asset-data">Tambah Data Aset</a>
+            <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small secondary expand button'))?>
         </p>
     </div>
     <div class="large-9 columns">
@@ -119,18 +159,27 @@
         <thead>
             <tr>
                 <th width="40">No.</th>
-                <th width="150">Tanggal</th>
-                <th width="400">Nama Aset</th>
+                <th width="150">Tahun</th>
+                <th width="300">Nama Aset</th>
                 <th width="150">Nilai</th>
+                <th width="130">Aksi</th>
             </tr>
         </thead>
             <tbody>
+                <?php $nomor = 0; foreach ($assets as $asset) { ?>
                 <tr>
-                    <td>1</td>
-                    <td>8 April 2013</td>
-                    <td><em>nama aset di sini</em></td>
-                    <td>Rp ###.###,##</td>
+                    <?php $nomor++; ?>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $asset['Asset']['year']?></td>
+                    <td><?php echo $asset['Asset']['name']?></td>
+                    <td><?php echo $asset['Asset']['value']?></td>
+                    <td>
+                        <?php echo $this->Html->link('Edit', array('controller' => 'assets','action' => 'edit', $asset['Asset']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                        <?php echo $this->Html->link('Hapus', array('controller' => 'assets','action' => 'delete', $asset['Asset']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                    </td>
+                    
                 </tr>
+             <?php } ?>
             </tbody>
         </table>  
         
@@ -152,13 +201,14 @@
     $(document).foundation();
     $(document).ready(function(){
         var line1=[
-            ['1-April-13', 54000],
-            ['2-April-13', 238000],
-            ['3-April-13', 70000],
-            ['4-April-13', 59871],
-            ['5-April-13', 34000],
-            ['6-April-13', 120000],
-            ['7-April-13', 41000],
+            <?php
+                foreach ($expenses as $expense):
+            ?>
+                ['<?php echo $this->Aturdoku->getGraphDateFormat($expense['Transaction']['date']) ?>', <?php echo $expense['Transaction']['amount'] ?>],
+            <?php
+                endforeach;
+            ?>
+            
         ];
         
         var plot1 = $.jqplot('plot', [line1], {

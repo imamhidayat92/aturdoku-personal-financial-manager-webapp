@@ -12,24 +12,26 @@
             <div class="row">
                 <div class="large-4 columns">
                     <div class="row collapse">
+                        <input type="hidden" name="data[Transaction][id]" value="<?php echo $expense['Transaction']['id']; ?>"/>
+                        
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Transaction][amount]" value="<?php echo $data['Transaction']['amount']?>"/>
+                            <input type="text" name="data[Transaction][amount]" value="<?php echo $expense['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rupiah</span>
                         </div>
                     </div>
                     <label>Kategori</label>
-                    <select class="medium">
+                    <select class="medium" name="data[Transaction][category_id]">
                         <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo $data['Category']['id']?>"><?php echo $data['Category']['name']?></option>
+                        <option value="<?php echo $category['Category']['id']?>"<?php if ($category['Category']['id'] == $expense['Transaction']['category_id']) echo " selected" ?>><?php echo $category['Category']['name']?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
-                    <textarea name="data[Transaction][description]" value="<?php echo $data['Transaction']['description']?>"></textarea>
+                    <textarea name="data[Transaction][description]"><?php echo $expense['Transaction']['description']?></textarea>
                 </div>
             </div>
         </fieldset>
@@ -38,11 +40,11 @@
             <div class="row">
                 <div class="large-4 columns">
                     <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $data['Transaction']['date']?>"/>
+                    <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $expense['Transaction']['date']?>"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Tempat (<a href="#">Lacak dengan Google Maps</a>)</label>
-                    <input type="text" name="data[Transaction][place]" value="<?php echo $data['Transaction']['place']?>"/>
+                    <input type="text" name="data[Transaction][place]" value="<?php echo $expense['Transaction']['place']?>"/>
                 </div>
             </div>
         </fieldset>
