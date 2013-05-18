@@ -9,7 +9,8 @@
     <div class="large-3 columns">
         <h1 class="aturdoku-nav-head aturdoku-bg-black">KATEGORI</h1>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <a href="#" class="small success expand button aturdoku-button" data-reveal-id="add-category-data">Tambah Kategori</a>
+        <!--<a href="#" class="small success expand button aturdoku-button" data-reveal-id="add-category-data">Tambah Kategori</a>-->
+        <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'categories', 'action' => 'add_expense'), array('class' => 'small success expand button aturdoku-button'))?>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Daftar Seluruh Kategori Pengeluaran</h2>
