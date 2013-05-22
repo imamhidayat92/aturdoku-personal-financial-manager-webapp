@@ -1,5 +1,14 @@
 <div class="row">
-    
+<?php echo $this->Element('user-navigation'); ?>
+    <div class="large-12 columns">
+        <ul class="breadcrumbs">
+            <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'index')) ?>">Data Aset</a></li>
+            <li><a href="#">Tambah</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">    
     <div class="large-8 large-offset-2 columns">
         <h2 class="special-font">Tambah Data Pengeluaran</h2>
         <p class="lead">Isi formulir di bawah ini untuk menambahkan data pengeluaran Anda.</p>

@@ -20,9 +20,9 @@
                 <tr>
                     <th width="40">No.</th>
                     <th width="150">Tahun</th>
-                    <th width="300">Nama Aset</th>
+                    <th width="280">Nama Aset</th>
                     <th width="150">Nilai</th>
-                    <th width="100">Aksi</th>
+                    <th width="120">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,10 +32,10 @@
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $asset['Asset']['year']?></td>
                     <td><?php echo $asset['Asset']['name']?></td>
-                    <td><?php echo $asset['Asset']['value']?></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($asset['Asset']['value'])?></td>
                     <td>
-                        <?php echo $this->Html->link('Edit', array('action' => 'edit', $asset['Asset']['id'])); ?>
-                        <?php echo $this->Html->link('Hapus', array('action' => 'delete', $asset['Asset']['id'])); ?>
+                        <?php echo $this->Html->link('Ubah', array('controller' => 'assets','action' => 'edit', $asset['Asset']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                        <?php echo $this->Html->link('Hapus', array('controller' => 'assets','action' => 'delete', $asset['Asset']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
                     </td>
                     
                 </tr>

@@ -114,7 +114,7 @@
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
         <p>Klasifikasikan jenis pemasukan Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
-        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small secondary expand button aturdoku-button">Atur Kategori</a>
+        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small secondary expand button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>

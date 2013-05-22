@@ -1,6 +1,12 @@
 <div class="row">
     
     <?php echo $this->Element('user-navigation'); ?>
+    <div class="large-12 columns">
+        <ul class="breadcrumbs">
+            <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
+            <li><a href="#">Data Pengeluaran</a></li>
+        </ul>
+    </div>
     
     <div class="large-3 columns">
         <h2 class="aturdoku-nav-head aturdoku-bg-red">PENGELUARAN</h2>
@@ -30,10 +36,10 @@
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $expense['Transaction']['date']?></td>
                     <td><?php echo $expense['Transaction']['description']?></td>
-                    <td><?php echo $expense['Transaction']['amount']?></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount'])?></td>
                     <td>
-                        <?php echo $this->Html->link('Edit', array('action' => 'edit', $expense['Transaction']['id'])); ?>
-                        <?php echo $this->Html->link('Hapus', array('action' => 'delete', $expense['Transaction']['id'])); ?>
+                        <?php echo $this->Html->link('Ubah', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                        <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
                     </td>
                     
                 </tr>

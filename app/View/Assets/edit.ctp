@@ -1,8 +1,17 @@
 <div class="row">
-    
+    <?php echo $this->Element('user-navigation'); ?>
+    <div class="large-12 columns">
+        <ul class="breadcrumbs">
+            <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'assets', 'action' => 'index')) ?>">Data Aset</a></li>
+            <li><a href="#">Ubah</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
     <div class="large-8 large-offset-2 columns">
-        <h2 class="special-font">Edit Data Aset</h2>
-        <p class="lead">Ubah formulir di bawah ini untuk melakukan edit data aset Anda.</p>
+        <h2 class="special-font">Ubah Data Aset</h2>
+        <p class="lead">Ubah formulir di bawah ini untuk melakukan pengubahan data aset Anda.</p>
         
         <!-- Form Edit -->
         
