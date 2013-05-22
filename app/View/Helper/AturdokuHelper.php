@@ -7,18 +7,18 @@ class AturdokuHelper extends AppHelper {
     );
     
     private $months = array(
-        "January",
-        "February",
-        "March",
+        "Januari",
+        "Februari",
+        "Maret",
         "April",
-        "May",
-        "June",
-        "July",
-        "August",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
         "September",
-        "October",
+        "Oktober",
         "November",
-        "December",
+        "Desember",
     );
     
     public function get_number_of_day($month) {
@@ -40,11 +40,11 @@ class AturdokuHelper extends AppHelper {
         return $number_of_day[$month];
     }
     
-    public function print_date_progress() {
+    public function printDateProgress() {
         $date = intval(date('d'));
         $month = intval(date('m'));       
 ?>
-        <p style="margin: 0">Hari ini tanggal: <?php echo date('Y-m-d') ?></p>
+<p style="margin: 0">Hari ini tanggal: <?php echo $this->getGraphDateFormat(date('Y-m-d')); ?></p>
         <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="width: <?php echo ceil($date * 100 / $this->get_number_of_day($month)); ?>%"></span></div>
 <?php
     }
@@ -66,12 +66,21 @@ class AturdokuHelper extends AppHelper {
     
     public function getGraphDateFormat($date) {
         $dateElements = explode('-', $date);
-        return $dateElements[2] . "-" . $this->months[$dateElements[1]-1] . "-" . $dateElements[0];
+        return $dateElements[2] . " " . $this->months[$dateElements[1]-1] . " " . $dateElements[0];
     }
     
     public function currencyFormat($number){
-        return $this->Number->currency($number, "Rp. ", array('decimals' => ',', 'thousands' => '.'));
+        if ($number < 0) {
+            return '<span style="color: red;">' . $this->Number->currency($number, "Rp. ", array('decimals' => ',', 'thousands' => '.')) . '</span>';
+        }
+        else {
+            return $this->Number->currency($number, "Rp. ", array('decimals' => ',', 'thousands' => '.'));
+        }        
     }
     
+    // Debugging purpose:
+    public function printArray($anArray) {
+        return '<pre>' . print_r($anArray) . '<pre>';
+    }
 }
 ?>

@@ -19,7 +19,7 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>
-        <?php echo $this->Aturdoku->print_date_progress(); ?>
+        <?php echo $this->Aturdoku->printDateProgress(); ?>
         <div id="plot"></div>
         <p>&nbsp;</p>
         <p>Rata-rata pengeluaran bulan ini: Rp ###.###,##</p>

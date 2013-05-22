@@ -43,27 +43,35 @@ class UsersController extends AppController {
 
     private $defaultIncomeCategories = array(
         0 => array(
-            'name' => 'Pemasukan Bulanan',
-            'description' => '',
-            'type' => '1',
+            'Category' => array(
+                'name' => 'Pemasukan Bulanan',
+                'description' => '',
+                'type' => '1',
+            ),
         ),
         1 => array(
-            'name' => 'Pemasukan Tambahan',
-            'description' => '',
-            'type' => '1',
+            'Category' => array(
+                'name' => 'Pemasukan Tambahan',
+                'description' => '',
+                'type' => '1',
+            )
         ),
     );
     
     private $defaultExpenseCategories = array(
         0 => array(
-            'name' => 'Administrasi Bulanan',
-            'description' => '',
-            'type' => '0',
+            'Category' => array(
+                'name' => 'Administrasi Bulanan',
+                'description' => '',
+                'type' => '0',
+            )
         ),
         1 => array(
-            'name' => 'Makanan/Minuman',
-            'description' => '',
-            'type' => '0',
+            'Category' => array(
+                'name' => 'Makanan/Minuman',
+                'description' => '',
+                'type' => '0',
+            )
         ),
     );
     
@@ -93,12 +101,14 @@ class UsersController extends AppController {
                     $this->Category->save($category);
                 }
 
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Session->setFlash('Registrasi berhasil. Silakan masuk dengan menggunakan username dan password Anda.', 'flash_success');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash('Registrasi gagal. Coba cek ulang data Anda.', 'flash_fail');
             }
         }
+        
+        $this->set('title_for_layout', 'Registrasi');
     }
 
 /**
@@ -169,6 +179,8 @@ class UsersController extends AppController {
     }
     
     public function dashboard() {
+        $this->set('title_for_layout', 'Dashboard');
+        
         $dailyExpenses = $this->Transaction->query("SELECT date, SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY date LIMIT 30");
         $this->set('dailyExpenses', $dailyExpenses);
         

@@ -1,7 +1,3 @@
-<pre>
-<?php //print_r($totalIncomes) ?>
-</pre>
-
 <?php
     $totalExpense = 0;
     $maxExpense = 0;
@@ -11,29 +7,9 @@
         )
     );
 ?>
-<div class="row">
-    
-    <?php echo $this->Element('user-navigation'); ?>
-    
-    <div class="large-5 columns">
-        <h1 class="special-font">Selamat datang, <?php echo AuthComponent::user('first_name')?>. :)</h1>
-        <h3 class="subheader">Anda sedang berada di <em>Dashboard</em>.</h3>
-    </div>
-    <div class="large-7 columns">
-        <h3 class="special-font aturdoku-bg-orange" align="center">Suguhan dari blog.aturdoku.com >></h3>
-        <div class="large-6 columns aturdoku-news-box">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                ultricies leo et erat vulputate ultricies. Phasellus id
-                laoreet dolor. </p>
-            <a class="small success button">Selengkapnya</a>
-        </div>
-        <div class="large-6 columns aturdoku-news-box">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                ultricies leo et erat vulputate ultricies. Phasellus id
-                laoreet dolor. </p>
-            <a class="small success button">Selengkapnya</a>
-        </div>
-    </div>
+
+<div class="row">    
+    <?php echo $this->Element('user-navigation'); ?>    
     <div class="separator"></div>
     
     <!-- Pengeluaran -->
@@ -44,13 +20,20 @@
             <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
-        <p>Klasifikasikan jenis pengeluaran Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
-        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small secondary expand button aturdoku-button">Atur Kategori</a>
+        <p>Klasifikasikan jenis pengeluaran Anda.</p>
+        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small secondary expand button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>
-        <?php echo $this->Aturdoku->print_date_progress(); ?>
+        <?php echo $this->Aturdoku->printDateProgress(); ?>
+        
+    <?php if (count($expenses) > 0): ?>
+        
+        <?php if (count($dailyExpenses) > 1): ?>
         <div id="plot"></div>
+        <?php else: ?>
+        <h5 align="center" style="margin-top: 50px;">Data pengeluaran Anda saat ini belum dapat divisualisasikan.</h5>
+        <?php endif; ?>
         <p>&nbsp;</p>
         
         <?php        
@@ -69,8 +52,7 @@
         ?>
         
         <p>Rata-rata pengeluaran bulan ini: <?php echo $this->Aturdoku->currencyFormat($averageExpense) ?></p>
-        <p>Pengeluaran terbesar pada tanggal <?php echo $this->Aturdoku->getGraphDateFormat($maxExpense['Transaction']['date']) ?> sejumlah: <?php echo $this->Aturdoku->currencyFormat($maxExpense['Transaction']['amount']); ?></p>
-        <?php echo $this->Html->link('Lihat Laporan Pengeluaran Selengkapnya', array('controller' => 'expenses', 'action' => 'index'), array('class' => 'secondary expand button aturdoku-button'))?>
+        <p>Pengeluaran terbesar sejumlah: <?php echo $this->Aturdoku->currencyFormat($maxExpense['Transaction']['amount']); ?></p>
         
         <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
         
@@ -101,7 +83,12 @@
                 </tr>
              <?php } ?>                
             </tbody>
-        </table>  
+        </table>
+        
+        <?php echo $this->Html->link('Lihat Data Pengeluaran Selengkapnya', array('controller' => 'expenses', 'action' => 'index'), array('class' => 'secondary expand button'))?>
+    <?php else: ?>
+        <h2 style="color: #cccccc; text-align: center; line-height: 1;">Anda belum menyimpan data pengeluaran apapun.</h2>
+    <?php endif; ?>
     </div>
     <div class="separator"></div>
     
@@ -113,7 +100,7 @@
             <?php echo $this->Html->link('Tambah Data Pemasukan', array('controller' => 'incomes', 'action' => 'add'), array('class' => 'small success expand button'))?>
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
-        <p>Klasifikasikan jenis pemasukan Anda. <a href="#">(Pelajari Selengkapnya)</a></p>
+        <p>Klasifikasikan jenis pemasukan Anda.</p>
         <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small secondary expand button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
@@ -148,6 +135,8 @@
              <?php } ?>
             </tbody>
         </table>
+        
+                <a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Pendapatan Lengkap</a>
     </div>
     <p class="clearfix"></p>
     <div class="separator"></div>
@@ -157,7 +146,7 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-orange">ASET</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small secondary expand button'))?>
+            <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small expand button'))?>
         </p>
     </div>
     <div class="large-9 columns">
@@ -212,7 +201,7 @@
             <?php
                 foreach ($dailyExpenses as $expense):
             ?>
-                ['<?php echo $this->Aturdoku->getGraphDateFormat($expense['transactions']['date']) ?>', <?php echo $expense[0]['total'] ?>],
+                ['<?php echo $expense['transactions']['date'] ?>', <?php echo $expense[0]['total'] ?>],
             <?php
                 endforeach;
             ?>
@@ -247,94 +236,3 @@
         });    
     });
 </script>
-
-<!-- Modal Forms -->
-
-<div id="add-expense-data" class="reveal-modal">
-    <h2 class="special-font">Tambah Data Pengeluaran</h2>
-    <p class="lead">Isi formulir di bawah ini untuk menambahkan data pengeluaran Anda.</p>
-  
-    <form action="" method="">
-        <fieldset>
-            <legend>Nominal dan Deskripsi</legend>
-            <div class="row">
-                <div class="large-4 columns">
-                    <div class="row collapse">
-                        <label>Nominal</label>
-                        <div class="large-9 columns">
-                            <input type="text"/>
-                        </div>
-                        <div class="large-3 columns">
-                            <span class="postfix">Rupiah</span>
-                        </div>
-                    </div>
-                    <label>Kategori</label>
-                    <select class="medium">
-                        <option value="#">Makanan</option>
-                        <option value="#">Bahan Makanan</option>
-                        <option value="#">Asuransi/Kesehatan</option>
-                        <option value="#">Keperluan 1 Kali</option>
-                    </select>
-                </div>
-                <div class="large-8 columns">
-                    <label>Keperluan</label>
-                    <textarea></textarea>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Waktu & Tempat</legend>
-            <div class="row">
-                <div class="large-4 columns">
-                    <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text"/>
-                </div>
-                <div class="large-8 columns">
-                    <label>Tempat (<a href="#">Lacak dengan Google Maps</a>)</label>
-                    <input type="text"/>
-                </div>
-            </div>
-        </fieldset>
-        <input type="submit" class="success button" value="Simpan Data"/>
-    </form>
-  
-    <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<div id="add-asset-data" class="reveal-modal">
-    <h2 class="special-font">Tambah Data Aset</h2>
-    <p class="lead">Isi formulir di bawah ini untuk menambahkan data aset Anda.</p>
-  
-    <form action="" method="">
-        <fieldset>
-            <legend>Nama dan Nilai</legend>
-            <div class="row">
-                <div class="large-8 columns">
-                    <label>Nama Aset</label>
-                    <input type="text"/>
-                </div>
-                <div class="large-4 columns">
-                    <div class="row collapse">
-                        <label>Nominal</label>
-                        <div class="large-9 columns">
-                            <input type="text"/>
-                        </div>
-                        <div class="large-3 columns">
-                            <span class="postfix">Rupiah</span>
-                        </div>
-                    </div>
-                    <label>Kategori</label>
-                    <select class="medium">
-                        <option value="#">Makanan</option>
-                        <option value="#">Bahan Makanan</option>
-                        <option value="#">Asuransi/Kesehatan</option>
-                        <option value="#">Keperluan 1 Kali</option>
-                    </select>
-                </div>                
-            </div>
-        </fieldset>
-        <input type="submit" class="success button" value="Simpan Data"/>
-    </form>
-  
-    <a class="close-reveal-modal">&#215;</a>
-</div>

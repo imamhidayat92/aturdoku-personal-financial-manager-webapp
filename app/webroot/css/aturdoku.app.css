@@ -7,6 +7,11 @@ body {
     background-color: #ffffff;
 }
 
+.header-container {
+    width: 1000px;
+    height: 450px;
+    background-image: url("../img/header_bg.png");
+}
 
 .special-font {
     font-family: 'Yanone Kaffeesatz', 'Arial Narrow', Arial;

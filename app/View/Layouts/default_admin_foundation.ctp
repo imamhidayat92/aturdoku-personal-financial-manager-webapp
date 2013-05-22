@@ -24,7 +24,7 @@
         <?php echo $this->Session->flash(); ?>
         <?php echo $this->fetch('content'); ?>
         <div class="row">
-            <div class="large-12 columns" style="background-color: #000000; font-size: 0.8em; margin-top: 0.5em;">
+            <div class="large-12 columns" style="background-color: #c1c2c2; font-size: 0.8em; margin-top: 0.5em;">
                 <p align="center" style="color: #ebebeb;">&copy; 2013 - aturdoku.com | Development Teams</p>
             </div>
         </div>
