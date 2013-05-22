@@ -57,5 +57,31 @@ class AssetsController extends AppController {
     public function delete($asset_id) {
         
     }
+    
+    public function outputtopdf(){
+        $assets = $this->Asset->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
+            ),
+            'order' => array(
+                'Asset.year DESC' 
+            ),
+            'limit' => 5
+        ));
+        $this->set('assets', $assets);
+        
+        App::import('Vendor', 'Fpdf', array('file' => 'fpdf/fpdf.php'));
+        $this->layout = 'pdf'; //this will use the pdf.ctp layout
+        
+        $this->response->type('pdf');
+        
+        $pdfObject = new FPDF('P','mm','A4');
+        $pdfObject->SetLeftMargin(20);
+        $pdfObject->SetRightMargin(20);
+        
+        $this->set('fpdf', $pdfObject);
+
+        $this->render('pdf');
+    }
 }
 ?>

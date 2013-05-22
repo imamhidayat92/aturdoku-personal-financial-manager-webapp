@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $nomor = 0; foreach ($expenses as $expense) { ?>
+                <?php $nomor = ($this->Paginator->current($model = null)-1)*$itemPerPage; foreach ($expenses as $expense) { ?>
                 <tr>
                     <?php $nomor++; ?>
                     <td><?php echo $nomor; ?></td>
@@ -38,7 +38,15 @@
                     
                 </tr>
              <?php } ?>
+                <tr>
+                    <td colspan="3"><strong>Total Pengeluaran:</strong></td>
+                    <td>Rp Sekian</td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
+        
+        <p align="center"><?php echo $this->Paginator->numbers(); ?></p>
+        
     </div>
 </div>

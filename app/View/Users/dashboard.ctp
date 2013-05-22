@@ -1,7 +1,15 @@
+<pre>
+<?php //print_r($totalIncomes) ?>
+</pre>
+
 <?php
     $totalExpense = 0;
     $maxExpense = 0;
-    $averageExpense = 0;
+    $averageExpense = array(
+        'Transaction' => array(
+            'amount' => 0
+        )
+    );
 ?>
 <div class="row">
     
@@ -50,7 +58,7 @@
             foreach ($expenses as $expense) {
                 $totalExpense += $expense['Transaction']['amount']; 
                 
-                if ($maxExpense < $expense['Transaction']['amount']) {
+                if ($maxExpense['Transaction']['amount'] < $expense['Transaction']['amount']) {
                     $maxExpense = $expense;
                 }
                 
@@ -60,9 +68,9 @@
             $averageExpense = $totalExpense / $numberOfExpense;
         ?>
         
-        <p>Rata-rata pengeluaran bulan ini: <?php echo $averageExpense ?></p>
-        <p>Pengeluaran terbesar pada tanggal <?php echo $this->Aturdoku->getGraphDateFormat($maxExpense['Transaction']['date']) ?> sejumlah: <?php echo $maxExpense['Transaction']['amount']; ?></p>
-        <a href="#" class="secondary expand button aturdoku-button">Lihat Laporan Selengkapnya >></a>
+        <p>Rata-rata pengeluaran bulan ini: <?php echo $this->Aturdoku->currencyFormat($averageExpense) ?></p>
+        <p>Pengeluaran terbesar pada tanggal <?php echo $this->Aturdoku->getGraphDateFormat($maxExpense['Transaction']['date']) ?> sejumlah: <?php echo $this->Aturdoku->currencyFormat($maxExpense['Transaction']['amount']); ?></p>
+        <?php echo $this->Html->link('Lihat Laporan Pengeluaran Selengkapnya', array('controller' => 'expenses', 'action' => 'index'), array('class' => 'secondary expand button aturdoku-button'))?>
         
         <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
         
@@ -85,13 +93,13 @@
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $expense['Transaction']['date']?></td>
                     <td><?php echo $expense['Transaction']['description']?></td>
-                    <td><?php echo $expense['Transaction']['amount']?></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount']);?></td>
                     <td>
                         <?php echo $this->Html->link('Edit', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
                         <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
                     </td>                    
                 </tr>
-             <?php } ?>
+             <?php } ?>                
             </tbody>
         </table>  
     </div>
@@ -110,7 +118,7 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
-        <h3 class="subheader">Isi dompet Anda: </h3>
+        <h3 class="subheader">Isi kas Anda: <?php echo $this->Aturdoku->currencyFormat($totalIncomes - $totalExpenses); ?></h3>
         <h2 class="special-font underline">Data Pendapatan Terkini</h2>
         
         <table>
@@ -130,7 +138,7 @@
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $income['Transaction']['date']?></td>
                     <td><?php echo $income['Transaction']['description']?></td>
-                    <td><?php echo $income['Transaction']['amount']?></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($income['Transaction']['amount']);?></td>
                     <td>
                         <?php echo $this->Html->link('Edit', array('controller' => 'incomes','action' => 'edit', $income['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
                         <?php echo $this->Html->link('Hapus', array('controller' => 'incomes','action' => 'delete', $income['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
@@ -172,7 +180,7 @@
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $asset['Asset']['year']?></td>
                     <td><?php echo $asset['Asset']['name']?></td>
-                    <td><?php echo $asset['Asset']['value']?></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($asset['Asset']['value']);?></td>
                     <td>
                         <?php echo $this->Html->link('Edit', array('controller' => 'assets','action' => 'edit', $asset['Asset']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
                         <?php echo $this->Html->link('Hapus', array('controller' => 'assets','action' => 'delete', $asset['Asset']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
@@ -202,9 +210,9 @@
     $(document).ready(function(){
         var line1=[
             <?php
-                foreach ($expenses as $expense):
+                foreach ($dailyExpenses as $expense):
             ?>
-                ['<?php echo $this->Aturdoku->getGraphDateFormat($expense['Transaction']['date']) ?>', <?php echo $expense['Transaction']['amount'] ?>],
+                ['<?php echo $this->Aturdoku->getGraphDateFormat($expense['transactions']['date']) ?>', <?php echo $expense[0]['total'] ?>],
             <?php
                 endforeach;
             ?>

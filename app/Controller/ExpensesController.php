@@ -1,11 +1,11 @@
 <?php
 
 class ExpensesController extends AppController{
+    public $itemPerPage = 25;
     
     public $paginate = array(
-        'limit' => 25,
         'order' => array(
-            'date' => 'ASC'
+            'date' => 'DESC'
         ),
     );
     
@@ -15,6 +15,8 @@ class ExpensesController extends AppController{
         $this->loadModel('Category');
         $this->loadModel('Transaction');        
         $this->loadModel('User');
+        
+        $this->paginate['limit'] = $this->itemPerPage;
     }
     
     public function index() {
@@ -24,6 +26,7 @@ class ExpensesController extends AppController{
         );
         $expenses = $this->paginate('Transaction');              
         $this->set('expenses', $expenses);
+        $this->set('itemPerPage', $this->itemPerPage);
     }
     
     public function add() {

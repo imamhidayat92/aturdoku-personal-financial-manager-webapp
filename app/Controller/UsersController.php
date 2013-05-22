@@ -169,15 +169,24 @@ class UsersController extends AppController {
     }
     
     public function dashboard() {
+        $dailyExpenses = $this->Transaction->query("SELECT date, SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY date LIMIT 30");
+        $this->set('dailyExpenses', $dailyExpenses);
+        
+        $totalExpenses = $this->Transaction->query("SELECT SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id'). " AND type = 0");
+        $this->set('totalExpenses', $totalExpenses[0][0]['total']);
+        
+        $totalIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id'). " AND type = 1");
+        $this->set('totalIncomes', $totalIncomes[0][0]['total']);
+        
         $expenses = $this->Transaction->find('all', array(
             'conditions' => array(
                 'User.id' => $this->Auth->user('id'),
                 'type' => 0
             ),
             'order' => array(
-                'Transaction.created DESC' 
+                'Transaction.date DESC' 
             ),
-            'limit' => 31
+            'limit' => 20
         ));
         $this->set('expenses', $expenses);
         
@@ -187,7 +196,7 @@ class UsersController extends AppController {
                 'type' => 1
             ),
             'order' => array(
-                'Transaction.created DESC' 
+                'Transaction.date DESC' 
             ),
             'limit' => 31
         ));

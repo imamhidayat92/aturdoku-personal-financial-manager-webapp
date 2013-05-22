@@ -2,6 +2,10 @@
 App::uses('AppHelper', 'View/Helper');
 
 class AturdokuHelper extends AppHelper {
+    public $helpers = array(
+        "Number"
+    );
+    
     private $months = array(
         "January",
         "February",
@@ -64,5 +68,10 @@ class AturdokuHelper extends AppHelper {
         $dateElements = explode('-', $date);
         return $dateElements[2] . "-" . $this->months[$dateElements[1]-1] . "-" . $dateElements[0];
     }
+    
+    public function currencyFormat($number){
+        return $this->Number->currency($number, "Rp. ", array('decimals' => ',', 'thousands' => '.'));
+    }
+    
 }
 ?>
