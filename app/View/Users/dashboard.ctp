@@ -16,7 +16,7 @@
     <?php echo $this->Element('user-navigation'); ?>
     
     <div class="large-5 columns">
-        <h1 class="special-font">Selamat datang, User. :)</h1>
+        <h1 class="special-font">Selamat datang, <?php echo AuthComponent::user('first_name')?>. :)</h1>
         <h3 class="subheader">Anda sedang berada di <em>Dashboard</em>.</h3>
     </div>
     <div class="large-7 columns">

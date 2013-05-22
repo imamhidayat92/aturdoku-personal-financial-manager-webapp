@@ -10,7 +10,14 @@
     );
     
     $i = 0;
+    $fpdf->SetFont('Arial', '', 20);
+    $fpdf->Cell(170,10,'Laporan Asset',0,0,'C');
+    $fpdf->Ln(20);
+    $fpdf->SetFont('Arial', '', 12);
+    $fpdf->Cell(50,10,'Nama: '.AuthComponent::user('first_name').' '.AuthComponent::user('last_name'),0,1);
+    $fpdf->Cell(50,10,'Email: '.AuthComponent::user('email'),0,0);
     
+    $fpdf->Ln(20);
     $fpdf->SetFont('Arial', 'B', 12);
     foreach($header as $col):
         $fpdf->Cell($columnWidths[$i],7,$col,1,0,'C');
