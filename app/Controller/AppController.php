@@ -37,7 +37,7 @@ class AppController extends Controller {
         'Session',
         'Auth' => array(
             'loginRedirect' => array('controller' => 'users', 'action' => 'dashboard'),
-            'logoutRedirect' => array('controller' => 'site', 'action' => 'index')
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login')
         )
     );
     
@@ -48,5 +48,13 @@ class AppController extends Controller {
     public function beforeFilter() {
         parent::beforeFilter();
         $this->layout = "default_foundation";
+    }
+    
+    public function isAdministrator() {
+        if ($this->Auth->user('role') == 0) {
+            return true;
+        }
+        
+        return false;
     }
 }

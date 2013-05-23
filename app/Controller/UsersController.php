@@ -22,8 +22,7 @@ class UsersController extends AppController {
  * @return void
  */
     public function index() {
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
+        $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
     }
 
 /**
@@ -87,6 +86,7 @@ class UsersController extends AppController {
         
         if ($this->request->is('post')) {
             $this->User->create();
+            $this->request->data['User']['is_active'] = true;
             if ($this->User->save($this->request->data)) {
                 $newId = $this->User->getInsertID();
 
@@ -148,13 +148,47 @@ class UsersController extends AppController {
  * @return void
  */
     public function delete($id = null) {
+        if (!$this->isAdministrator()) {
+            $this->redirect(array('action' => 'dashboard'));
+        }
+        
         $this->User->id = $id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
-        $this->request->onlyAllow('post', 'delete');
         if ($this->User->delete()) {
-            $this->Session->setFlash(__('User deleted'));
+            
+            $this->loadModel('Transaction');
+            $transactions = $this->Transaction->find('all', array(
+                'conditions' => array(
+                    'user_id' => $id
+                )
+            ));
+            foreach ($transactions as $transaction) {
+                $this->Transaction->delete($transaction);
+            }
+            
+            $this->loadModel('Category');
+            $categories = $this->Category->find('all', array(
+                'conditions' => array(
+                    'user_id' => $id
+                )
+            ));
+            foreach ($categories as $category) {
+                $this->Category->delete($category);
+            }
+            
+            $this->loadModel('ExpensePlan');
+            $expensePlans = $this->ExpensePlan->find('all', array(
+                'conditions' => array(
+                    'user_id' => $id
+                )
+            ));
+            foreach ($expensePlans as $expensePlan) {
+                $this->ExpensePlan->delete($expensePlan);
+            }
+            
+            $this->Session->setFlash(__('User dan seluruh datanya telah dihapus.'), 'flash_success');
             $this->redirect(array('action' => 'index'));
         }
         $this->Session->setFlash(__('User was not deleted'));
@@ -165,6 +199,9 @@ class UsersController extends AppController {
         if ($this->request->isPost()) {
             if ($this->Auth->login()) {
                 if ($this->Auth->user('is_active')) {
+                    $loginData['User']['last_login'] = date('Y-m-d H:i:s');
+                    $loginData['User']['id'] = $this->Auth->user('id');
+                    $this->User->save($loginData);
                     $this->redirect($this->Auth->redirect());
                 }
                 else {
