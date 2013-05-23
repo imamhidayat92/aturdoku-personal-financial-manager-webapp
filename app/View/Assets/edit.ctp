@@ -21,6 +21,7 @@
             <div class="row">
                 <div class="large-4 columns">
                     <div class="row collapse">
+                        <input type="hidden" name="data[Asset][id]" value="<?php echo $data['Asset']['id']; ?>"/>
                         <label>Nilai</label>
                         <div class="large-9 columns">
                             <input type="text" name="data[Asset][value]" value="<?php echo $data['Asset']['value']?>"/>
