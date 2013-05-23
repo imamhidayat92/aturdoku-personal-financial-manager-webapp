@@ -26,7 +26,7 @@
                             <input type="text" name="data[Transaction][amount]"/>
                         </div>
                         <div class="large-3 columns">
-                            <span class="postfix">Rupiah</span>
+                            <span class="postfix">Rp</span>
                         </div>
                     </div>
                     <label>Kategori</label>
@@ -35,14 +35,14 @@
                         <option value="<?php echo $category['Category']['id']?>"><?php echo $category['Category']['name']?></option>
                         <?php endforeach;?>
                     </select>
+                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'add_expense')) ?>" class="button secondary small">Atur Kategori</a>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
                     <input type="text" name="data[Transaction][date]" id="datepicker"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>
-                    <!-- ini harus di benerin -->
-                    <textarea name="data[Transaction][description]" style="height: 30px; display: block;"></textarea>
+                    <textarea name="data[Transaction][description]" style="height: 30px; display: block; height: 200px;"></textarea>
                 </div>
             </div>
         </fieldset>

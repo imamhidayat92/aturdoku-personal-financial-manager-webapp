@@ -26,7 +26,7 @@
                             <input type="text" name="data[Asset][value]"/>
                         </div>
                         <div class="large-3 columns">
-                            <span class="postfix">Rupiah</span>
+                            <span class="postfix">Rp</span>
                         </div>
                     </div>
                   <label>Tahun</label>

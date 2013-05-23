@@ -81,6 +81,10 @@ class UsersController extends AppController {
  * @return void
  */
     public function add() {
+        if ($this->Auth->user() != null) {
+            $this->redirect(array('action' => 'dashboard'));
+        }
+        
         if ($this->request->is('post')) {
             $this->User->create();
             if ($this->User->save($this->request->data)) {

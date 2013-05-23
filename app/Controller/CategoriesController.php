@@ -52,7 +52,7 @@ class CategoriesController extends AppController {
     }
     
     public function delete($category_id) {
-        
+        $this->Category->delete($category_id);
     }
     
     public function expense() {

@@ -27,7 +27,7 @@ class AssetsController extends AppController {
         if($this->request->isPost()){
             $this->request->data['Asset']['user_id'] = $this->Auth->user('id');
             if($this->Asset->save($this->request->data)){
-                $this->Session->setFlash('Data Aset Telah Tersimpan', 'flash_success');
+                $this->Session->setFlash('Data aset telah tersimpan.', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else{
@@ -40,7 +40,7 @@ class AssetsController extends AppController {
         if($this->request->isPost()){
             $this->request->data['Asset']['id'] = $asset_id;
             if($this->Asset->save($this->request->data)){
-                $this->Session->setFlash('Ubah Data Aset Telah Tersimpan', 'flash_success');
+                $this->Session->setFlash('Data aset telah tersimpan.', 'flash_success');
                 $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
             }
             else{
@@ -48,14 +48,14 @@ class AssetsController extends AppController {
             }
         }
         
-        $this->set('title_for_layout', "Edit Data Aset");
+        $this->set('title_for_layout', "Ubah Data Aset");
         
         $data = $this->Asset->findByid($asset_id);
         $this->set('data', $data);
     }
     
     public function delete($asset_id) {
-        
+        $this->Asset->delete($asset_id);
     }
     
     public function outputtopdf(){

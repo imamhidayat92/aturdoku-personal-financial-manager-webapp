@@ -19,9 +19,14 @@
         <p>
             <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
         </p>
+ 
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
         <p>Klasifikasikan jenis pengeluaran Anda.</p>
-        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small secondary expand button">Atur Kategori</a>
+        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small alert expand button">Atur Kategori</a>
+        
+        <h3 class="aturdoku-nav-subhead">Perencanaan</h3>
+        <p>Rencanakan pengeluaran-pengeluaran Anda.</p>
+        <a href="<?php echo Router::url(array('controller' => 'expenseplans', 'action' => 'add')) ?>" class="small alert expand button">Buat Rencana</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>
@@ -97,11 +102,11 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-green">PENDAPATAN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <?php echo $this->Html->link('Tambah Data Pemasukan', array('controller' => 'incomes', 'action' => 'add'), array('class' => 'small success expand button'))?>
+            <?php echo $this->Html->link('Tambah Data Pendapatan', array('controller' => 'incomes', 'action' => 'add'), array('class' => 'small success expand button'))?>
         </p>
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
-        <p>Klasifikasikan jenis pemasukan Anda.</p>
-        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small secondary expand button">Atur Kategori</a>
+        <p>Klasifikasikan jenis pendapatan Anda.</p>
+        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small success expand button">Atur Kategori</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>

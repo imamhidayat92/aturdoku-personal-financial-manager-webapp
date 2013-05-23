@@ -30,7 +30,7 @@
                         $nomor++;
                     ?>
                     <td><?php echo $nomor; ?></td>
-                    <td><?php echo $category['Category']['name']?></td>
+                    <td><a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'list_by_category', $category['Category']['id'])) ?>"><?php echo $category['Category']['name']?></a></td>
                     <td><?php echo $category['Category']['description']?></td>
                     <td style="text-align: center;">
                         <?php echo $this->Html->link('Edit', array('controller' => 'categories','action' => 'edit', $category['Category']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
