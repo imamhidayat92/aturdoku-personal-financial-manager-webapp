@@ -152,6 +152,7 @@
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
             <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small expand button'))?>
+            <?php echo $this->Html->link('Export Data Aset', array('controller' => 'assets', 'action' => 'outputtopdf'), array('class' => 'secondary small expand button'))?>
         </p>
     </div>
     <div class="large-9 columns">

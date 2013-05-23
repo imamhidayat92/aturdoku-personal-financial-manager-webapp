@@ -10,7 +10,8 @@
         <h1 class="aturdoku-nav-head aturdoku-bg-orange">ASET</h1>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <?php echo $this->Html->link('Tambah Data', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small secondary expand button aturdoku-button'))?>
+            <?php echo $this->Html->link('Tambah Data', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small expand button'))?>
+            <?php echo $this->Html->link('Export Data', array('controller' => 'assets', 'action' => 'outputtopdf'), array('class' => 'small secondary expand button'))?>
         </p>
     </div>
     <div class="large-9 columns">
