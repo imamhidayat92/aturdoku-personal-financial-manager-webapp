@@ -73,4 +73,6 @@ body {
     height: 30px;
     display: block;
     width: 100%;
+    border-top: solid 4px #cccccc;
+    border-bottom: solid 4px #cccccc;
 }

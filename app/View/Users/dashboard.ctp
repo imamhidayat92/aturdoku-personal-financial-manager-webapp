@@ -141,7 +141,7 @@
             </tbody>
         </table>
         
-                <a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Pendapatan Lengkap</a>
+                <a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Pendapatan Selengkapnya</a>
     </div>
     <p class="clearfix"></p>
     <div class="separator"></div>
