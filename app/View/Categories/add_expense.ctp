@@ -15,7 +15,7 @@
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>
-                    <input type="text" name="data[Asset][name]" />
+                    <input type="text" name="data[Category][name]" />
                 </div>
             </div>
         </fieldset>

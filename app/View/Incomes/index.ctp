@@ -39,8 +39,10 @@
                     <td><?php echo $income['Transaction']['description']?></td>
                     <td><?php echo $this->Aturdoku->currencyFormat($income['Transaction']['amount'])?></td>
                     <td>
-                        <?php echo $this->Html->link('Ubah', array('controller' => 'incomes','action' => 'edit', $income['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
-                        <?php echo $this->Html->link('Hapus', array('controller' => 'incomes','action' => 'delete', $income['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        <p align="center" style="margin: 0; padding: 0;">
+                            <?php echo $this->Html->link('Ubah', array('controller' => 'incomes','action' => 'edit', $income['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Hapus', array('controller' => 'incomes','action' => 'delete', $income['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
                     </td>
                     
                 </tr>

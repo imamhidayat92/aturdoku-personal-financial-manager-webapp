@@ -1,5 +1,4 @@
 <div class="row">
-    
     <div class="large-8 large-offset-2 columns">
         <h2 class="special-font">Tambah Data Kategori Pendapatan</h2>
         <p class="lead">Isi formulir di bawah ini untuk menambahkan data kategori pendapatan Anda.</p>

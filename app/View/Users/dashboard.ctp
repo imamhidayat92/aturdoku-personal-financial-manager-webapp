@@ -82,8 +82,10 @@
                     <td><?php echo $expense['Transaction']['description']?></td>
                     <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount']);?></td>
                     <td>
-                        <?php echo $this->Html->link('Edit', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
-                        <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        <p align="center" style="margin:0;padding:0;">
+                            <?php echo $this->Html->link('Edit', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
                     </td>                    
                 </tr>
              <?php } ?>                
@@ -132,8 +134,10 @@
                     <td><?php echo $income['Transaction']['description']?></td>
                     <td><?php echo $this->Aturdoku->currencyFormat($income['Transaction']['amount']);?></td>
                     <td>
-                        <?php echo $this->Html->link('Edit', array('controller' => 'incomes','action' => 'edit', $income['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
-                        <?php echo $this->Html->link('Hapus', array('controller' => 'incomes','action' => 'delete', $income['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        <p align="center" style="margin: 0; padding: 0;">
+                            <?php echo $this->Html->link('Edit', array('controller' => 'incomes','action' => 'edit', $income['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Hapus', array('controller' => 'incomes','action' => 'delete', $income['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
                     </td>
                     
                 </tr>
@@ -162,9 +166,10 @@
         <thead>
             <tr>
                 <th width="40">No.</th>
-                <th width="150">Tahun</th>
-                <th width="300">Nama Aset</th>
+                <th width="100">Tahun</th>
+                <th width="150">Nama Aset</th>
                 <th width="150">Nilai</th>
+                <th width="200">Keterangan</th>
                 <th width="130">Aksi</th>
             </tr>
         </thead>
@@ -176,9 +181,12 @@
                     <td><?php echo $asset['Asset']['year']?></td>
                     <td><?php echo $asset['Asset']['name']?></td>
                     <td><?php echo $this->Aturdoku->currencyFormat($asset['Asset']['value']);?></td>
+                    <td><?php echo $asset['Asset']['description']?></td>
                     <td>
+                        <p align="center" style="margin: 0; padding: 0;">
                         <?php echo $this->Html->link('Edit', array('controller' => 'assets','action' => 'edit', $asset['Asset']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
                         <?php echo $this->Html->link('Hapus', array('controller' => 'assets','action' => 'delete', $asset['Asset']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
                     </td>
                     
                 </tr>

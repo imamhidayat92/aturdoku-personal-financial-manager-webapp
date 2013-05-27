@@ -18,6 +18,7 @@
         echo $this->Html->script('jquery.jqplot.min');        
         echo $this->Html->script('ui/jquery-ui');
         echo $this->Html->script('ui/jquery.ui.datepicker');
+        echo $this->Html->script('foundation.min')
     ?>
     
     <!-- Google Fonts -->
