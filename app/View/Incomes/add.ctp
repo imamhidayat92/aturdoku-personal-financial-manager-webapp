@@ -38,7 +38,7 @@
                     <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'add_expense')) ?>" class="button secondary small">Atur Kategori</a>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]" id="datepicker"/>
+                    <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>
@@ -54,6 +54,6 @@
 
 <script>
     $(function() {
-        $('#datepicker').datepicker();
+        $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     });
 </script>
