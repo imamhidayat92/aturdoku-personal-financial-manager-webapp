@@ -20,6 +20,7 @@
         echo $this->Html->script('plugins/jqplot.categoryAxisRenderer.min.js');
         echo $this->Html->script('ui/jquery-ui');
         echo $this->Html->script('ui/jquery.ui.datepicker');
+        echo $this->Html->script('foundation.min')
     ?>
     
     <!-- Google Fonts -->

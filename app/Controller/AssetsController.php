@@ -70,6 +70,9 @@ class AssetsController extends AppController {
         ));
         $this->set('assets', $assets);
         
+        $totalAssets = $this->Asset->query("SELECT SUM(value) AS 'total' FROM assets WHERE user_id = ".$this->Auth->user('id'));
+        $this->set('totalAssets', $totalAssets[0][0]['total']);
+        
         App::import('Vendor', 'Fpdf', array('file' => 'fpdf/fpdf.php'));
         $this->layout = 'pdf'; //this will use the pdf.ctp layout
         

@@ -35,6 +35,8 @@
                 <div class="large-8 columns">
                     <label>Nama Aset</label>
                     <input type="text" name="data[Asset][name]" />
+                    <label>Keterangan</label>
+                    <input type="text" name="data[Asset][description]" />
                 </div>
             </div>
         </fieldset>

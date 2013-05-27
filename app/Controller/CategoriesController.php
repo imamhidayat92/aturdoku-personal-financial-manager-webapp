@@ -48,6 +48,19 @@ class CategoriesController extends AppController {
     }
     
     public function edit($category_id) {
+        if($this->request->isPost()){
+            $this->request->data['Category']['user_id'] = $this->Auth->user('id');
+            if($this->Category->save($this->request->data)){
+                $this->Session->setFlash('Data Kategori Telah Tersimpan', 'flash_success');
+                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+            }
+            else{
+                $this->Session->setFlash('Data Kategori Pengeluaran Gagal Tersimpan', 'flash_fail');
+            }
+        }
+        
+        $data = $this->Category->findByid($category_id);
+        $this->set('data', $data);
         
     }
     
