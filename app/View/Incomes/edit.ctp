@@ -40,7 +40,7 @@
                     </select>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                  <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $income['Transaction']['date']?>"/>
+                  <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $income['Transaction']['date']?>" readonly />
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
@@ -56,6 +56,6 @@
 </div>
 <script>
     $(function() {
-        $('#datepicker').datepicker();
+        $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     });
 </script>
