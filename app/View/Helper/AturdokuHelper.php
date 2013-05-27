@@ -45,7 +45,7 @@ class AturdokuHelper extends AppHelper {
         $month = intval(date('m'));       
 ?>
 <p style="margin: 0">Hari ini tanggal: <?php echo $this->getGraphDateFormat(date('Y-m-d')); ?></p>
-        <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="width: <?php echo ceil($date * 100 / $this->get_number_of_day($month)); ?>%"></span></div>
+        <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="background-color: orange; width: <?php echo ceil($date * 100 / $this->get_number_of_day($month)); ?>%"></span></div>
 <?php
     }
     

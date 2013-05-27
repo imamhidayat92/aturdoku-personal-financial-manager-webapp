@@ -35,7 +35,7 @@ class CategoriesController extends AppController {
             $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             if($this->Category->save($this->request->data)){
                 $this->Session->setFlash('Data Kategori Pengeluaran Telah Tersimpan', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'categories', 'action' => 'expense'));
             }
             else{
                 $this->Session->setFlash('Data Kategori Pengeluaran Gagal Tersimpan', 'flash_fail');
@@ -49,7 +49,7 @@ class CategoriesController extends AppController {
             $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             if($this->Category->save($this->request->data)){
                 $this->Session->setFlash('Data Kategori Pengeluaran Telah Tersimpan', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'categories', 'action' => 'income'));
             }
             else{
                 $this->Session->setFlash('Data Kategori Pengeluaran Gagal Tersimpan', 'flash_fail');
