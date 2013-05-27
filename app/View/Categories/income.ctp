@@ -13,7 +13,7 @@
         <?php echo $this->Html->link('Tambah Data Pendapatan', array('controller' => 'categories', 'action' => 'add_income'), array('class' => 'small success expand button aturdoku-button'))?>
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Daftar Seluruh Kategori Pemasukan</h2>
+        <h2 class="special-font underline">Daftar Seluruh Kategori Pendapatan</h2>
         <table>
             <thead>
                 <tr>
@@ -40,42 +40,21 @@
                 <?php } ?>
             </tbody>
         </table>
+        <form action="<?php echo Router::url(array('controller' => 'categories', 'action' => 'add_income'))?>" method="POST">
+            <fieldset>
+                <legend>Tambah Kategori Pendapatan</legend>
+                <div class="row">
+                    <div class="large-4 columns">
+                      <label>Nama</label>
+                        <input type="text" name="data[Category][name]"/>
+                    </div>
+                    <div class="large-8 columns">
+                        <label>Deskripsi</label>
+                        <input type="text" name="data[Category][description]" />
+                    </div>
+                </div>
+            </fieldset>
+            <input type="submit" class="success button" value="Tambah Kategori"/>
+        </form>
     </div>
 </div>
-
-<!-- Modal Forms -->
-<div id="add-category-data" class="reveal-modal">
-    <h2 class="special-font">Tambah Kategori</h2>
-    <p class="lead">Isi formulir di bawah ini untuk menambahkan data kategori.</p>
-  
-    <form action="" method="">
-        <fieldset>
-            <legend>Detail Kategori</legend>
-            <div class="row">
-                <div class="large-6 columns">
-                    <label>Nama Kategori</label>
-                    <input type="text"/>
-                    <label>Deskripsi</label>
-                    <textarea></textarea>
-                </div>              
-                <div class="large-6 columnx">
-                    <h3>Bantuan</h3>
-                    <p>Kategori pengeluaran adalah fitur yang memudahkan Anda untuk mengklasifikasikan jenis pemasukan. Isikan
-                    juga deskripsinya untuk menjelaskan detailnya.</p>
-                </div>
-            </div>
-        </fieldset>
-        <input type="submit" class="success button" value="Tambah Kategori"/>
-    </form>
-  
-    <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<?php  
-    echo $this->Html->script('foundation/foundation');
-    echo $this->Html->script('foundation/foundation.reveal');
-?>
-
-<script>
-    $(document).foundation();
-</script>

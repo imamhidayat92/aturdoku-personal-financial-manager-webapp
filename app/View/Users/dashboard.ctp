@@ -237,18 +237,21 @@
             ];
 
             var plot1 = $.jqplot('plot', [line1], {
-                animate: !$.jqplot.use_excanvas,
+                seriesColors:["#ff0000"],
+                animate: !$.jqplot.use_excanvas,                
+                
                 axes:{
                     xaxis:{
                         renderer:$.jqplot.DateAxisRenderer,
                         tickOptions:{
-                            formatString:'%b&nbsp;%#d'
-                        } 
+                            formatString:'%b&nbsp;%#d',
+                            showGridline:true
+                        }                     
                     },
                     yaxis:{
                         tickOptions:{
                             formatString:'Rp %.2f'
-                        }
+                        }                        
                     }
                 },
                 highlighter: {
@@ -259,7 +262,10 @@
                     show: false
                 },
                 grid: {
-                    background: "#FFFFFF"
+                    drawGridLines:true,
+                    gridLineColor: "#000000",
+                    background: "#fffdf6",
+                    renderer: $.jqplot.CanvasGridRenderer
                 }
             });    
         }

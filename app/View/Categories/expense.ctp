@@ -9,8 +9,7 @@
     <div class="large-3 columns">
         <h1 class="aturdoku-nav-head aturdoku-bg-black">KATEGORI</h1>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <!--<a href="#" class="small success expand button aturdoku-button" data-reveal-id="add-category-data">Tambah Kategori</a>-->
-        <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'categories', 'action' => 'add_expense'), array('class' => 'small success expand button aturdoku-button'))?>
+        <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'categories', 'action' => 'add_expense'), array('class' => 'small alert expand button aturdoku-button'))?>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Daftar Seluruh Kategori Pengeluaran</h2>
@@ -40,42 +39,21 @@
                 <?php } ?>
             </tbody>
         </table>
+        <form action="<?php echo Router::url(array('controller' => 'categories', 'action' => 'add_expense'))?>" method="POST">
+            <fieldset>
+                <legend>Tambah Kategori Pengeluaran</legend>
+                <div class="row">
+                    <div class="large-4 columns">
+                      <label>Nama</label>
+                        <input type="text" name="data[Category][name]"/>
+                    </div>
+                    <div class="large-8 columns">
+                        <label>Deskripsi</label>
+                        <input type="text" name="data[Category][description]" />
+                    </div>
+                </div>
+            </fieldset>
+            <input type="submit" class="alert button" value="Tambah Kategori"/>
+        </form>
     </div>
 </div>
-
-<!-- Modal Forms -->
-<div id="add-category-data" class="reveal-modal">
-    <h2 class="special-font">Tambah Kategori</h2>
-    <p class="lead">Isi formulir di bawah ini untuk menambahkan data kategori.</p>
-  
-    <form action="" method="">
-        <fieldset>
-            <legend>Detail Kategori</legend>
-            <div class="row">
-                <div class="large-6 columns">
-                    <label>Nama Kategori</label>
-                    <input type="text"/>
-                    <label>Deskripsi</label>
-                    <textarea></textarea>
-                </div>              
-                <div class="large-6 columnx">
-                    <h3>Bantuan</h3>
-                    <p>Kategori pengeluaran adalah fitur yang memudahkan Anda untuk mengklasifikasikan jenis pengeluaran. Isikan
-                    juga deskripsinya untuk menjelaskan detailnya.</p>
-                </div>
-            </div>
-        </fieldset>
-        <input type="submit" class="success button" value="Tambah Kategori"/>
-    </form>
-  
-    <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<?php  
-    echo $this->Html->script('foundation/foundation');
-    echo $this->Html->script('foundation/foundation.reveal');
-?>
-
-<script>
-    $(document).foundation();
-</script>
