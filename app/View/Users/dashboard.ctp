@@ -15,7 +15,6 @@
 
 <div class="row">    
     <?php echo $this->Element('user-navigation'); ?>    
-    <div class="separator"></div>
     
     <!-- Pengeluaran -->
     <div class="large-3 columns">
@@ -90,7 +89,7 @@
                     ?>
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $expense['Transaction']['date']?></td>
-                    <td><?php echo $expense['Transaction']['description']?></td>
+                    <td><?php /* ?><span class="label alert"><?php echo $expense['Category']['name'] ?></span><?php */ ?><?php echo $expense['Transaction']['description']?></td>
                     <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount']);?></td>
                     <td>
                         <p align="center" style="margin:0;padding:0;">
@@ -265,8 +264,8 @@
                 },
                 grid: {
                     drawGridLines:true,
-                    gridLineColor: "#000000",
-                    background: "#fffdf6",
+                    gridLineColor: "#ebebeb",
+                    background: "#ffffff",
                     renderer: $.jqplot.CanvasGridRenderer
                 }
             });    
@@ -299,7 +298,13 @@
                     ticks: barInfo
                 }
             },
-            highlighter: { show: false }
+            highlighter: { show: false },
+            grid: {
+                drawGridLines:true,
+                gridLineColor: "#ebebeb",
+                background: "#ffffff",
+                renderer: $.jqplot.CanvasGridRenderer
+            }
         });
     });
 </script>

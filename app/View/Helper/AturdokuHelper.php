@@ -6,7 +6,7 @@ class AturdokuHelper extends AppHelper {
         "Number"
     );
     
-    private $months = array(
+    public $months = array(
         "Januari",
         "Februari",
         "Maret",

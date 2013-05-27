@@ -76,3 +76,25 @@ body {
     border-top: solid 4px #cccccc;
     border-bottom: solid 4px #cccccc;
 }
+
+/* Overridden Foundation Styles */
+.breadcrumbs {
+    border: none;
+    background-color: #ebebeb;
+    -webkit-border-bottom-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -moz-border-top-left-radius: 0;
+    -moz-border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+ul.breadcrumbs li a {
+    color: #000000;
+}

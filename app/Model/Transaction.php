@@ -5,5 +5,10 @@ class Transaction extends AppModel {
     public $belongsTo = array(
         'User'
     );
+    /*
+    public $hasOne = array(
+        'Category'
+    );
+    */
 }
 ?>

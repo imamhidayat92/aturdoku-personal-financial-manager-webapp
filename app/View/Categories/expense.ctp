@@ -8,8 +8,6 @@
     </div>
     <div class="large-3 columns">
         <h1 class="aturdoku-nav-head aturdoku-bg-black">KATEGORI</h1>
-        <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'categories', 'action' => 'add_expense'), array('class' => 'small alert expand button aturdoku-button'))?>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Daftar Seluruh Kategori Pengeluaran</h2>
@@ -29,7 +27,7 @@
                         $nomor++;
                     ?>
                     <td><?php echo $nomor; ?></td>
-                    <td><?php echo $category['Category']['name']; ?></td>
+                    <td><a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])) ?>"><?php echo $category['Category']['name']; ?></a></td>
                     <td><?php echo $category['Category']['description']; ?></td>
                     <td style="text-align: center;">
                         <?php echo $this->Html->link('Edit', array('controller' => 'categories','action' => 'edit', $category['Category']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>

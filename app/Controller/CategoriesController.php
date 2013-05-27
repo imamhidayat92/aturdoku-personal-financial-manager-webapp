@@ -6,8 +6,7 @@ class CategoriesController extends AppController {
         'limit' => 25,
         'order' => array(
             'id' => 'asc'
-        ),
-        
+        ),        
     );
     
     public function beforeFilter() {
@@ -84,6 +83,8 @@ class CategoriesController extends AppController {
     }
     
     public function expense() {
+        $this->set('title_for_layout', "Kategori Pengeluaran");
+        
         $this->paginate['conditions'] = array(
             'User.id' => $this->Auth->user('id'),
             'type' => 0
@@ -93,12 +94,29 @@ class CategoriesController extends AppController {
     }
     
     public function income() {
+        $this->set('title_for_layout', "Kategori Pendapatan");
+        
         $this->paginate['conditions'] = array(
             'User.id' => $this->Auth->user('id'),
             'type' => 1
         );
        $categories = $this->paginate('Category');
        $this->set('categories', $categories);
+    }
+    
+    public function view($id) {
+        $this->loadModel('Transaction');
+        
+        $category = $this->Category->findByid($id);
+        $this->set('category', $category);
+        
+        $this->paginate['conditions'] = array(
+            'Transaction.category_id' => $id,
+        );
+        $transactions = $this->paginate('Transaction');        
+        $this->set('transactions', $transactions);
+        
+        $this->set('title_for_layout', 'Pendapatan Kategori: ' . $category['Category']['name']);
     }
 }
 ?>

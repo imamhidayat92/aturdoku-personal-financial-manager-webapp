@@ -24,9 +24,12 @@
                 </div>
                 <div class="small-8 columns">
                     <select style="width: 100px;">
-                        <option value="0">Januari</option>
-                        <option value="1">Februari</option>
-                        <option value="3">Maret</option>
+                        
+                        <?php 
+                        $index = 1;
+                        foreach ($this->Aturdoku->months as $month): ?>
+                        <option value="<?php echo $index+1 ?>"><?php echo $month; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
             </div>

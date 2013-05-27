@@ -11,12 +11,12 @@
 <div class="row">
     <div class="large-8 large-offset-2 columns">
         
-        <h2 class="special-font">Edit Data Pengeluaran</h2>
+        <h2 class="special-font">Ubah Data Pengeluaran</h2>
         <p class="lead">Ubah formulir di bawah ini untuk melakukan pengubahan data pengeluaran Anda.</p>
         
         <!-- Form Edit -->
         
-        <form action="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'edit'))?>" method="POST">
+        <form action="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'edit', $expense['Transaction']['id']))?>" method="POST" class="custom">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -29,7 +29,7 @@
                             <input type="text" name="data[Transaction][amount]" value="<?php echo $expense['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
-                            <span class="postfix">Rupiah</span>
+                            <span class="postfix">Rp</span>
                         </div>
                     </div>
                     <label>Kategori</label>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
-                    <textarea name="data[Transaction][description]"><?php echo $expense['Transaction']['description']?></textarea>
+                    <textarea name="data[Transaction][description]" style="height: 150px;"><?php echo $expense['Transaction']['description']?></textarea>
                 </div>
             </div>
         </fieldset>
@@ -66,6 +66,7 @@
 </div>
 <script>
     $(function() {
+        $(document).foundation();
         $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     });
 </script>

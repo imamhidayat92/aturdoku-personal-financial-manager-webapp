@@ -81,20 +81,5 @@ class IncomesController extends AppController {
         $this->Transaction->delete($income_id);
         $this->redirect(array('controller' => 'users', 'controller' => 'dashboard'));
     }
-    
-    public function list_by_category($category_id) {
-        $this->loadModel('Category');
-        $category = $this->Category->findByid($category_id);
-        $this->set('category', $category);
-        
-        $this->paginate['conditions'] = array(
-            'Transaction.category_id' => $category_id,
-            'Transaction.type' => 1,
-        );
-        $incomes = $this->paginate('Transaction');        
-        $this->set('incomes', $incomes);
-        
-        $this->set('title_for_layout', 'Pendapatan Kategori: ' . $category['Category']['name']);
-    }
 }
 ?>

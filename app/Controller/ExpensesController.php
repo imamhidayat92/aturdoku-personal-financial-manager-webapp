@@ -36,7 +36,7 @@ class ExpensesController extends AppController{
             $this->request->data['Transaction']['date'] = strlen($this->request->data['Transaction']['date']) == 0 ? date('Y-m-d') : $this->request->data['Transaction']['date'];
             if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash('Data Pengeluaran Telah Tersimpan', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'expenses', 'action' => 'index'));
             }
             else {
                 $this->Session->setFlash('Data Pengeluaran Gagal Tersimpan', 'flash_fail');
@@ -59,7 +59,7 @@ class ExpensesController extends AppController{
             $this->request->date['Transaction']['type'] = 0;
             if ($this->Transaction->save($this->request->data)) {
                 $this->Session->setFlash('Ubah Data Pengeluaran Telah Tersimpan', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'expenses', 'action' => 'index'));
             }
             else {
                 $this->Session->setFlash('Ubah Data Pengeluaran Gagal Tersimpan', 'flash_fail');
