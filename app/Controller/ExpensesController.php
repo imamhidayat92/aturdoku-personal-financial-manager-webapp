@@ -82,6 +82,7 @@ class ExpensesController extends AppController{
     
     public function delete($expense_id) {
         $this->Transaction->delete($expense_id);
+        $this->redirect(array('controller' => 'users', 'controller' => 'dashboard'));
     }
 }
 ?>

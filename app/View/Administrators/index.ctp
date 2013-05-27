@@ -34,7 +34,7 @@
                     <td><?php echo $user['User']['last_name']; ?></td>
                     <td><a href="<?php echo Router::url(array('action' => 'toggleActivateDeactivate', $user['User']['id'])) ?>" class="button <?php if ($user['User']['is_active']) echo "alert"; else echo "success"; ?> small aturdoku-button"><?php if ($user['User']['is_active']) echo "Matikan"; else echo "Aktifkan"; ?></a></td>   
                     <td>
-                        <a href="<?php Router::url(array('controller' => 'users', 'action' => 'delete', $user['User']['id'])) ?>" class="button alert small aturdoku-button">Hapus</a>
+                        <a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'delete', $user['User']['id'])) ?>" class="button alert small aturdoku-button">Hapus</a>
                     </td>
                 </tr>
              <?php } ?>

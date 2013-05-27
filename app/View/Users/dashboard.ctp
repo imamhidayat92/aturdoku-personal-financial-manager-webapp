@@ -8,6 +8,11 @@
     );
 ?>
 
+<script>
+    var expensePlotLoaded = false;
+    var incomePlotLoaded = false;
+</script>
+
 <div class="row">    
     <?php echo $this->Element('user-navigation'); ?>    
     <div class="separator"></div>
@@ -33,6 +38,10 @@
         <?php echo $this->Aturdoku->printDateProgress(); ?>
         
     <?php if (count($expenses) > 0): ?>
+        
+        <script>
+            expensePlotLoaded = true;
+        </script>
         
         <?php if (count($dailyExpenses) > 1): ?>
         <div id="plot"></div>
@@ -92,8 +101,9 @@
         
         <?php echo $this->Html->link('Lihat Data Pengeluaran Selengkapnya', array('controller' => 'expenses', 'action' => 'index'), array('class' => 'secondary expand button'))?>
     <?php else: ?>
-        <h2 style="color: #cccccc; text-align: center; line-height: 1;">Anda belum menyimpan data pengeluaran apapun.</h2>
+        <h2 style="color: #cccccc; text-align: center; line-height: 1; margin: 100px 0 100px 0;">Anda belum menyimpan data pengeluaran apapun.</h2>
     <?php endif; ?>
+        <h2 class="special-font underline">Pengeluaran Berdasarkan Kategori</h2>
     </div>
     <div class="separator"></div>
     
@@ -110,6 +120,7 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
+        <div id="income"></div>
         <h3 class="subheader">Isi kas Anda: <?php echo $this->Aturdoku->currencyFormat($totalIncomes - $totalExpenses); ?></h3>
         <h2 class="special-font underline">Data Pendapatan Terkini</h2>
         
@@ -202,42 +213,76 @@
 <script>
     $(document).foundation();
     $(document).ready(function(){
-        var line1=[
-            <?php
-                foreach ($dailyExpenses as $expense):
-            ?>
-                ['<?php echo $expense['transactions']['date'] ?>', <?php echo $expense[0]['total'] ?>],
-            <?php
-                endforeach;
-            ?>
-            
+        $.jqplot.config.enablePlugins = true;
+        
+        if (expensePlotLoaded) {
+            var line1=[
+                <?php
+                    foreach ($dailyExpenses as $expense):
+                ?>
+                    ['<?php echo $expense['transactions']['date'] ?>', <?php echo $expense[0]['total'] ?>],
+                <?php
+                    endforeach;
+                ?>
+
+            ];
+
+            var plot1 = $.jqplot('plot', [line1], {
+                animate: !$.jqplot.use_excanvas,
+                axes:{
+                    xaxis:{
+                        renderer:$.jqplot.DateAxisRenderer,
+                        tickOptions:{
+                            formatString:'%b&nbsp;%#d'
+                        } 
+                    },
+                    yaxis:{
+                        tickOptions:{
+                            formatString:'Rp %.2f'
+                        }
+                    }
+                },
+                highlighter: {
+                    show: true,
+                    sizeAdjust: 7.5
+                },
+                cursor: {
+                    show: false
+                },
+                grid: {
+                    background: "#FFFFFF"
+                }
+            });    
+        }
+        
+        
+        var barValue = [
+            2,
+            4,
+            5,
+            7
+        ];
+        var barInfo = [
+            'a',
+            'b',
+            'c',
+            'd'
         ];
         
-        var plot1 = $.jqplot('plot', [line1], {
-            animate: true,
-            axes:{
-                xaxis:{
-                    renderer:$.jqplot.DateAxisRenderer,
-                    tickOptions:{
-                        formatString:'%b&nbsp;%#d'
-                    } 
-                },
-                yaxis:{
-                    tickOptions:{
-                        formatString:'Rp %.2f'
-                    }
+        var plot2 = $.jqplot('income', [barValue], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: false }
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: barInfo
                 }
             },
-            highlighter: {
-                show: true,
-                sizeAdjust: 7.5
-            },
-            cursor: {
-                show: false
-            },
-            grid: {
-                background: "#FFFFFF"
-            }
-        });    
+            highlighter: { show: false }
+        });
     });
 </script>

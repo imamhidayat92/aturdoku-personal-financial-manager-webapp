@@ -152,42 +152,7 @@ class UsersController extends AppController {
             $this->redirect(array('action' => 'dashboard'));
         }
         
-        $this->User->id = $id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__('Invalid user'));
-        }
-        if ($this->User->delete()) {
-            
-            $this->loadModel('Transaction');
-            $transactions = $this->Transaction->find('all', array(
-                'conditions' => array(
-                    'user_id' => $id
-                )
-            ));
-            foreach ($transactions as $transaction) {
-                $this->Transaction->delete($transaction);
-            }
-            
-            $this->loadModel('Category');
-            $categories = $this->Category->find('all', array(
-                'conditions' => array(
-                    'user_id' => $id
-                )
-            ));
-            foreach ($categories as $category) {
-                $this->Category->delete($category);
-            }
-            
-            $this->loadModel('ExpensePlan');
-            $expensePlans = $this->ExpensePlan->find('all', array(
-                'conditions' => array(
-                    'user_id' => $id
-                )
-            ));
-            foreach ($expensePlans as $expensePlan) {
-                $this->ExpensePlan->delete($expensePlan);
-            }
-            
+        if ($this->User->delete()) {           
             $this->Session->setFlash(__('User dan seluruh datanya telah dihapus.'), 'flash_success');
             $this->redirect(array('action' => 'index'));
         }
@@ -227,6 +192,9 @@ class UsersController extends AppController {
         
         $totalExpenses = $this->Transaction->query("SELECT SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id'). " AND type = 0");
         $this->set('totalExpenses', $totalExpenses[0][0]['total']);
+        
+        $dailyIncomes = $this->Transaction->query("SELECT date, SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 1 GROUP BY date LIMIT 30");
+        $this->set('dailyIncomes', $dailyIncomes);
         
         $totalIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id'). " AND type = 1");
         $this->set('totalIncomes', $totalIncomes[0][0]['total']);

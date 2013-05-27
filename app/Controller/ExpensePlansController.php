@@ -1,6 +1,6 @@
 <?php
 
-class ExpensesPlanController extends AppController {
+class ExpensePlansController extends AppController {
     public $paginate = array(
         'limit' => 5
     );

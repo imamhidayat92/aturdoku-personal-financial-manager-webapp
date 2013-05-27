@@ -79,6 +79,7 @@ class IncomesController extends AppController {
     
     public function delete($income_id) {
         $this->Transaction->delete($income_id);
+        $this->redirect(array('controller' => 'users', 'controller' => 'dashboard'));
     }
     
     public function list_by_category($category_id) {
