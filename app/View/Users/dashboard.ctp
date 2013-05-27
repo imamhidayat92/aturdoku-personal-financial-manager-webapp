@@ -39,17 +39,6 @@
         
     <?php if (count($expenses) > 0): ?>
         
-        <script>
-            expensePlotLoaded = true;
-        </script>
-        
-        <?php if (count($dailyExpenses) > 1): ?>
-        <div id="plot"></div>
-        <?php else: ?>
-        <h5 align="center" style="margin-top: 50px;">Data pengeluaran Anda saat ini belum dapat divisualisasikan.</h5>
-        <?php endif; ?>
-        <p>&nbsp;</p>
-        
         <?php        
             $numberOfExpense = 0;
             foreach ($expenses as $expense) {
@@ -64,6 +53,19 @@
             
             $averageExpense = $totalExpense / $numberOfExpense;
         ?>
+        
+        <script>
+            expensePlotLoaded = true;
+        </script>
+        
+        <?php if (count($dailyExpenses) > 1): ?>
+        <div id="plot"></div>
+        <?php else: ?>
+        <h5 align="center" style="margin-top: 50px;">Data pengeluaran Anda saat ini belum dapat divisualisasikan.</h5>
+        <?php endif; ?>
+        <p>&nbsp;</p>
+        
+        
         
         <p>Rata-rata pengeluaran bulan ini: <?php echo $this->Aturdoku->currencyFormat($averageExpense) ?></p>
         <p>Pengeluaran terbesar sejumlah: <?php echo $this->Aturdoku->currencyFormat($maxExpense['Transaction']['amount']); ?></p>

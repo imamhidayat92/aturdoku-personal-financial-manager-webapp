@@ -16,7 +16,17 @@ class CategoriesController extends AppController {
     }
     
     public function index() {
+        $expenses = $this->Category->find('all', array(
+            'type' => 0
+        ));
+        $this->set('expenses', $expenses);
         
+        $incomes = $this->Category->find('all', array(
+            'type' => 1
+        ));
+        $this->set('incomes', $incomes);
+        
+        $this->set('title_for_layout', "Kategori Pengeluaran & Pendapatan");
     }
     
     public function add_expense() {
@@ -65,7 +75,12 @@ class CategoriesController extends AppController {
     }
     
     public function delete($category_id) {
-        $this->Category->delete($category_id);
+        if ($this->Category->delete($category_id)) {
+            
+        }
+        else {
+            
+        }
     }
     
     public function expense() {
