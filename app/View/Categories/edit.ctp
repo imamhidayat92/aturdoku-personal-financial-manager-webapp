@@ -3,7 +3,7 @@
         $type = '';
         $view = '';
     
-        if ($data['Category']['type'] == 0){
+        if ($data['Category']['category_type'] == 0){
             $type = 'Pengeluaran';
             $view = 'expense';
         }

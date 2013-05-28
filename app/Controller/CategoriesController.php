@@ -16,12 +16,12 @@ class CategoriesController extends AppController {
     
     public function index() {
         $expenses = $this->Category->find('all', array(
-            'type' => 0
+            'category_type' => 0
         ));
         $this->set('expenses', $expenses);
         
         $incomes = $this->Category->find('all', array(
-            'type' => 1
+            'category_type' => 1
         ));
         $this->set('incomes', $incomes);
         
@@ -30,7 +30,7 @@ class CategoriesController extends AppController {
     
     public function add_expense() {
         if($this->request->isPost()){
-            $this->request->data['Category']['type'] = 0;
+            $this->request->data['Category']['category_type'] = 0;
             $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             if($this->Category->save($this->request->data)){
                 $this->Session->setFlash('Data Kategori Pengeluaran Telah Tersimpan', 'flash_success');
@@ -44,7 +44,7 @@ class CategoriesController extends AppController {
     
     public function add_income() {
         if($this->request->isPost()){
-            $this->request->data['Category']['type'] = 1;
+            $this->request->data['Category']['category_type'] = 1;
             $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             if($this->Category->save($this->request->data)){
                 $this->Session->setFlash('Data Kategori Pengeluaran Telah Tersimpan', 'flash_success');
@@ -61,7 +61,7 @@ class CategoriesController extends AppController {
             $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             if($this->Category->save($this->request->data)){
                 $this->Session->setFlash('Data Kategori Telah Tersimpan', 'flash_success');
-                if ($this->request->data['Category']['type'] == 0) {
+                if ($this->request->data['Category']['category_type'] == 0) {
                     $this->redirect(array('controller' => 'categories', 'action' => 'expense'));
                 }
                 else{
@@ -95,7 +95,7 @@ class CategoriesController extends AppController {
         
         $this->paginate['conditions'] = array(
             'User.id' => $this->Auth->user('id'),
-            'type' => 0
+            'category_type' => 0
         );
        $categories = $this->paginate('Category');
        $this->set('categories', $categories);
@@ -106,7 +106,7 @@ class CategoriesController extends AppController {
         
         $this->paginate['conditions'] = array(
             'User.id' => $this->Auth->user('id'),
-            'type' => 1
+            'category_type' => 1
         );
        $categories = $this->paginate('Category');
        $this->set('categories', $categories);
