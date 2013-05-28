@@ -30,7 +30,7 @@
         
         <h3 class="aturdoku-nav-subhead">Perencanaan</h3>
         <p>Rencanakan pengeluaran-pengeluaran Anda.</p>
-        <a href="<?php echo Router::url(array('controller' => 'expenseplans', 'action' => 'add')) ?>" class="small alert expand button">Buat Rencana</a>
+        <a href="<?php echo Router::url(array('controller' => 'expenseplans', 'action' => 'index')) ?>" class="small alert expand button">Atur Rencana</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>

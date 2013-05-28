@@ -8,7 +8,8 @@ class Category extends AppModel {
     );
     
     public $hasMany = array(
-        'Transaction'
+        'Transaction',
+        'ExpensePlan'
     );
 }
 ?>
