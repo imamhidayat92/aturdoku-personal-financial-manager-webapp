@@ -36,11 +36,11 @@
         </div>
         <?php echo $this->fetch('content'); ?>
         <div class="row" style="background-color: #000000; padding: 10px 0 10px 0;">
-            <div class="large-5 columns large-offset-5" style="font-size: 0.8em; margin-top: 0.5em;">
+            <div class="large-5 columns large-offset-4" style="font-size: 0.8em; margin-top: 0.5em;">
                 <p align="right" style="color: #ffffff;"><strong>&copy; 2013 - Aturdoku.com, <em>Development Team</em></strong></p>
                 <p align="right" style="color: #ffffff;">Aturdoku adalah aplikasi proyek akhir mata kuliah Manajemen Proyek Sistem Informasi, Universitas Paramadina.</p>
             </div>
-            <div class="large-2 columns" style="text-align: right">
+            <div class="large-3 columns" style="text-align: right">
                 <?php echo $this->Html->image('white-logo.png'); ?>
             </div>
         </div>

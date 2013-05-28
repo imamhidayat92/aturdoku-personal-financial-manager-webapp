@@ -15,7 +15,7 @@
         
         <!-- Form Edit -->
         
-        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'edit'))?>" method="POST">
+        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'edit', $income['Transaction']['id']))?>" method="POST">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">

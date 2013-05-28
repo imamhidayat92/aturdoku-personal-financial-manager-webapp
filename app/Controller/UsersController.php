@@ -178,6 +178,8 @@ class UsersController extends AppController {
                 $this->Session->setFlash('Login Error', 'flash_fail');
             }
         }
+        
+        $this->set('title_for_layout', "Login");
     }
     
     public function logout() {
