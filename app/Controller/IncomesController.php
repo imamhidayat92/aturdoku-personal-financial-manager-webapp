@@ -33,7 +33,7 @@ class IncomesController extends AppController {
             $this->request->data['Transaction']['date'] = date('Y-m-d');
             if($this->Transaction->save($this->request->data)){
                 $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'incomes', 'action' => 'index'));
             }
             else{
                 $this->Session->setFlash('Data Pemasukan Gagal Tersimpan', 'flash_fail');
@@ -56,7 +56,7 @@ class IncomesController extends AppController {
             $this->request->date['Transaction']['type'] = 1;
             if($this->Transaction->save($this->request->data)){
                 $this->Session->setFlash('Ubah Data Pemasukan Telah Tersimpan', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'incomes', 'action' => 'index'));
             }
             else{
                 $this->Session->setFlash('Ubah Data Pemasukan Gagal Tersimpan', 'flash_fail');

@@ -28,7 +28,7 @@ class AssetsController extends AppController {
             $this->request->data['Asset']['user_id'] = $this->Auth->user('id');
             if($this->Asset->save($this->request->data)){
                 $this->Session->setFlash('Data aset telah tersimpan.', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'assets', 'action' => 'index'));
             }
             else{
                 $this->Session->setFlash('Data Aset Gagal Tersimpan', 'flash_fail');
@@ -41,7 +41,7 @@ class AssetsController extends AppController {
             $this->request->data['Asset']['user_id'] = $this->Auth->user('id');
             if($this->Asset->save($this->request->data)){
                 $this->Session->setFlash('Data aset telah tersimpan.', 'flash_success');
-                $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
+                $this->redirect(array('controller' => 'assets', 'action' => 'index'));
             }
             else{
                 $this->Session->setFlash('Ubah Data Aset Gagal Tersimpan', 'flash_fail');
