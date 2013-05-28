@@ -58,10 +58,11 @@ class CategoriesController extends AppController {
     
     public function edit($category_id) {
         if($this->request->isPost()){
+            $category_type = $this->request->data['Category']['category_type'];
             $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             if($this->Category->save($this->request->data)){
                 $this->Session->setFlash('Data Kategori Telah Tersimpan', 'flash_success');
-                if ($this->request->data['Category']['category_type'] == 0) {
+                if ($category_type == 0) {
                     $this->redirect(array('controller' => 'categories', 'action' => 'expense'));
                 }
                 else{

@@ -33,6 +33,7 @@
             <legend>Data Kategori <?php echo $type; ?></legend>
             <div class="row">
                 <input type="hidden" name="data[Category][id]" value="<?php echo $data['Category']['id']; ?>"/>
+                <input type="hidden" name="data[Category][category_type]" value="<?php echo $data['Category']['category_type']; ?>"/>
                 <div class="large-4 columns">
                   <label>Nama</label>
                     <input type="text" name="data[Category][name]" value="<?php echo $data['Category']['name'];?>"/>
