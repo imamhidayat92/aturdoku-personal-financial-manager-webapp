@@ -68,6 +68,8 @@ class CategoriesController extends AppController {
             }
         }
         
+        $this->set('title_for_layout', "Ubah Data Kategori");
+        
         $data = $this->Category->findByid($category_id);
         $this->set('data', $data);
         

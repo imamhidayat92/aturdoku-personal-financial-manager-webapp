@@ -63,7 +63,7 @@ class IncomesController extends AppController {
             }
         }
         
-        $this->set('title_for_layout', "Edit Data Pemasukan");
+        $this->set('title_for_layout', "Ubah Data Pemasukan");
         
         $income = $this->Transaction->findByid($income_id);
         $this->set('income', $income);

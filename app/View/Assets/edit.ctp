@@ -3,7 +3,7 @@
     <div class="large-12 columns">
         <ul class="breadcrumbs">
             <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
-            <li><a href="<?php echo Router::url(array('controller' => 'assets', 'action' => 'index')) ?>">Data Aset</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'assets', 'action' => 'index')) ?>">Aset</a></li>
             <li><a href="#">Ubah</a></li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
                             <input type="text" name="data[Asset][value]" value="<?php echo $data['Asset']['value']?>"/>
                         </div>
                         <div class="large-3 columns">
-                            <span class="postfix">Rupiah</span>
+                            <span class="postfix">Rp</span>
                         </div>
                     </div>
                   <label>Tahun</label>
