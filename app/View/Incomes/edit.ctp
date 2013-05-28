@@ -3,19 +3,19 @@
     <div class="large-12 columns">
         <ul class="breadcrumbs">
             <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
-            <li><a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>">Data Aset</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>">Pendapatan</a></li>
             <li><a href="#">Ubah</a></li>
         </ul>
     </div>
 </div>
 <div class="row">
     <div class="large-8 large-offset-2 columns">
-        <h2 class="special-font">Edit Data Pendapatan</h2>
+        <h2 class="special-font">Ubah Data Pendapatan</h2>
         <p class="lead">Ubah formulir di bawah ini untuk melakukan pengubahan data pendapatan Anda.</p>
         
         <!-- Form Edit -->
         
-        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'edit', $income['Transaction']['id']))?>" method="POST">
+        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'edit', $income['Transaction']['id']))?>" method="POST" class="custom">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -29,7 +29,7 @@
                             <input type="text" name="data[Transaction][amount]" value="<?php echo $income['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
-                            <span class="postfix">Rupiah</span>
+                            <span class="postfix">Rp</span>
                         </div>
                     </div>
                     <label>Kategori</label>
@@ -56,6 +56,7 @@
 </div>
 <script>
     $(function() {
+        $(document).foundation();
         $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     });
 </script>

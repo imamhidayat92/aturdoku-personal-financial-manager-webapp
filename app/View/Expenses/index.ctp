@@ -4,7 +4,7 @@
     <div class="large-12 columns">
         <ul class="breadcrumbs">
             <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
-            <li><a href="#">Data Pengeluaran</a></li>
+            <li><a href="#">Pengeluaran</a></li>
         </ul>
     </div>
     

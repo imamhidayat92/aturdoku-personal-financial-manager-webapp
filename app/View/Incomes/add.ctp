@@ -3,7 +3,7 @@
     <div class="large-12 columns">
         <ul class="breadcrumbs">
             <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
-            <li><a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>">Data Aset</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>">Pendapatan</a></li>
             <li><a href="#">Tambah</a></li>
         </ul>
     </div>
@@ -15,7 +15,7 @@
         
         <!-- Form Tambah -->
         
-        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'add'))?>" method="POST">
+        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'add'))?>" method="POST" class="custom">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -35,7 +35,7 @@
                         <option value="<?php echo $category['Category']['id']?>"><?php echo $category['Category']['name']?></option>
                         <?php endforeach;?>
                     </select>
-                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'add_expense')) ?>" class="button secondary small">Atur Kategori</a>
+                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand">Atur Kategori</a>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
                     <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
@@ -54,6 +54,7 @@
 
 <script>
     $(function() {
+        $(document).foundation();
         $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     });
 </script>

@@ -66,7 +66,7 @@ class ExpensesController extends AppController{
             }
         }
         
-        $this->set('title_for_layout', "Edit Data Pengeluaran");
+        $this->set('title_for_layout', "Ubah Data Pengeluaran");
         
         $expense = $this->Transaction->findByid($expense_id);
         $this->set('expense', $expense);

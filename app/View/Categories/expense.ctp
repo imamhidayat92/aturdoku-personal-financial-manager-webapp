@@ -3,7 +3,7 @@
     <div class="large-12 columns">
         <ul class="breadcrumbs">
             <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
-            <li><a href="#">Atur Kategori</a></li>
+            <li><a href="#">Kategori Pengeluaran</a></li>
         </ul>
     </div>
     <div class="large-3 columns">
@@ -30,7 +30,7 @@
                     <td><a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])) ?>"><?php echo $category['Category']['name']; ?></a></td>
                     <td><?php echo $category['Category']['description']; ?></td>
                     <td style="text-align: center;">
-                        <?php echo $this->Html->link('Edit', array('controller' => 'categories','action' => 'edit', $category['Category']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                        <?php echo $this->Html->link('Ubah', array('controller' => 'categories','action' => 'edit', $category['Category']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
                         <?php echo $this->Html->link('Hapus', array('controller' => 'categories','action' => 'delete', $category['Category']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
                     </td>
                 </tr>

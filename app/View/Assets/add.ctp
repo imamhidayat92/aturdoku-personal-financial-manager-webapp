@@ -3,7 +3,7 @@
     <div class="large-12 columns">
         <ul class="breadcrumbs">
             <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
-            <li><a href="<?php echo Router::url(array('controller' => 'assets', 'action' => 'index')) ?>">Data Aset</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'assets', 'action' => 'index')) ?>">Aset</a></li>
             <li><a href="#">Tambah</a></li>
         </ul>
     </div>

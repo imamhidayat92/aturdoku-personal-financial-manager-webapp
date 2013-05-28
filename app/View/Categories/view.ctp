@@ -1,5 +1,4 @@
 <div class="row">
-    
     <?php echo $this->Element('user-navigation'); ?>
     <div class="large-12 columns">
         <ul class="breadcrumbs">

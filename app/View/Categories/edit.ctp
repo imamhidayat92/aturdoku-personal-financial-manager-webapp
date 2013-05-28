@@ -16,15 +16,15 @@
     <div class="large-12 columns">
         <ul class="breadcrumbs">
             <li><a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'dashboard')) ?>">Dashboard</a></li>
-            <li><a href="<?php echo Router::url(array('controller' => 'categories', 'action' => $view )) ?>">Data Kategori</a></li>
+            <li><a href="<?php echo Router::url(array('controller' => 'categories', 'action' => $view )) ?>">Kategori</a></li>
             <li><a href="#">Ubah</a></li>
         </ul>
     </div>
 </div>
 <div class="row">
     <div class="large-8 large-offset-2 columns">
-        <h2 class="special-font">Tambah Data Kategori <?php echo $type; ?></h2>
-        <p class="lead">Isi formulir di bawah ini untuk menambahkan data kategori <?php echo $type; ?> Anda.</p>
+        <h2 class="special-font">Ubah Data Kategori <?php echo $type; ?></h2>
+        <p class="lead">Ubah formulir di bawah ini untuk mengubah data kategori <?php echo $type; ?> Anda.</p>
         
         <!-- Form Tambah -->
         
