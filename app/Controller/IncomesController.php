@@ -44,7 +44,7 @@ class IncomesController extends AppController {
         $categories = $this->Category->find('all', array(
            'conditions' => array(
                'User.id' => $this->Auth->user('id'),
-               'type' => 1
+               'category_type' => 1
            )
         ));
         $this->set('categories', $categories);
@@ -71,7 +71,7 @@ class IncomesController extends AppController {
         $categories = $this->Category->find('all', array(
            'conditions' => array(
                'User.id' => $this->Auth->user('id'),
-               'type' => 1
+               'category_type' => 1
            )
         ));
         $this->set('categories', $categories);
