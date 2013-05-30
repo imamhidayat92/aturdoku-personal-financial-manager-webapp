@@ -27,6 +27,7 @@ class ExpensesController extends AppController{
         $expenses = $this->paginate('Transaction');              
         $this->set('expenses', $expenses);
         $this->set('itemPerPage', $this->itemPerPage);
+        $this->set('title_for_layout', "Pengeluaran");
     }
     
     public function add() {

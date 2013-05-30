@@ -10,6 +10,8 @@
         echo $this->Html->css('jquery.jqplot.min');
         echo $this->Html->css('themes/base/jquery-ui');
         echo $this->Html->css('themes/base/jquery.ui.datepicker');
+        //form validation
+        echo $this->Html->css('validationEngine.jquery');
     ?>
     
     <!-- Scripts -->
@@ -21,7 +23,10 @@
         echo $this->Html->script('plugins/jqplot.dateAxisRenderer.min.js');
         echo $this->Html->script('ui/jquery-ui');
         echo $this->Html->script('ui/jquery.ui.datepicker');
-        echo $this->Html->script('foundation.min')
+        echo $this->Html->script('foundation.min');        
+        //form validation
+        echo $this->Html->script('jquery.validationEngine');
+        echo $this->Html->script('jquery.validationEngine-en');
     ?>
     
     <!-- Google Fonts -->

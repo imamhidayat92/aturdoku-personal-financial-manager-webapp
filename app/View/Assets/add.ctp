@@ -15,7 +15,7 @@
         
         <!-- Form Tambah -->
         
-        <form action="<?php echo Router::url(array('controller' => 'assets', 'action' => 'add'))?>" method="POST">
+        <form id="formID" action="<?php echo Router::url(array('controller' => 'assets', 'action' => 'add'))?>" method="POST">
         <fieldset>
             <legend>Data Aset</legend>
             <div class="row">
@@ -23,18 +23,18 @@
                     <div class="row collapse">
                         <label>Nilai</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Asset][value]"/>
+                            <input type="text" class="validate[required,custom[onlyNumberSp]] text-input" name="data[Asset][value]"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rp</span>
                         </div>
                     </div>
                   <label>Tahun</label>
-                    <input type="text" name="data[Asset][year]"/>
+                    <input type="text" class="validate[required] text-input" name="data[Asset][year]"/>
                 </div>
                 <div class="large-8 columns">
                     <label>Nama Aset</label>
-                    <input type="text" name="data[Asset][name]" />
+                    <input type="text" class="validate[required] text-input" name="data[Asset][name]" />
                     <label>Keterangan</label>
                     <input type="text" name="data[Asset][description]" />
                 </div>
@@ -45,3 +45,9 @@
     </div>
    
 </div>
+<script>
+    $(function(){
+            // binds form submission and fields to the validation engine
+        $('#formID').validationEngine();
+    });
+</script>

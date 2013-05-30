@@ -15,7 +15,7 @@
         
         <!-- Form Tambah -->
         
-        <form class="custom" action="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'add'))?>" method="POST">
+        <form id="formID" class="custom" action="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'add'))?>" method="POST">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -23,7 +23,7 @@
                     <div class="row collapse">
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Transaction][amount]"/>
+                            <input type="text" class="validate[required,custom[onlyNumberSp]] text-input" name="data[Transaction][amount]"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rp</span>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
-                    <textarea name="data[Transaction][description]" style="height: 150px;"></textarea>
+                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 150px;"></textarea>
                 </div>
             </div>
         </fieldset>
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="large-4 columns">
                     <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
+                    <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" readonly/>
                 </div>
                 <div class="large-8 columns">
                     <label>Tempat (<a href="#">Lacak dengan Google Maps</a>)</label>
@@ -67,5 +67,6 @@
     $(function() {
         $(document).foundation();
         $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#formID').validationEngine();
     });
 </script>

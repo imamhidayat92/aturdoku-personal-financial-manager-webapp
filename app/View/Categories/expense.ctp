@@ -37,17 +37,17 @@
                 <?php } ?>
             </tbody>
         </table>
-        <form action="<?php echo Router::url(array('controller' => 'categories', 'action' => 'add_expense'))?>" method="POST">
+        <form id="formID" action="<?php echo Router::url(array('controller' => 'categories', 'action' => 'add_expense'))?>" method="POST">
             <fieldset>
                 <legend>Tambah Kategori Pengeluaran</legend>
                 <div class="row">
                     <div class="large-4 columns">
                       <label>Nama</label>
-                        <input type="text" name="data[Category][name]"/>
+                        <input type="text" class="validate[required] text-input" name="data[Category][name]"/>
                     </div>
                     <div class="large-8 columns">
                         <label>Deskripsi</label>
-                        <input type="text" name="data[Category][description]" />
+                        <input type="text" class="validate[required] text-input" name="data[Category][description]" />
                     </div>
                 </div>
             </fieldset>
@@ -55,3 +55,9 @@
         </form>
     </div>
 </div>
+<script>
+    $(function(){
+            // binds form submission and fields to the validation engine
+        $('#formID').validationEngine();
+    });
+</script>

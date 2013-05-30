@@ -16,7 +16,7 @@
         
         <!-- Form Edit -->
         
-        <form action="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'edit', $expense['Transaction']['id']))?>" method="POST" class="custom">
+        <form id="formID" action="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'edit', $expense['Transaction']['id']))?>" method="POST" class="custom">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -26,7 +26,7 @@
                         
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Transaction][amount]" value="<?php echo $expense['Transaction']['amount']?>"/>
+                            <input type="text" class="validate[required,custom[onlyNumberSp]] text-input" name="data[Transaction][amount]" value="<?php echo $expense['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rp</span>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
-                    <textarea name="data[Transaction][description]" style="height: 150px;"><?php echo $expense['Transaction']['description']?></textarea>
+                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 150px;"><?php echo $expense['Transaction']['description']?></textarea>
                 </div>
             </div>
         </fieldset>
@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="large-4 columns">
                     <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $expense['Transaction']['date']?>" readonly/>
+                    <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" value="<?php echo $expense['Transaction']['date']?>" readonly/>
                 </div>
                 <div class="large-8 columns">
                     <label>Tempat (<a href="#">Lacak dengan Google Maps</a>)</label>
@@ -68,5 +68,6 @@
     $(function() {
         $(document).foundation();
         $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#formID').validationEngine();
     });
 </script>

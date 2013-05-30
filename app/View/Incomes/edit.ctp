@@ -15,7 +15,7 @@
         
         <!-- Form Edit -->
         
-        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'edit', $income['Transaction']['id']))?>" method="POST" class="custom">
+        <form id="formID" action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'edit', $income['Transaction']['id']))?>" method="POST" class="custom">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -26,7 +26,7 @@
                         
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Transaction][amount]" value="<?php echo $income['Transaction']['amount']?>"/>
+                            <input type="text" class="validate[required,custom[onlyNumberSp]] text-input" name="data[Transaction][amount]" value="<?php echo $income['Transaction']['amount']?>"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rp</span>
@@ -40,12 +40,12 @@
                     </select>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                  <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $income['Transaction']['date']?>" readonly />
+                  <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" value="<?php echo $income['Transaction']['date']?>" readonly />
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
                     <!-- ini harus di benerin -->
-                    <textarea name="data[Transaction][description]" style="height: 30px; display: block;"><?php echo $income['Transaction']['description']?></textarea>
+                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 30px; display: block;"><?php echo $income['Transaction']['description']?></textarea>
                 </div>
             </div>
         </fieldset>
@@ -58,5 +58,6 @@
     $(function() {
         $(document).foundation();
         $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#formID').validationEngine();
     });
 </script>

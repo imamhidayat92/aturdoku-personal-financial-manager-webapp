@@ -24,6 +24,7 @@ class IncomesController extends AppController {
         );
        $incomes = $this->paginate('Transaction');
        $this->set('incomes', $incomes);
+       $this->set('title_for_layout', "Pendapatan");
     }
     
     public function add() {
@@ -40,7 +41,7 @@ class IncomesController extends AppController {
             }
         }        
         
-        $this->set('title_for_layout', "Tambah Data Pemasukan");
+        $this->set('title_for_layout', "Tambah Data Pendapatan");
         $categories = $this->Category->find('all', array(
            'conditions' => array(
                'User.id' => $this->Auth->user('id'),
@@ -63,7 +64,7 @@ class IncomesController extends AppController {
             }
         }
         
-        $this->set('title_for_layout', "Ubah Data Pemasukan");
+        $this->set('title_for_layout', "Ubah Data Pendapatan");
         
         $income = $this->Transaction->findByid($income_id);
         $this->set('income', $income);

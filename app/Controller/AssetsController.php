@@ -20,7 +20,8 @@ class AssetsController extends AppController {
         );
         
         $assets = $this->paginate('Asset');
-         $this->set('assets', $assets);
+        $this->set('assets', $assets);
+        $this->set('title_for_layout', "Aset");
     }
     
     public function add() {
@@ -34,6 +35,7 @@ class AssetsController extends AppController {
                 $this->Session->setFlash('Data Aset Gagal Tersimpan', 'flash_fail');
             }
         }
+        $this->set('title_for_layout', "Tambah Data Aset");
     }
     
     public function edit($asset_id) {

@@ -15,7 +15,7 @@
         
         <!-- Form Tambah -->
         
-        <form action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'add'))?>" method="POST" class="custom">
+        <form id="formID" action="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'add'))?>" method="POST" class="custom">
         <fieldset>
             <legend>Nominal dan Deskripsi</legend>
             <div class="row">
@@ -23,7 +23,7 @@
                     <div class="row collapse">
                         <label>Nominal</label>
                         <div class="large-9 columns">
-                            <input type="text" name="data[Transaction][amount]"/>
+                            <input type="text" class="validate[required,custom[onlyNumberSp]] text-input" name="data[Transaction][amount]"/>
                         </div>
                         <div class="large-3 columns">
                             <span class="postfix">Rp</span>
@@ -38,11 +38,11 @@
                     <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand">Atur Kategori</a>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
+                    <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" readonly/>
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>
-                    <textarea name="data[Transaction][description]" style="height: 30px; display: block; height: 200px;"></textarea>
+                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 30px; display: block; height: 200px;"></textarea>
                 </div>
             </div>
         </fieldset>
@@ -56,5 +56,6 @@
     $(function() {
         $(document).foundation();
         $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        $('#formID').validationEngine();
     });
 </script>
