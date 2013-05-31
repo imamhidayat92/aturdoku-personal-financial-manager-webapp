@@ -45,14 +45,14 @@ class UsersController extends AppController {
             'Category' => array(
                 'name' => 'Pemasukan Bulanan',
                 'description' => '',
-                'type' => '1',
+                'category_type' => '1',
             ),
         ),
         1 => array(
             'Category' => array(
                 'name' => 'Pemasukan Tambahan',
                 'description' => '',
-                'type' => '1',
+                'category_type' => '1',
             )
         ),
     );
@@ -62,14 +62,14 @@ class UsersController extends AppController {
             'Category' => array(
                 'name' => 'Administrasi Bulanan',
                 'description' => '',
-                'type' => '0',
+                'category_type' => '0',
             )
         ),
         1 => array(
             'Category' => array(
                 'name' => 'Makanan/Minuman',
                 'description' => '',
-                'type' => '0',
+                'category_type' => '0',
             )
         ),
     );
