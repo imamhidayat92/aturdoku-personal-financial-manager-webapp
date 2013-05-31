@@ -18,18 +18,18 @@
     
     <!-- Pengeluaran -->
     <div class="large-3 columns">
-        <h2 class="aturdoku-nav-head aturdoku-bg-red">PENGELUARAN</h2>
+        <h2 class="aturdoku-nav-head aturdoku-bg-red" id="expense-tab">PENGELUARAN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <p>
+        <p id="expense-add">
             <?php echo $this->Html->link('Tambah Data Pengeluaran', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
         </p>
  
         <h3 class="aturdoku-nav-subhead">Kategori</h3>
         <p>Klasifikasikan jenis pengeluaran Anda.</p>
-        <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small alert expand button">Atur Kategori</a>
+        <a id="expense-category" href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small alert expand button">Atur Kategori</a>
         
         <h3 class="aturdoku-nav-subhead">Perencanaan</h3>
-        <p>Rencanakan pengeluaran-pengeluaran Anda.</p>
+        <p id="expense-plan">Rencanakan pengeluaran-pengeluaran Anda.</p>
         <a href="<?php echo Router::url(array('controller' => 'expenseplans', 'action' => 'index')) ?>" class="small alert expand button">Atur Rencana</a>
     </div>
     <div class="large-9 columns">
@@ -112,12 +112,12 @@
     
     <!-- Pemasukan -->
     <div class="large-3 columns">
-        <h2 class="aturdoku-nav-head aturdoku-bg-green">PENDAPATAN</h2>
+        <h2 class="aturdoku-nav-head aturdoku-bg-green" id="income-tab">PENDAPATAN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <p>
+        <p id="income-add">
             <?php echo $this->Html->link('Tambah Data Pendapatan', array('controller' => 'incomes', 'action' => 'add'), array('class' => 'small success expand button'))?>
         </p>
-        <h3 class="aturdoku-nav-subhead">Kategori</h3>
+        <h3 class="aturdoku-nav-subhead" id="income-category">Kategori</h3>
         <p>Klasifikasikan jenis pendapatan Anda.</p>
         <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small success expand button">Atur Kategori</a>
     </div>
@@ -164,7 +164,7 @@
     
     <!-- Aset -->
     <div class="large-3 columns">
-        <h2 class="aturdoku-nav-head aturdoku-bg-orange">ASET</h2>
+        <h2 class="aturdoku-nav-head aturdoku-bg-orange" id="asset">ASET</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
             <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small expand button'))?>
@@ -308,3 +308,57 @@
         });
     });
 </script>
+
+<?php 
+    if ($first_time == 1):
+        echo $this->Html->script('foundation/foundation.joyride');        
+?>
+
+<!-- At the bottom of your page but inside of the body tag -->
+<ol class="joyride-list" data-joyride>
+    <li data-button="Selanjutnya">
+        <h4>Selamat datang!</h4>
+        <p>Sepertinya ini adalah kunjungan pertama Anda. Mari berkeliling terlebih dahulu. :)</p>
+    </li>
+    
+    <li data-id="expense-tab" data-button="Selanjutnya">
+        <p>Bagian ini adalah navigasi yang dapat Anda gunakan untuk menambahkan data pengeluaran Anda.</p>
+    </li>
+    <li data-id="expense-add" data-button="Selanjutnya">
+        <p>Untuk menambahkan data pengeluaran, klik tombol ini.</p>
+    </li>
+    <li data-id="expense-category" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+        <p>Atur ketegori pengeluaran Anda dengan menggunakan menu ini. Ini akan memudahkan Anda dalam
+        mengkategorikan data pengeluaran Anda.</p>
+    </li>
+    <li data-id="expense-plan" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+        <p>Rencanakan pengeluaran Anda nanti dengan menggunakan fitur ini.</p>
+    </li>
+    
+    <li data-id="income-tab" data-button="Selanjutnya">
+        <p>Bagian ini adalah navigasi yang dapat Anda gunakan untuk menambahkan data pendapatan Anda.</p>
+    </li>
+    <li data-id="income-add" data-button="Selanjutnya">
+        <p>Untuk menambahkan data pendapatan, klik tombol ini.</p>
+    </li>
+    <li data-id="income-category" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+        <p>Atur ketegori pengeluaran Anda dengan menggunakan menu ini. Ini akan memudahkan Anda dalam
+        mengkategorikan data pendapatan Anda.</p>
+    </li>
+    
+    <li data-id="asset" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+        <p>Bagian ini adalah bagian Aset. Pastikan Anda menyimpan data aset terbaru Anda.</p>
+    </li>
+    
+    <li data-button="Selanjutnya">
+        <h4>Selesai</h4>
+        <p>Demikian. Mari atur keuangan Anda dengan lebih bijaksana bersama Aturdoku. :)</p>
+    </li>
+</ol>
+
+<script>
+    $(document).foundation('joyride', 'start');
+</script>
+<?php 
+    endif;
+?>

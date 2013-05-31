@@ -235,5 +235,18 @@ class UsersController extends AppController {
             'limit' => 5
         ));
         $this->set('assets', $assets);
+                
+        if ($this->Auth->user('first_time') == 1) {
+            $loginData['User']['id'] = $this->Auth->user('id');
+            $loginData['User']['first_time'] = 0;
+            $this->User->save($loginData);
+            
+            $this->set('first_time', 1);
+        }
+        else {
+            $this->set('first_time', 0);
+        }
+        
+        
     }
 }

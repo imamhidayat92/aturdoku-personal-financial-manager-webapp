@@ -23,8 +23,11 @@
         echo $this->Html->script('plugins/jqplot.dateAxisRenderer.min.js');
         echo $this->Html->script('ui/jquery-ui');
         echo $this->Html->script('ui/jquery.ui.datepicker');
+
+        echo $this->Html->script('vendor/custom.modernizr');        
         echo $this->Html->script('foundation.min');        
-        //form validation
+        
+        // form validation
         echo $this->Html->script('jquery.validationEngine');
         echo $this->Html->script('jquery.validationEngine-en');
     ?>
