@@ -27,6 +27,13 @@
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($plans as $plan): ?>
+                <tr>
+                    <td><?php echo $plan['ExpensePlan']['id'] ?></td>
+                    <td><?php echo $plan['Category']['name'] ?></td>
+                    <td></td>
+                </tr>
+                <?php endforeach; ?>
                 <tr>
                     <td>1</td>
                     <td><em><a href="#">Category Name</a></em></td>
