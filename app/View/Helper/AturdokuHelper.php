@@ -21,6 +21,21 @@ class AturdokuHelper extends AppHelper {
         "Desember",
     );
     
+    public $monthAbbvs = array(
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "Mei",
+        "Jun",
+        "Jul",
+        "Agt",
+        "Sep",
+        "Okt",
+        "Nov",
+        "Des",
+    );
+    
     public function get_number_of_day($month) {
         $number_of_day = array(
             1  => 31,
@@ -81,6 +96,11 @@ class AturdokuHelper extends AppHelper {
     // Debugging purpose:
     public function printArray($anArray) {
         return '<pre>' . print_r($anArray) . '<pre>';
+    }
+    
+    public function printBarGraphDateInfo($date){
+        $str = explode(" - ", $date);
+        return $this->monthAbbvs[$str[0]-1] . " " . $str[1];
     }
 }
 ?>

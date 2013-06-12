@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row">   
     
     <?php echo $this->Element('user-navigation'); ?>
     <div class="large-12 columns">
@@ -49,7 +49,8 @@
         <a href="#" data-reveal-id="myModal" class="small success expand button">Lihat Laporan</a>
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
+        <div id="expense"></div>
+        <h2 class="special-font underline">Data Pengeluaran Bulan Ini</h2>
         
         <table>
             <thead>
@@ -68,6 +69,41 @@
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $expense['Transaction']['date']?></td>
                     <td><?php echo $expense['Transaction']['description']?></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount'])?></td>
+                    <td>
+                        <p align="center" style="margin: 0; padding: 0;">
+                            <?php echo $this->Html->link('Ubah', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
+                    </td>
+                    
+                </tr>
+             <?php } ?>
+                <tr>
+                    <td colspan="3"><strong>Total Pengeluaran:</strong></td>
+                    <td>Rp Sekian</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2 class="special-font underline">Data Pengeluaran Lawas</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="40">No.</th>
+                    <th width="120">Bulan</th>                    
+                    <th width="150">Total Pengeluaran</th>
+                    <th width="130">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $nomor = ($this->Paginator->current($model = null)-1)*$itemPerPage; foreach ($expenses as $expense) { ?>
+                <tr>
+                    <?php $nomor++; ?>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $expense['Transaction']['date']?></td>                    
                     <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount'])?></td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
@@ -120,5 +156,44 @@
     $(document).ready(function(){
         $(document).foundation();
         $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        
+        var barValue = [
+            <?php 
+                foreach ($monthlyExpense as $expense):
+                    echo $expense[0]['total']." ,";
+                endforeach;
+            ?>
+        ];
+        var barInfo = [
+            <?php 
+                foreach ($monthlyExpense as $expense):
+                    echo "'".$this->Aturdoku->printBarGraphDateInfo($expense[0]['time'])."',";
+                endforeach;
+            ?>
+        ];
+        
+        var plot1 = $.jqplot('expense', [barValue], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: false },
+                color: '#008000'
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: barInfo
+                }
+            },
+            highlighter: { show: false },
+            grid: {
+                drawGridLines:true,
+                gridLineColor: "#ebebeb",
+                background: "#ffffff",
+                renderer: $.jqplot.CanvasGridRenderer
+            }
+        });
+        
     });
 </script>

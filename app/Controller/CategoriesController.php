@@ -47,11 +47,11 @@ class CategoriesController extends AppController {
             $this->request->data['Category']['category_type'] = 1;
             $this->request->data['Category']['user_id'] = $this->Auth->user('id');
             if($this->Category->save($this->request->data)){
-                $this->Session->setFlash('Data Kategori Pengeluaran Telah Tersimpan', 'flash_success');
+                $this->Session->setFlash('Data Kategori Pendapatan Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'categories', 'action' => 'income'));
             }
             else{
-                $this->Session->setFlash('Data Kategori Pengeluaran Gagal Tersimpan', 'flash_fail');
+                $this->Session->setFlash('Data Kategori Pendapatan Gagal Tersimpan', 'flash_fail');
             }
         }
     }

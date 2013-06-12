@@ -31,13 +31,15 @@ class IncomesController extends AppController {
         if($this->request->isPost()){
             $this->request->data['Transaction']['type'] = 1;
             $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
-            $this->request->data['Transaction']['date'] = date('Y-m-d');
+            if (strlen(trim($this->request->data['Transaction']['date'])) == 0) {
+                $this->request->data['Transaction']['date'] = date('Y-m-d');
+            }            
             if($this->Transaction->save($this->request->data)){
-                $this->Session->setFlash('Data Pemasukan Telah Tersimpan', 'flash_success');
+                $this->Session->setFlash('Data Pendapatan Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'incomes', 'action' => 'index'));
             }
             else{
-                $this->Session->setFlash('Data Pemasukan Gagal Tersimpan', 'flash_fail');
+                $this->Session->setFlash('Data Pendapatan Gagal Tersimpan', 'flash_fail');
             }
         }        
         
@@ -56,11 +58,11 @@ class IncomesController extends AppController {
             $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
             $this->request->date['Transaction']['type'] = 1;
             if($this->Transaction->save($this->request->data)){
-                $this->Session->setFlash('Ubah Data Pemasukan Telah Tersimpan', 'flash_success');
+                $this->Session->setFlash('Ubah Data Pendapatan Telah Tersimpan', 'flash_success');
                 $this->redirect(array('controller' => 'incomes', 'action' => 'index'));
             }
             else{
-                $this->Session->setFlash('Ubah Data Pemasukan Gagal Tersimpan', 'flash_fail');
+                $this->Session->setFlash('Ubah Data Pendapatan Gagal Tersimpan', 'flash_fail');
             }
         }
         
@@ -80,7 +82,7 @@ class IncomesController extends AppController {
     
     public function delete($income_id) {
         $this->Transaction->delete($income_id);
-        $this->redirect(array('controller' => 'users', 'controller' => 'dashboard'));
+        $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
     }
 }
 ?>

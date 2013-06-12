@@ -7,6 +7,20 @@ body {
     background-color: #ffffff;
 }
 
+.joyride-content-wrapper{
+    background-color: #ebebeb;
+    color: #000000;
+    
+}
+
+.joyride-content-wrapper h4{
+    color: #000000;
+}
+
+.joyride-tip-guide .joyride-nub.top, .joyride-tip-guide .joyride-nub.bottom{
+    border-color: #ebebeb;
+}
+
 .header-container {
     width: 1000px;
     height: 450px;
