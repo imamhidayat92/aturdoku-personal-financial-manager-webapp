@@ -240,6 +240,7 @@ class UsersController extends AppController {
             $loginData['User']['id'] = $this->Auth->user('id');
             $loginData['User']['first_time'] = 0;
             $this->User->save($loginData);
+            $this->Session->write('Auth', $this->User->read(null, $this->Auth->user('id')));
             
             $this->set('first_time', 1);
         }

@@ -327,11 +327,11 @@
     <li data-id="expense-add" data-button="Selanjutnya">
         <p>Untuk menambahkan data pengeluaran, klik tombol ini.</p>
     </li>
-    <li data-id="expense-category" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+    <li data-id="expense-category" data-button="Selanjutnya">
         <p>Atur ketegori pengeluaran Anda dengan menggunakan menu ini. Ini akan memudahkan Anda dalam
         mengkategorikan data pengeluaran Anda.</p>
     </li>
-    <li data-id="expense-plan" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+    <li data-id="expense-plan" data-button="Selanjutnya">
         <p>Rencanakan pengeluaran Anda nanti dengan menggunakan fitur ini.</p>
     </li>
     
@@ -341,12 +341,12 @@
     <li data-id="income-add" data-button="Selanjutnya">
         <p>Untuk menambahkan data pendapatan, klik tombol ini.</p>
     </li>
-    <li data-id="income-category" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+    <li data-id="income-category" data-button="Selanjutnya">
         <p>Atur ketegori pengeluaran Anda dengan menggunakan menu ini. Ini akan memudahkan Anda dalam
         mengkategorikan data pendapatan Anda.</p>
     </li>
     
-    <li data-id="asset" data-button="Selanjutnya" data-options="tipLocation:top;tipAnimation:fade">
+    <li data-id="asset" data-button="Selanjutnya">
         <p>Bagian ini adalah bagian Aset. Pastikan Anda menyimpan data aset terbaru Anda.</p>
     </li>
     
