@@ -39,7 +39,9 @@
                     <td><?php echo $this->Aturdoku->currencyFormat($expense[0]['total'])?></td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
-                            <?php echo $this->Html->link('Lihat Detail', "/", array('class' => 'tiny button secondary expand aturdoku-button')); ?>                            
+                            <?php 
+                                $n = explode("-", $expense['transactions']['date']);
+                            echo $this->Html->link('Lihat Detail', array('controller' => 'expenses', 'action' => 'detail', $n[0], $n[1], $n[2]), array('class' => 'tiny button secondary expand aturdoku-button')); ?>                            
                         </p>
                     </td>
                     

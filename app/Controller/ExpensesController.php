@@ -111,5 +111,18 @@ class ExpensesController extends AppController{
         $this->set('expenses', $expenses);
         $this->set('title_for_layout', 'Pengeluaran Bulan ' . $month . ' ' . $year);
     }
+    
+    public function detail($year, $month, $day){
+        $expenses = $this->Transaction->find('all', array(
+            'conditions' => array(
+                'MONTH(Transaction.date)' => $month,
+                'DAY(Transaction.date)' => $day,
+                'type' => 0,
+                'User.id' => $this->Auth->user('id')
+            )
+        ));        
+        $this->set('expenses', $expenses);
+        $this->set('title_for_layout', 'Pengeluaran Tanggal '. $day .' ' . $month . ' ' . $year);
+    }
 }
 ?>
