@@ -11,7 +11,7 @@
 <div class="row">    
     <div class="large-8 large-offset-2 columns">
         <h2 class="special-font">Buat Rencana Pengeluaran</h2>
-        <p class="lead">Isi formulir di bawah ini untuk menambahkan data pengeluaran Anda.</p>
+        <p class="lead">Isi formulir di bawah ini untuk membuat rencana pengeluaran Anda.</p>
         
         <!-- Form Tambah -->
         

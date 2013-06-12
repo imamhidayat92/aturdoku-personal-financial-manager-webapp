@@ -8,9 +8,9 @@ class ExpensePlansController extends AppController {
     public function index() {       
         $this->set('title_for_layout', "Rencana Pengeluaran");
         
-        $plans = $this->ExpensePlan->find('all', array(
-            'User.id' => $this->Auth->user('id')
-        ));
+        $this->paginate['conditions']['user_id'] = $this->Auth->user('id');
+        
+        $plans = $this->paginate('ExpensePlan');
         $this->set('plans', $plans);
     }
     
@@ -30,7 +30,7 @@ class ExpensePlansController extends AppController {
         $categories = $this->Category->find('all', array(
             'conditions' => array(
                 'User.id' => $this->Auth->user('id'),
-                'type' => 0
+                'category_type' => 0
             )
         ));
         $this->set('categories', $categories);
