@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <label>Kategori</label>
-                    <select class="medium">
+                    <select class="medium" name="data[Transaction][category_id]">
                         <?php foreach($categories as $category): ?>
                         <option value="<?php echo $category['Category']['id']?>"<?php if ($category['Category']['id'] == $income['Transaction']['category_id']) echo " selected" ?>><?php echo $category['Category']['name']?></option>
                         <?php endforeach;?>

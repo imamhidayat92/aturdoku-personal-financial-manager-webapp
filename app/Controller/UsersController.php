@@ -201,6 +201,24 @@ class UsersController extends AppController {
         $totalIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id'). " AND type = 1");
         $this->set('totalIncomes', $totalIncomes[0][0]['total']);
         
+        $monthlyIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), ' - ', YEAR(date)) AS 'time', date FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 1 GROUP BY time ORDER BY date");
+        $this->set('monthlyIncomes', $monthlyIncomes);
+        
+        $incomeCategory = $this->Transaction->query("SELECT SUM(amount) AS 'total', categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE category_type = 1 AND transactions.user_id = ". $this->Auth->user('id') ." GROUP BY category_id");
+        $this->set('incomeCategory', $incomeCategory);
+        
+        $expenseCategory = $this->Transaction->query("SELECT SUM(amount) AS 'total', categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE category_type = 0 AND transactions.user_id = ". $this->Auth->user('id') ." GROUP BY category_id");
+        $this->set('expenseCategory', $expenseCategory);
+        
+        $currentMonthTotalExpense = $this->Transaction->query("SELECT SUM(amount) AS 'total', date FROM transactions WHERE type = 0 AND MONTH(date) = MONTH(NOW()) AND user_id = ". $this->Auth->user('id') ." ");
+        $this->set('currentMonthTotalExpense', $currentMonthTotalExpense[0][0]['total']);
+        
+        $currentMonthAverageExpense = $this->Transaction->query("SELECT AVG(amount) AS 'total', date FROM transactions WHERE type = 0 AND MONTH(date) = MONTH(NOW()) AND user_id = ". $this->Auth->user('id') ." ");
+        $this->set('currentMonthAverageExpense', $currentMonthAverageExpense[0][0]['total']);
+        
+        $currentMonthMaxExpense = $this->Transaction->query("SELECT MAX(amount) AS 'total', date FROM transactions WHERE type = 0 AND MONTH(date) = MONTH(NOW()) AND user_id = ". $this->Auth->user('id') ." ");
+        $this->set('currentMonthMaxExpense', $currentMonthMaxExpense[0][0]['total']);
+        
         $expenses = $this->Transaction->find('all', array(
             'conditions' => array(
                 'User.id' => $this->Auth->user('id'),

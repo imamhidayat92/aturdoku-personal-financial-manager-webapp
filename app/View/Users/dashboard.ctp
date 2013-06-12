@@ -1,4 +1,4 @@
-<?php
+<?php    
     $totalExpense = 0;
     $maxExpense = 0;
     $averageExpense = array(
@@ -64,10 +64,10 @@
         <?php endif; ?>
         <p>&nbsp;</p>
         
+        <h3 class="subheader">Total pengeluaran Anda bulan ini: <?php echo $this->Aturdoku->currencyFormat($currentMonthTotalExpense); ?></h3>
         
-        
-        <p>Rata-rata pengeluaran bulan ini: <?php echo $this->Aturdoku->currencyFormat($averageExpense) ?></p>
-        <p>Pengeluaran terbesar sejumlah: <?php echo $this->Aturdoku->currencyFormat($maxExpense['Transaction']['amount']); ?></p>
+        <p>Rata-rata pengeluaran bulan ini: <?php echo $this->Aturdoku->currencyFormat($currentMonthAverageExpense) ?></p>
+        <p>Pengeluaran terbesar sejumlah: <?php echo $this->Aturdoku->currencyFormat($currentMonthMaxExpense); ?></p>
         
         <h2 class="special-font underline">Data Pengeluaran Terkini</h2>
         
@@ -107,6 +107,11 @@
         <h2 style="color: #cccccc; text-align: center; line-height: 1; margin: 100px 0 100px 0;">Anda belum menyimpan data pengeluaran apapun.</h2>
     <?php endif; ?>
         <h2 class="special-font underline">Pengeluaran Berdasarkan Kategori</h2>
+        <div class="row">
+            <div class="large-8 columns">
+                <div id="expenseCategory"></div>
+            </div>            
+        </div>        
     </div>
     <div class="separator"></div>
     
@@ -123,6 +128,21 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
+        <?php if($totalIncomes - $totalExpenses < 0):?>
+        <div class="row">
+            <div class="large-8 large-offset-2 columns">
+                <div class="row" style="background-color: red;">
+                    <div class="large-4 columns">
+                        <?php echo $this->Html->image('warning.png'); ?>
+                    </div>
+                    <div class="large-8 columns">
+                        <h3 style="color: white; line-height: 1em; margin-top: 20px;">Saat ini kas Anda negatif!!</h3>
+                        <p style="color: white; line-height: 1em;">Pastikan Anda telah mengisi data pendapatan Anda dengan lengkap.</p>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
         <div id="income"></div>
         <h3 class="subheader">Isi kas Anda: <?php echo $this->Aturdoku->currencyFormat($totalIncomes - $totalExpenses); ?></h3>
         <h2 class="special-font underline">Data Pendapatan Terkini</h2>
@@ -156,8 +176,13 @@
              <?php } ?>
             </tbody>
         </table>
-        
-                <a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Pendapatan Selengkapnya</a>
+        <h2 class="special-font underline">Pendapatan Berdasarkan Kategori</h2>
+        <div class="row">
+            <div class="large-8 columns">
+                <div id="incomeCategory"></div>
+            </div>             
+        </div>
+        <a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Pendapatan Selengkapnya</a>
     </div>
     <p class="clearfix"></p>
     <div class="separator"></div>
@@ -273,16 +298,18 @@
         
         
         var barValue = [
-            2,
-            4,
-            5,
-            7
+            <?php 
+                foreach ($monthlyIncomes as $income):
+                    echo $income[0]['total']." ,";
+                endforeach;
+            ?>
         ];
         var barInfo = [
-            'a',
-            'b',
-            'c',
-            'd'
+            <?php 
+                foreach ($monthlyIncomes as $income):
+                    echo "'".$this->Aturdoku->printBarGraphDateInfo($income[0]['time'])."',";
+                endforeach;
+            ?>
         ];
         
         var plot2 = $.jqplot('income', [barValue], {
@@ -290,7 +317,8 @@
             animate: !$.jqplot.use_excanvas,
             seriesDefaults:{
                 renderer:$.jqplot.BarRenderer,
-                pointLabels: { show: false }
+                pointLabels: { show: false },
+                color: '#008000'
             },
             axes: {
                 xaxis: {
@@ -306,6 +334,57 @@
                 renderer: $.jqplot.CanvasGridRenderer
             }
         });
+        
+        var dataIncome = [
+            <?php
+                foreach ($incomeCategory as $category):
+            ?>
+                ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
+            <?php
+                endforeach;
+            ?>
+          ];
+          
+        var plot3 = jQuery.jqplot ('incomeCategory', [dataIncome], 
+          { 
+            seriesDefaults: {
+              // Make this a pie chart.
+              renderer: jQuery.jqplot.PieRenderer, 
+              rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+              }
+            }, 
+            legend: { show:true, location: 'e' }
+          }
+        );
+            
+        var dataExpense = [
+            <?php
+                foreach ($expenseCategory as $category):
+            ?>
+                ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
+            <?php
+                endforeach;
+            ?>
+          ];
+          
+        var plot4 = jQuery.jqplot ('expenseCategory', [dataExpense], 
+          { 
+            seriesDefaults: {
+              // Make this a pie chart.
+              renderer: jQuery.jqplot.PieRenderer, 
+              rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+              }
+            }, 
+            legend: { show:true, location: 'e' }
+          }
+        );    
+        
     });
 </script>
 

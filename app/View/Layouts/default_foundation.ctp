@@ -21,6 +21,7 @@
         echo $this->Html->script('plugins/jqplot.barRenderer.min.js');        
         echo $this->Html->script('plugins/jqplot.categoryAxisRenderer.min.js');
         echo $this->Html->script('plugins/jqplot.dateAxisRenderer.min.js');
+        echo $this->Html->script('plugins/jqplot.pieRenderer.min.js');
         echo $this->Html->script('ui/jquery-ui');
         echo $this->Html->script('ui/jquery.ui.datepicker');
 

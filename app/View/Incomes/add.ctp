@@ -38,7 +38,7 @@
                     <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand">Atur Kategori</a>
                     <p class="clear10px">  </p>
                   <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" readonly/>
+                    <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>
