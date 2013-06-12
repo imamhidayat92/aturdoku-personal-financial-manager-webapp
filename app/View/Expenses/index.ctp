@@ -13,38 +13,7 @@
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
             <?php echo $this->Html->link('Tambah Data', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
-        </p>
-        <h3 class="aturdoku-nav-subhead">Laporan Bulanan</h3>
-        <form class="custom" action="" method="POST">
-            <fieldset style="padding-bottom: 0;">
-                <legend>Waktu Pengeluaran</legend>
-                <div class="row">
-                <div class="small-4 columns">
-                    <label class="right inline">Bulan</label>
-                </div>
-                <div class="small-8 columns">
-                    <select style="width: 100px;">
-                        
-                        <?php 
-                        $index = 1;
-                        foreach ($this->Aturdoku->months as $month): ?>
-                        <option value="<?php echo $index+1 ?>"><?php echo $month; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="small-4 columns">
-                    <label class="right inline">Tahun</label>
-                </div>
-                <div class="small-8 columns">
-                    <input type="text" />
-                </div>
-            </div>
-            </fieldset>
-            <input type="submit" class="small alert expand button aturdoku-button" value="Lihat Laporan"/>
-        </form>
-        
+        </p>                        
         <h3 class="aturdoku-nav-subhead">Laporan Harian</h3>
         <a href="#" data-reveal-id="myModal" class="small success expand button">Lihat Laporan</a>
     </div>
@@ -89,36 +58,60 @@
         
         <h2 class="special-font underline">Data Pengeluaran Lawas</h2>
         
+        <form class="custom" action="" method="POST">
+            <fieldset style="padding-bottom: 0;">
+                <legend>Waktu Pengeluaran</legend>
+                <div class="row">
+                <div class="small-4 columns">
+                    <label class="right inline">Bulan</label>
+                </div>
+                <div class="small-8 columns">
+                    <select style="width: 100px;">
+                        
+                        <?php 
+                        $index = 1;
+                        foreach ($this->Aturdoku->months as $month): ?>
+                        <option value="<?php echo $index+1 ?>"><?php echo $month; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="small-4 columns">
+                    <label class="right inline">Tahun</label>
+                </div>
+                <div class="small-8 columns">
+                    <input type="text" />
+                </div>
+            </div>
+            </fieldset>
+            <input type="submit" class="small alert expand button aturdoku-button" value="Lihat Laporan"/>
+        </form>
+        
         <table>
             <thead>
                 <tr>
                     <th width="40">No.</th>
-                    <th width="120">Bulan</th>                    
-                    <th width="150">Total Pengeluaran</th>
-                    <th width="130">Action</th>
+                    <th width="200">Bulan dan Tahun</th>                    
+                    <th width="300">Total Pengeluaran</th>
+                    <th width="200">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php $nomor = ($this->Paginator->current($model = null)-1)*$itemPerPage; foreach ($expenses as $expense) { ?>
+                <?php $nomor = ($this->Paginator->current($model = null)-1)*$itemPerPage; foreach ($monthlyExpense as $expense) { ?>
                 <tr>
                     <?php $nomor++; ?>
                     <td><?php echo $nomor; ?></td>
-                    <td><?php echo $expense['Transaction']['date']?></td>                    
-                    <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount'])?></td>
+                    <td><?php echo $this->Aturdoku->printBarGraphDateInfo($expense[0]['time'])?></td>                    
+                    <td><?php echo $this->Aturdoku->currencyFormat($expense[0]['total'])?></td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
-                            <?php echo $this->Html->link('Ubah', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
-                            <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Lihat Detail', "#", array('class' => 'tiny button secondary expand aturdoku-button')); ?>                            
                         </p>
                     </td>
                     
                 </tr>
-             <?php } ?>
-                <tr>
-                    <td colspan="3"><strong>Total Pengeluaran:</strong></td>
-                    <td>Rp Sekian</td>
-                    <td></td>
-                </tr>
+             <?php } ?>                
             </tbody>
         </table>
         

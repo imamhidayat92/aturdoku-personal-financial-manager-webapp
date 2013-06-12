@@ -27,8 +27,8 @@ class ExpensesController extends AppController{
         $expenses = $this->paginate('Transaction');              
         $this->set('expenses', $expenses);
         
-        $monthlyExpense = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), ' - ', YEAR(date)) AS 'time', date FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY time ORDER BY date");
-        $this->set('monthlyExpense', $monthlyExpense);
+        $monthlyExpense = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), ' - ', YEAR(date)) AS 'time', date, MONTH(date) AS 'month' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY time ORDER BY date");
+        $this->set('monthlyExpense', $monthlyExpense);              
         
         $this->set('itemPerPage', $this->itemPerPage);
         $this->set('title_for_layout', "Pengeluaran");
