@@ -1,5 +1,5 @@
-<div class="row">   
-    
+<div class="row">
+    <?php //echo $this->Aturdoku->printArray($monthlyExpense);?>
     <?php echo $this->Element('user-navigation'); ?>
     <div class="large-12 columns">
         <ul class="breadcrumbs">
@@ -25,67 +25,69 @@
             <thead>
                 <tr>
                     <th width="40">No.</th>
-                    <th width="120">Tanggal</th>
-                    <th width="300">Deskripsi Pendapatan</th>
-                    <th width="150">Nominal</th>
-                    <th width="130">Action</th>
+                    <th width="200">Tanggal</th>
+                    <th width="300">Total Pengeluaran</th>
+                    <th width="200">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php $nomor = ($this->Paginator->current($model = null)-1)*$itemPerPage; foreach ($expenses as $expense) { ?>
+                <?php $nomor = ($this->Paginator->current($model = null)-1)*$itemPerPage; foreach ($dailyExpenses as $expense) { ?>
                 <tr>
                     <?php $nomor++; ?>
                     <td><?php echo $nomor; ?></td>
-                    <td><?php echo $expense['Transaction']['date']?></td>
-                    <td><?php echo $expense['Transaction']['description']?></td>
-                    <td><?php echo $this->Aturdoku->currencyFormat($expense['Transaction']['amount'])?></td>
+                    <td><?php echo $expense['transactions']['date']?></td>                    
+                    <td><?php echo $this->Aturdoku->currencyFormat($expense[0]['total'])?></td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
-                            <?php echo $this->Html->link('Ubah', array('controller' => 'expenses','action' => 'edit', $expense['Transaction']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
-                            <?php echo $this->Html->link('Hapus', array('controller' => 'expenses','action' => 'delete', $expense['Transaction']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Lihat Detail', "/", array('class' => 'tiny button secondary expand aturdoku-button')); ?>                            
                         </p>
                     </td>
                     
                 </tr>
-             <?php } ?>
-                <tr>
-                    <td colspan="3"><strong>Total Pengeluaran:</strong></td>
-                    <td>Rp Sekian</td>
-                    <td></td>
-                </tr>
+             <?php } ?>                
             </tbody>
         </table>
         
         <h2 class="special-font underline">Data Pengeluaran Lawas</h2>
         
-        <form class="custom" action="" method="POST">
+        <form class="custom" action="<?php Router::url(array('controller' => 'expenses', 'action' => 'index'))?>" method="POST">
             <fieldset style="padding-bottom: 0;">
                 <legend>Waktu Pengeluaran</legend>
                 <div class="row">
-                <div class="small-4 columns">
-                    <label class="right inline">Bulan</label>
+                <div class="large-4 columns">
+                    <div class="small-4 columns">
+                        <label class="right inline">Bulan</label>
+                    </div>
+                    <div class="small-8 columns">
+                        <select name="data[Transaction][month]" style="width: 100px;">
+
+                            <?php 
+                            $index = 1;
+                            foreach ($this->Aturdoku->months as $month): ?>
+                            <option value="<?php echo $index; $index++; ?>"><?php echo $month; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
-                <div class="small-8 columns">
-                    <select style="width: 100px;">
-                        
-                        <?php 
-                        $index = 1;
-                        foreach ($this->Aturdoku->months as $month): ?>
-                        <option value="<?php echo $index+1 ?>"><?php echo $month; ?></option>
-                        <?php endforeach; ?>
-                    </select>
+                <div class="large-4 columns">
+                    <div class="small-4 columns">
+                        <label class="right inline">Tahun</label>
+                    </div>
+                    <div class="small-8 columns">
+                        <select name="data[Transaction][year]" style="width: 100px;">
+
+                            <?php                             
+                            foreach ($years as $year): ?>
+                            <option value="<?php echo $year[0]['year']; ?>"><?php echo $year[0]['year']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="small-4 columns">
-                    <label class="right inline">Tahun</label>
+                <div class="large-4 columns">
+                    <input type="submit" class="small alert expand button aturdoku-button" value="Lihat Laporan"/>
                 </div>
-                <div class="small-8 columns">
-                    <input type="text" />
-                </div>
-            </div>
-            </fieldset>
-            <input type="submit" class="small alert expand button aturdoku-button" value="Lihat Laporan"/>
+            </div>                                     
+            </fieldset>            
         </form>
         
         <table>
@@ -106,7 +108,7 @@
                     <td><?php echo $this->Aturdoku->currencyFormat($expense[0]['total'])?></td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
-                            <?php echo $this->Html->link('Lihat Detail', "#", array('class' => 'tiny button secondary expand aturdoku-button')); ?>                            
+                            <?php echo $this->Html->link('Lihat Detail', array('controller' => 'expenses', 'action' => 'daily', $expense[0]['year'], $expense[0]['month'] ), array('class' => 'tiny button secondary expand aturdoku-button')); ?>                            
                         </p>
                     </td>
                     

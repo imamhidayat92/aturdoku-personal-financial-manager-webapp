@@ -19,16 +19,26 @@ class ExpensesController extends AppController{
         $this->paginate['limit'] = $this->itemPerPage;
     }
     
-    public function index() {
+    public function index() {       
+        if($this->request->isPost()){
+            $this->redirect(array('controller' => 'expenses', 'action' => 'daily', $this->request->data['Transaction']['year'], $this->request->data['Transaction']['month']));
+        }
         $this->paginate['conditions'] = array(
             'User.id' => $this->Auth->user('id'),
-            'type' => 0
+            'type' => 0,
+            'MONTH(Transaction.date)' => date('m')
         );
         $expenses = $this->paginate('Transaction');              
         $this->set('expenses', $expenses);
         
-        $monthlyExpense = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), ' - ', YEAR(date)) AS 'time', date, MONTH(date) AS 'month' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY time ORDER BY date");
-        $this->set('monthlyExpense', $monthlyExpense);              
+        $dailyExpenses = $this->Transaction->query("SELECT date, SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 AND MONTH(date) = MONTH(NOW()) GROUP BY date LIMIT 30");
+        $this->set('dailyExpenses', $dailyExpenses);
+        
+        $monthlyExpense = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), ' - ', YEAR(date)) AS 'time', date, MONTH(date) AS 'month', YEAR(date) AS 'year' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY time ORDER BY date DESC");
+        $this->set('monthlyExpense', $monthlyExpense);      
+        
+        $years = $this->Transaction->query("SELECT YEAR(date) AS 'year' FROM transactions WHERE user_id = ". $this->Auth->user('id') ." AND type = 0 GROUP BY year");
+        $this->set('years', $years);
         
         $this->set('itemPerPage', $this->itemPerPage);
         $this->set('title_for_layout', "Pengeluaran");
@@ -88,6 +98,18 @@ class ExpensesController extends AppController{
     public function delete($expense_id) {
         $this->Transaction->delete($expense_id);
         $this->redirect(array('controller' => 'users', 'controller' => 'dashboard'));
+    }
+    
+    public function daily($year, $month){
+        $expenses = $this->Transaction->find('all', array(
+            'conditions' => array(
+                'MONTH(Transaction.date)' => $month,
+                'type' => 0,
+                'User.id' => $this->Auth->user('id')
+            )
+        ));        
+        $this->set('expenses', $expenses);
+        $this->set('title_for_layout', 'Pengeluaran Bulan ' . $month . ' ' . $year);
     }
 }
 ?>
