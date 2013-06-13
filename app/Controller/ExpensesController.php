@@ -34,8 +34,11 @@ class ExpensesController extends AppController{
         $dailyExpenses = $this->Transaction->query("SELECT date, SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 AND MONTH(date) = MONTH(NOW()) GROUP BY date LIMIT 30");
         $this->set('dailyExpenses', $dailyExpenses);
         
-        $monthlyExpense = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), ' - ', YEAR(date)) AS 'time', date, MONTH(date) AS 'month', YEAR(date) AS 'year' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY time ORDER BY date DESC");
-        $this->set('monthlyExpense', $monthlyExpense);      
+        $monthlyExpense = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time', date, MONTH(date) AS 'month', YEAR(date) AS 'year' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY time ORDER BY date DESC");
+        $this->set('monthlyExpense', $monthlyExpense);
+        
+        $monthlyExpenseGraph = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time', date, MONTH(date) AS 'month', YEAR(date) AS 'year' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY time ORDER BY date ASC");
+        $this->set('monthlyExpenseGraph', $monthlyExpenseGraph);
         
         $years = $this->Transaction->query("SELECT YEAR(date) AS 'year' FROM transactions WHERE user_id = ". $this->Auth->user('id') ." AND type = 0 GROUP BY year");
         $this->set('years', $years);
@@ -104,12 +107,20 @@ class ExpensesController extends AppController{
         $expenses = $this->Transaction->find('all', array(
             'conditions' => array(
                 'MONTH(Transaction.date)' => $month,
+                'YEAR(Transaction.date)' => $year,
                 'type' => 0,
                 'User.id' => $this->Auth->user('id')
             )
-        ));        
+        ));
+        
+        $dailyExpenses = $this->Transaction->query("SELECT SUM(amount) AS 'total', date FROM transactions WHERE MONTH(date) = " . $month . " AND YEAR(date) = " . $year . " AND type = 0 AND user_id = " .$this->Auth->user('id') . " GROUP BY date");
+        $this->set('dailyExpenses', $dailyExpenses);
+        
         $this->set('expenses', $expenses);
         $this->set('title_for_layout', 'Pengeluaran Bulan ' . $month . ' ' . $year);
+        
+        $this->set('parameterMonth', $month > 9 ? $month:"0" . $month);
+        $this->set('parameterYear', $year);
     }
     
     public function detail($year, $month, $day){
@@ -123,6 +134,14 @@ class ExpensesController extends AppController{
         ));        
         $this->set('expenses', $expenses);
         $this->set('title_for_layout', 'Pengeluaran Tanggal '. $day .' ' . $month . ' ' . $year);
+    }
+    
+    public function filter($period, $number){
+        if(strcasecmp($period, 'month') == 0) {
+            $expenses = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time' FROM transactions WHERE type = 0 AND user_id = " . $this->Auth->user('id') . " AND date >= DATE_SUB(CURRENT_DATE, INTERVAL " . $number . " MONTH) GROUP BY time ORDER BY date DESC ");
+            $this->set('filteredExpenses', $expenses);
+            $this->set('number', $number);
+        }
     }
 }
 ?>

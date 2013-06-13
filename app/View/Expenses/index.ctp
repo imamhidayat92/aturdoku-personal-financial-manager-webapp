@@ -13,7 +13,15 @@
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
             <?php echo $this->Html->link('Tambah Data', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
-        </p>                        
+        </p>
+        <h3 class="aturdoku-nav-subhead">Laporan 6 Bulan Terakhir</h3>
+        <p>
+            <?php echo $this->Html->link('Lihat Laporan', array('controller' => 'expenses', 'action' => 'filter', 'month', '6'), array('class' => 'small success expand button aturdoku-button'))?>
+        </p>
+        <h3 class="aturdoku-nav-subhead">Laporan 1 Tahun Terakhir</h3>
+        <p>
+            <?php echo $this->Html->link('Lihat Laporan', array('controller' => 'expenses', 'action' => 'filter', 'month', '12'), array('class' => 'small success expand button aturdoku-button'))?>
+        </p>
         <h3 class="aturdoku-nav-subhead">Laporan Harian</h3>
         <a href="#" data-reveal-id="myModal" class="small success expand button">Lihat Laporan</a>
     </div>
@@ -156,14 +164,14 @@
         
         var barValue = [
             <?php 
-                foreach ($monthlyExpense as $expense):
+                foreach ($monthlyExpenseGraph as $expense):
                     echo $expense[0]['total']." ,";
                 endforeach;
             ?>
         ];
         var barInfo = [
             <?php 
-                foreach ($monthlyExpense as $expense):
+                foreach ($monthlyExpenseGraph as $expense):
                     echo "'".$this->Aturdoku->printBarGraphDateInfo($expense[0]['time'])."',";
                 endforeach;
             ?>
@@ -175,7 +183,7 @@
             seriesDefaults:{
                 renderer:$.jqplot.BarRenderer,
                 pointLabels: { show: false },
-                color: '#008000'
+                color: 'red'
             },
             axes: {
                 xaxis: {

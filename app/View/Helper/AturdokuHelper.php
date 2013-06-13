@@ -36,7 +36,7 @@ class AturdokuHelper extends AppHelper {
         "Des",
     );
     
-    public function get_number_of_day($month) {
+    public function getNumberOfDay($month) {
         $number_of_day = array(
             1  => 31,
             2  => 28 + $this->is_leap_year(date('Y')),
@@ -60,7 +60,7 @@ class AturdokuHelper extends AppHelper {
         $month = intval(date('m'));       
 ?>
 <p style="margin: 0">Hari ini tanggal: <?php echo $this->getGraphDateFormat(date('Y-m-d')); ?></p>
-        <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="background-color: orange; width: <?php echo ceil($date * 100 / $this->get_number_of_day($month)); ?>%"></span></div>
+        <div class="progress large-6 success" style="width: 100%;"><span class="meter" style="background-color: orange; width: <?php echo ceil($date * 100 / $this->getNumberOfDay($month)); ?>%"></span></div>
 <?php
     }
     
@@ -99,7 +99,7 @@ class AturdokuHelper extends AppHelper {
     }
     
     public function printBarGraphDateInfo($date){
-        $str = explode(" - ", $date);
+        $str = explode("-", $date);
         return $this->monthAbbvs[$str[0]-1] . " " . $str[1];
     }
 }

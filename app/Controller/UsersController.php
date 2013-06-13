@@ -201,7 +201,7 @@ class UsersController extends AppController {
         $totalIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id'). " AND type = 1");
         $this->set('totalIncomes', $totalIncomes[0][0]['total']);
         
-        $monthlyIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), ' - ', YEAR(date)) AS 'time', date FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 1 GROUP BY time ORDER BY date");
+        $monthlyIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time', date FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 1 GROUP BY time ORDER BY date");
         $this->set('monthlyIncomes', $monthlyIncomes);
         
         $incomeCategory = $this->Transaction->query("SELECT SUM(amount) AS 'total', categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE category_type = 1 AND transactions.user_id = ". $this->Auth->user('id') ." GROUP BY category_id");

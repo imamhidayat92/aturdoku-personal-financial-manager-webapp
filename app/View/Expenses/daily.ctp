@@ -1,4 +1,4 @@
-<div class="row">       
+<div class="row">   
     <?php echo $this->Element('user-navigation'); ?>
     <div class="large-12 columns">
         <ul class="breadcrumbs">
@@ -11,7 +11,8 @@
     <div class="large-3 columns">
         <h2 class="aturdoku-nav-head aturdoku-bg-red">PENGELUARAN</h2>                                        
     </div>
-    <div class="large-9 columns">        
+    <div class="large-9 columns">    
+        <div id="expense"></div>
         <h2 class="special-font underline">Data Pengeluaran Bulan Ini</h2>
         
         <table>
@@ -50,6 +51,52 @@
 <script>
     $(document).ready(function(){
         $(document).foundation();
-        $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});        
+        $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        
+        var barValue = [
+            <?php 
+                for ($day = 1; $day <= $this->Aturdoku->getNumberOfDay((int) $parameterMonth); $day++):
+                    $currentDate = $parameterYear . "-" . $parameterMonth . "-" . ($day > 9 ? $day : "0" . $day);
+                    $found = false;
+                    foreach ($dailyExpenses as $expense) {                        
+                        if (strcmp($currentDate, $expense['transactions']['date']) == 0) {
+                            echo $expense[0]['total']." ,";
+                            $found = true;
+                        }
+                    }
+                    if (!$found) echo "0, ";
+                endfor;
+            ?>
+        ];
+        var barInfo = [
+            <?php 
+                for ($day = 1; $day <= $this->Aturdoku->getNumberOfDay((int)$parameterMonth); $day++):
+                    echo $day . ",";
+                endfor;
+            ?>
+        ];
+        
+        var plot1 = $.jqplot('expense', [barValue], {
+            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+            animate: !$.jqplot.use_excanvas,
+            seriesDefaults:{
+                renderer:$.jqplot.BarRenderer,
+                pointLabels: { show: false },
+                color: 'red'
+            },
+            axes: {
+                xaxis: {
+                    renderer: $.jqplot.CategoryAxisRenderer,
+                    ticks: barInfo
+                }
+            },
+            highlighter: { show: false },
+            grid: {
+                drawGridLines:true,
+                gridLineColor: "#ebebeb",
+                background: "#ffffff",
+                renderer: $.jqplot.CanvasGridRenderer
+            }
+        });
     });
 </script>
