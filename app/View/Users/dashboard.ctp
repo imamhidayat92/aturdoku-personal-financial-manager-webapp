@@ -187,6 +187,51 @@
     <p class="clearfix"></p>
     <div class="separator"></div>
     
+    <!-- Akun -->
+    <div class="large-3 columns">
+        <h2 class="aturdoku-nav-head aturdoku-bg-purple" id="asset">Akun</h2>
+        <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
+        <p>
+            <?php echo $this->Html->link('Tambah Data Akun', array('controller' => 'accounts', 'action' => 'add'), array('class' => 'small expand button purple-button'))?>           
+        </p>
+    </div>
+    <div class="large-9 columns">
+        <h2 class="special-font underline">Data Akun</h2>
+        
+        <table>
+        <thead>
+            <tr>
+                <th width="40">No.</th>
+                    <th width="150">Nama Bank</th>
+                    <th width="270">Atas Nama</th>
+                    <th width="150">Saldo</th>
+                    <th width="130">Action</th>
+            </tr>
+        </thead>
+            <tbody>
+                <?php $nomor = 0; foreach ($accounts as $account) { ?>
+                <tr>
+                    <?php $nomor++; ?>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $account['Account']['bank_name']?></td>
+                    <td><?php echo $account['Account']['name']?></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'])?></td>
+                    <td>
+                        <p align="center" style="margin: 0; padding: 0;">
+                            <?php echo $this->Html->link('Ubah', array('controller' => 'accounts','action' => 'edit', $account['Account']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Hapus', array('controller' => 'account','action' => 'delete', $account['Account']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
+                    </td>
+                    
+                </tr>
+             <?php } ?>
+            </tbody>
+        </table>  
+        
+        <a href="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Akun Lengkap</a>
+    </div>
+    <div class="separator"></div>
+    
     <!-- Aset -->
     <div class="large-3 columns">
         <h2 class="aturdoku-nav-head aturdoku-bg-orange" id="asset">ASET</h2>
@@ -262,7 +307,7 @@
 
             ];
 
-            var plot1 = $.jqplot('plot', [line1], {
+            var dailyExpenseGraph = $.jqplot('plot', [line1], {
                 seriesColors:["#ff0000"],
                 animate: !$.jqplot.use_excanvas,                
                 
@@ -312,7 +357,7 @@
             ?>
         ];
         
-        var plot2 = $.jqplot('income', [barValue], {
+        var monthlyIncomeGraph = $.jqplot('income', [barValue], {
             // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
             animate: !$.jqplot.use_excanvas,
             seriesDefaults:{
@@ -333,11 +378,11 @@
                 background: "#ffffff",
                 renderer: $.jqplot.CanvasGridRenderer
             }
-        });
-        
-        var dataIncome = [
+        });       
+            
+        var dataExpense = [
             <?php
-                foreach ($incomeCategory as $category):
+                foreach ($expenseCategory as $category):
             ?>
                 ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
             <?php
@@ -345,7 +390,7 @@
             ?>
           ];
           
-        var plot3 = jQuery.jqplot ('incomeCategory', [dataIncome], 
+        var expenseCategoryGraph = jQuery.jqplot ('expenseCategory', [dataExpense], 
           { 
             seriesDefaults: {
               // Make this a pie chart.
@@ -359,10 +404,10 @@
             legend: { show:true, location: 'e' }
           }
         );
-            
-        var dataExpense = [
+        
+        var dataIncome = [
             <?php
-                foreach ($expenseCategory as $category):
+                foreach ($incomeCategory as $category):
             ?>
                 ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
             <?php
@@ -370,7 +415,7 @@
             ?>
           ];
           
-        var plot4 = jQuery.jqplot ('expenseCategory', [dataExpense], 
+        var incomeCategoryGraph = jQuery.jqplot ('incomeCategory', [dataIncome], 
           { 
             seriesDefaults: {
               // Make this a pie chart.
@@ -383,7 +428,7 @@
             }, 
             legend: { show:true, location: 'e' }
           }
-        );    
+        );
         
     });
 </script>

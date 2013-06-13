@@ -55,6 +55,15 @@ body {
     margin: 0;
 }
 
+.purple-button{
+    background-color: #9e1be0;
+    border-color: #9e1be0;
+}
+
+a.purple-button:hover{
+    background-color: #600091;
+}
+
 .aturdoku-bg-red {
     background-color: red;
     color: white;
@@ -72,6 +81,11 @@ body {
 
 .aturdoku-bg-black {
     background-color: black;
+    color: white;
+}
+
+.aturdoku-bg-purple{
+    background-color: #9e1be0;
     color: white;
 }
 

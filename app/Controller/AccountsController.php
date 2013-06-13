@@ -14,8 +14,9 @@ class AccountsController extends AppController {
     
     public function add() {
         if ($this->request->isPost()) {
+            $this->request->data['Account']['user_id'] = $this->Auth->user('id');
             if ($this->Account->save($this->request->data)) {
-                $this->Session->setFlash("", 'success');
+                $this->Session->setFlash("Data Akun Telah Tersimpan", 'flash_success');
                 $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
             }
             
@@ -28,14 +29,14 @@ class AccountsController extends AppController {
     public function edit($id) {
         if ($this->request->isPost()) {
             if ($this->Account->save($this->request->data)) {
-                $this->Session->setFlash("", 'success');
+                $this->Session->setFlash("Perbaruan Data Akun Telah Tersimpan", 'flash_success');
                 $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
             }
             
             $this->Session->setFlash("", 'fail');
         }
         
-        $account = $this->Accound->findByid($id);
+        $account = $this->Account->findByid($id);
         $this->set('account', $account);
         
         $this->set('title_for_layout', "Ubah Akun");
@@ -50,7 +51,7 @@ class AccountsController extends AppController {
             
             $this->Session->setFlash("", 'fail');           
         }
-        $account = $this->Accound->findByid($id);
+        $account = $this->Account->findByid($id);
         $this->set('account', $account);
         
         $this->set('title_for_layout', "Perbarui Saldo Akun");
