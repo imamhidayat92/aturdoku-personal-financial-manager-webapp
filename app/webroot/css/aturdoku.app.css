@@ -75,6 +75,11 @@ body {
     color: white;
 }
 
+.aturdoku-bg-purple{
+    background-color: #9e1be0;
+    color: white;
+}
+
 .aturdoku-news-box h1 {
     line-height: none;
     font-size: 2em;
