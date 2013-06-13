@@ -2,6 +2,8 @@
 class ExpensePlan extends AppModel {
     public $name = "ExpensePlan";
     
-    public $belongsTo = array('Category');
+    public $belongsTo = array(
+        'Category'
+    );
 }
 ?>
