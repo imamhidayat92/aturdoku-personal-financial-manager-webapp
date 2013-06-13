@@ -13,7 +13,7 @@ class User extends AppModel {
     );
     
     public $hasMany = array(
-        'Transaction'
+        'Transaction', 'Account'
     );
     
     public function beforeSave($options = array()) {
