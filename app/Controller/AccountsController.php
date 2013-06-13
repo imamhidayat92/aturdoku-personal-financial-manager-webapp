@@ -16,7 +16,7 @@ class AccountsController extends AppController {
         if ($this->request->isPost()) {
             $this->request->data['Account']['user_id'] = $this->Auth->user('id');
             if ($this->Account->save($this->request->data)) {
-                $this->Session->setFlash("", 'flash_success');
+                $this->Session->setFlash("Data Akun Telah Tersimpan", 'flash_success');
                 $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
             }
             
@@ -29,7 +29,7 @@ class AccountsController extends AppController {
     public function edit($id) {
         if ($this->request->isPost()) {
             if ($this->Account->save($this->request->data)) {
-                $this->Session->setFlash("", 'success');
+                $this->Session->setFlash("Perbaruan Data Akun Telah Tersimpan", 'flash_success');
                 $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
             }
             

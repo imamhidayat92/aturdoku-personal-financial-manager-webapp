@@ -266,6 +266,13 @@ class UsersController extends AppController {
             $this->set('first_time', 0);
         }
         
+        $this->loadModel('Account');
+        $accounts = $this->Account->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
+            )           
+        ));
+        $this->set('accounts', $accounts);
         
     }
 }
