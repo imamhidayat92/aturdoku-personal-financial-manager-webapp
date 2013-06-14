@@ -189,11 +189,9 @@
     
     <!-- Akun -->
     <div class="large-3 columns">
-        <h2 class="aturdoku-nav-head aturdoku-bg-purple" id="asset">Akun</h2>
+        <h2 class="aturdoku-nav-head aturdoku-bg-purple" id="account">Akun</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <p>
-            <?php echo $this->Html->link('Tambah Data Akun', array('controller' => 'accounts', 'action' => 'add'), array('class' => 'small expand button purple-button'))?>           
-        </p>
+        <a href="#" data-reveal-id="myModal" class="small expand button purple-button">Tambah Data Akun</a>        
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Data Akun</h2>
@@ -469,7 +467,9 @@
         <p>Atur ketegori pengeluaran Anda dengan menggunakan menu ini. Ini akan memudahkan Anda dalam
         mengkategorikan data pendapatan Anda.</p>
     </li>
-    
+    <li data-id="account" data-button="Selanjutnya">
+        <p>Bagian ini adalah bagian Akun. Pastikan Anda menyimpan data Akun Anda terlebih dahulu sebelum melakukan penambahan data transaksi terbaru Anda.</p>
+    </li>
     <li data-id="asset" data-button="Selanjutnya">
         <p>Bagian ini adalah bagian Aset. Pastikan Anda menyimpan data aset terbaru Anda.</p>
     </li>
@@ -486,3 +486,19 @@
 <?php 
     endif;
 ?>
+
+<div id="myModal" class="reveal-modal">
+    <div class="row">        
+        <div class="large-12 columns">
+            <h3 class="special-font">Tambah Akun</h3>
+            <p>
+                Akun Apa Yang Ingin Anda Tambahkan?               
+            </p>
+            <ul class="button-group even-2">
+              <li><a href="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'cash')) ?>" class="button">Tunai</a></li>
+              <li><a href="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'noncash')) ?>" class="secondary button">Non-Tunai</a></li>              
+            </ul>
+        </div>        
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>

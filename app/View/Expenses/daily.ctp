@@ -1,4 +1,4 @@
-<div class="row">   
+<div class="row">      
     <?php echo $this->Element('user-navigation'); ?>
     <div class="large-12 columns">
         <ul class="breadcrumbs">
@@ -44,6 +44,12 @@
              <?php } ?>                
             </tbody>
         </table>
+        <h2 class="special-font underline">Pengeluaran Berdasarkan Kategori</h2>
+        <div class="row">
+            <div class="large-8 columns">
+                <div id="expenseCategory"></div>
+            </div>             
+        </div>
     </div>
 </div>
         
@@ -98,5 +104,30 @@
                 renderer: $.jqplot.CanvasGridRenderer
             }
         });
+        
+        var dataExpense = [
+            <?php
+                foreach ($dailyExpensesCategoryGraph as $category):
+            ?>
+                ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
+            <?php
+                endforeach;
+            ?>
+          ];
+          
+        var expenseCategoryGraph = jQuery.jqplot ('expenseCategory', [dataExpense], 
+          { 
+            seriesDefaults: {
+              // Make this a pie chart.
+              renderer: jQuery.jqplot.PieRenderer, 
+              rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+              }
+            }, 
+            legend: { show:true, location: 'e' }
+          }
+        );
     });
 </script>

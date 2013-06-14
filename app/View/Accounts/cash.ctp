@@ -10,8 +10,8 @@
 </div>
 <div class="row">
     <div class="large-8 large-offset-2 columns">
-        <h2 class="special-font">Tambah Data Akun</h2>
-        <p class="lead">Isi formulir di bawah ini untuk menambahkan data akun Anda.</p>
+        <h2 class="special-font">Tambah Data Akun Tunai</h2>
+        <p class="lead">Isi formulir di bawah ini untuk menambahkan data akun tunai Anda.</p>
         
         <!-- Form Tambah -->
         
@@ -19,11 +19,11 @@
         <fieldset>
             <legend>Data Akun</legend>
             <div class="row">
+                <div class="large-7 columns">
+                    <label>Nama</label>
+                    <input type="text" name="data[Account][name]"/>                                    
+                </div>                
                 <div class="large-5 columns">
-                    <label>Nama Bank</label>
-                    <input type="text" name="data[Account][bank_name]"/>
-                    <label>Atas Nama</label>
-                    <input type="text" name="data[Account][name]"/>                                                                                                    
                     <div class="row collapse">
                         <label>Saldo Awal</label>
                         <div class="large-9 columns">
@@ -32,13 +32,7 @@
                             <div class="large-3 columns">
                             <span class="postfix">Rp</span>
                         </div>
-                    </div>                 
-                </div>                
-                <div class="large-6 columns">
-                    <label>Nomor Rekening</label>
-                    <input type="text" name="data[Account][number]"/>
-                    <label>Cabang</label>
-                    <input type="text" name="data[Account][branch]"/>
+                    </div>                    
                 </div>
             </div>
         </fieldset>

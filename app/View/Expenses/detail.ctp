@@ -1,4 +1,4 @@
-<div class="row">       
+<div class="row">   
     <?php echo $this->Element('user-navigation'); ?>
     <div class="large-12 columns">
         <ul class="breadcrumbs">
@@ -12,7 +12,7 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-red">PENGELUARAN</h2>                                        
     </div>
     <div class="large-9 columns">        
-        <h2 class="special-font underline">Data Pengeluaran Bulan Ini</h2>
+        <h2 class="special-font underline">Data Pengeluaran Hari Ini</h2>
         
         <table>
             <thead>
@@ -43,6 +43,12 @@
              <?php } ?>                
             </tbody>
         </table>
+        <h2 class="special-font underline">Pengeluaran Berdasarkan Kategori</h2>
+        <div class="row">
+            <div class="large-8 columns">
+                <div id="expenseCategory"></div>
+            </div>             
+        </div>
     </div>
 </div>
         
@@ -50,6 +56,30 @@
 <script>
     $(document).ready(function(){
         $(document).foundation();
-        $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});        
+
+        var dataExpense = [
+            <?php
+                foreach ($detailExpensesCategoryGraph as $category):
+            ?>
+                ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
+            <?php
+                endforeach;
+            ?>
+          ];
+          
+        var expenseCategoryGraph = jQuery.jqplot ('expenseCategory', [dataExpense], 
+          { 
+            seriesDefaults: {
+              // Make this a pie chart.
+              renderer: jQuery.jqplot.PieRenderer, 
+              rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+              }
+            }, 
+            legend: { show:true, location: 'e' }
+          }
+        );
     });
 </script>

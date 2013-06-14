@@ -116,6 +116,9 @@ class ExpensesController extends AppController{
         $dailyExpenses = $this->Transaction->query("SELECT SUM(amount) AS 'total', date FROM transactions WHERE MONTH(date) = " . $month . " AND YEAR(date) = " . $year . " AND type = 0 AND user_id = " .$this->Auth->user('id') . " GROUP BY date");
         $this->set('dailyExpenses', $dailyExpenses);
         
+        $dailyExpensesCategoryGraph = $this->Transaction->query("SELECT SUM(amount) AS 'total', date, categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE MONTH(date) = " . $month . " AND YEAR(date) = " . $year . " AND type = 0 AND transactions.user_id = " .$this->Auth->user('id') . " GROUP BY category_id");
+        $this->set('dailyExpensesCategoryGraph', $dailyExpensesCategoryGraph);
+        
         $this->set('expenses', $expenses);
         $this->set('title_for_layout', 'Pengeluaran Bulan ' . $month . ' ' . $year);
         
@@ -133,6 +136,10 @@ class ExpensesController extends AppController{
             )
         ));        
         $this->set('expenses', $expenses);
+        
+        $detailExpensesCategoryGraph = $this->Transaction->query("SELECT SUM(amount) AS 'total', date, categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE MONTH(date) = " . $month . " AND DAY(date) = " . $day . " AND type = 0 AND transactions.user_id = " .$this->Auth->user('id') . " GROUP BY category_id");
+        $this->set('detailExpensesCategoryGraph', $detailExpensesCategoryGraph);
+        
         $this->set('title_for_layout', 'Pengeluaran Tanggal '. $day .' ' . $month . ' ' . $year);
     }
     
@@ -141,6 +148,8 @@ class ExpensesController extends AppController{
             $expenses = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time' FROM transactions WHERE type = 0 AND user_id = " . $this->Auth->user('id') . " AND date >= DATE_SUB(CURRENT_DATE, INTERVAL " . $number . " MONTH) GROUP BY time ORDER BY date DESC ");
             $this->set('filteredExpenses', $expenses);
             $this->set('number', $number);
+            $expensesCategoryGraph = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time', categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE transactions.type = 0 AND transactions.user_id = " . $this->Auth->user('id') . " AND date >= DATE_SUB(CURRENT_DATE, INTERVAL ". $number ." MONTH) GROUP BY category_id ORDER BY date DESC");
+            $this->set('expensesCategoryGraph', $expensesCategoryGraph);
         }
     }
 }

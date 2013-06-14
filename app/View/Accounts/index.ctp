@@ -12,7 +12,7 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-purple">Akun</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <?php echo $this->Html->link('Tambah Data', array('controller' => 'accounts', 'action' => 'add'), array('class' => 'small success expand button'))?>
+            <?php echo $this->Html->link('Tambah Data', array('controller' => 'accounts', 'action' => 'add'), array('class' => 'small purple-button expand button'))?>
         </p>
     </div>
     <div class="large-9 columns">

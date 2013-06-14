@@ -12,7 +12,21 @@ class AccountsController extends AppController {
         $this->set('title_for_layout', "");
     }
     
-    public function add() {
+    public function noncash() {
+        if ($this->request->isPost()) {
+            $this->request->data['Account']['user_id'] = $this->Auth->user('id');
+            if ($this->Account->save($this->request->data)) {
+                $this->Session->setFlash("Data Akun Telah Tersimpan", 'flash_success');
+                $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
+            }
+            
+            $this->Session->setFlash("", 'fail');
+        }
+        
+        $this->set('title_for_layout', "Tambah Akun Baru");
+    }
+    
+    public function cash() {
         if ($this->request->isPost()) {
             $this->request->data['Account']['user_id'] = $this->Auth->user('id');
             if ($this->Account->save($this->request->data)) {
