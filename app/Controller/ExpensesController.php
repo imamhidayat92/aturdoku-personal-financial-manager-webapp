@@ -14,6 +14,7 @@ class ExpensesController extends AppController{
         
         $this->loadModel('Category');
         $this->loadModel('Transaction');        
+        $this->loadModel('Account');
         $this->loadModel('User');
         
         $this->paginate['limit'] = $this->itemPerPage;
@@ -48,6 +49,7 @@ class ExpensesController extends AppController{
     }
     
     public function add() {
+        $this->checkWhetherUserAccountIsExist();
         if ($this->request->isPost()) {
             $this->request->data['Transaction']['type'] = 0;
             $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
@@ -62,6 +64,7 @@ class ExpensesController extends AppController{
         }
         
         $this->set('title_for_layout', "Tambah Data Pengeluaran");
+        
         $categories = $this->Category->find('all', array(
            'conditions' => array(
                'User.id' => $this->Auth->user('id'),
@@ -69,6 +72,13 @@ class ExpensesController extends AppController{
            )
         ));
         $this->set('categories', $categories);
+        
+        $accounts = $this->Account->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
+            )
+        ));
+        $this->set('accounts', $accounts);
     }
     
     public function edit($expense_id) {
@@ -96,6 +106,13 @@ class ExpensesController extends AppController{
            )
         ));
         $this->set('categories', $categories);
+        
+        $accounts = $this->Account->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
+            )
+        ));
+        $this->set('accounts', $accounts);
     }
     
     public function delete($expense_id) {

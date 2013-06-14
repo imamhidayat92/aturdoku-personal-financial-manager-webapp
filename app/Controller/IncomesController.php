@@ -28,6 +28,7 @@ class IncomesController extends AppController {
     }
     
     public function add() {
+        $this->checkWhetherUserAccountIsExist();
         if($this->request->isPost()){
             $this->request->data['Transaction']['type'] = 1;
             $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');

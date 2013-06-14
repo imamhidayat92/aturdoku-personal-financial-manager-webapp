@@ -110,7 +110,13 @@
         <div class="row">
             <div class="large-8 columns">
                 <div id="expenseCategory"></div>
-            </div>            
+            </div>
+            <div class="large-4 columns">
+                <?php foreach ($expenseCategory as $category): ?>
+                <p style="margin: 0; padding: 0;"><strong><?php echo $category['categories']['category']?></strong></p>
+                <p align="right"><?php echo $this->Aturdoku->currencyFormat($category[0]['total'])?></p>
+                <?php endforeach; ?>
+            </div>
         </div>        
     </div>
     <div class="separator"></div>
@@ -180,7 +186,13 @@
         <div class="row">
             <div class="large-8 columns">
                 <div id="incomeCategory"></div>
-            </div>             
+            </div>
+            <div class="large-4 columns">
+                <?php foreach ($incomeCategory as $category): ?>
+                <p style="margin: 0; padding: 0;"><strong><?php echo $category['categories']['category']?></strong></p>
+                <p align="right"><?php echo $this->Aturdoku->currencyFormat($category[0]['total'])?></p>
+                <?php endforeach; ?>
+            </div>
         </div>
         <a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Pendapatan Selengkapnya</a>
     </div>

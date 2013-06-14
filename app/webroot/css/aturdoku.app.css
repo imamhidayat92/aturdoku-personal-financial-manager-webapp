@@ -126,3 +126,47 @@ a.purple-button:hover{
 ul.breadcrumbs li a {
     color: #000000;
 }
+
+ul.aturdoku-top-nav {
+    margin: 0; padding: 0;
+}
+
+ul.aturdoku-top-nav li {
+    list-style-type: none;
+    float: left;
+}
+
+ul.aturdoku-top-nav li a {
+    text-align: center;
+    padding: 0px 20px 0 20px;
+    margin: 0 2px 0 0;
+    color: #000000;
+    height: 115px;
+    line-height: 115px;
+    display: block;
+    font-family: 'Yanone Kaffeesatz', Arial;
+    font-size: 1.6em;
+    border-left: solid 1px #ebebeb;
+    border-right: solid 1px #ebebeb;
+    border-bottom: solid 4px #ebebeb;
+}
+
+ul.aturdoku-top-nav li a.red {
+    border-bottom: solid 4px #ff0000;
+}
+
+ul.aturdoku-top-nav li a.purple {
+    border-bottom: solid 4px #9e1be0;
+}
+
+ul.aturdoku-top-nav li a.green {
+    border-bottom: solid 4px green;
+}
+
+ul.aturdoku-top-nav li a.orange {
+    border-bottom: solid 4px #ffd013;
+}
+
+ul.aturdoku-top-nav li a:hover {
+    color: grey;
+}

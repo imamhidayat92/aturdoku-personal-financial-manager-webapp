@@ -44,15 +44,19 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend>Waktu & Tempat</legend>
+            <legend>Waktu & Sumber Dana</legend>
             <div class="row">
                 <div class="large-4 columns">
-                    <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" readonly/>
+                    <label>Tanggal</label>
+                    <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" value="<?php echo date('Y-m-d') ?>" readonly/>
                 </div>
                 <div class="large-8 columns">
-                    <label>Tempat (<a href="#">Lacak dengan Google Maps</a>)</label>
-                    <input type="text" name="data[Transaction][place]"/>
+                    <label>Sumber Dana</label>
+                    <select name="data[Transaction][account_id]">
+                        <?php foreach ($accounts as $account): ?>
+                        <option value="<?php echo $account['Account']['id']?>"><?php echo $account['Account']['name']?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
         </fieldset>

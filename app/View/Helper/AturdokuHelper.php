@@ -89,7 +89,10 @@ class AturdokuHelper extends AppHelper {
             return '<span style="color: red;">' . $this->Number->currency($number, "Rp. ", array('decimals' => ',', 'thousands' => '.')) . '</span>';
         }
         else {
-            return $this->Number->currency($number, "Rp. ", array('decimals' => ',', 'thousands' => '.'));
+            $price = $this->Number->currency($number, "Rp. ", array('decimals' => ',', 'thousands' => '.'));
+            return $price;
+            /*$str = explode(" ", (string) $price);
+            return '<div style="float: left;">' . $str[0] . '</div><div style="float: right;">' . $str[1] . '</div>';*/
         }        
     }
     

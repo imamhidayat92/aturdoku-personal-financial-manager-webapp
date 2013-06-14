@@ -1,3 +1,4 @@
+<?php echo $this->Element('top_header') ?>
 <div class="row">
     <div class="large-4 columns large-offset-2">
         <?php echo $this->Form->create('User', array('id' => 'formID')); ?>
@@ -14,6 +15,7 @@
     <div class="large-4 columns">
         <h1 class="special-font" style="line-height: 1; font-size: 3em;"><span style="color: blue;">Aturdoku</span> membantu mengelola keuangan pribadi Anda.</h1>
         <p>Mulai gunakan aplikasi Aturdoku dengan mendaftarkan diri Anda di halaman ini.</p>
+        <p>Sudah terdaftar? <a href="<?php echo Router::url(array('controller' => 'users', 'action' => 'login' )) ?>" class="tiny button secondary">Login</a></p>
     </div>
     <div class="large-2 columns">
         
@@ -21,7 +23,7 @@
 </div>
 <script>
     $(function(){
-            // binds form submission and fields to the validation engine
+        // binds form submission and fields to the validation engine
         $('#formID').validationEngine();
     });
 </script>
