@@ -1,7 +1,15 @@
 <?php    
-    $totalExpense = 0;
+    $totalExpense = 0;    
     $maxExpense = 0;
     $averageExpense = array(
+        'Transaction' => array(
+            'amount' => 0
+        )
+    );
+    
+    $totalIncome = 0;
+    $maxIncome = 0;
+    $averageIncome = array(
         'Transaction' => array(
             'amount' => 0
         )
@@ -33,7 +41,7 @@
         <a href="<?php echo Router::url(array('controller' => 'expenseplans', 'action' => 'index')) ?>" class="small alert expand button">Atur Rencana</a>
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Fluktuasi Pengeluaran Minggu Ini</h2>
+        <h2 class="special-font underline">Fluktuasi Pengeluaran</h2>
         <?php echo $this->Aturdoku->printDateProgress(); ?>
         
     <?php if (count($expenses) > 0): ?>
@@ -106,6 +114,7 @@
     <?php else: ?>
         <h2 style="color: #cccccc; text-align: center; line-height: 1; margin: 100px 0 100px 0;">Anda belum menyimpan data pengeluaran apapun.</h2>
     <?php endif; ?>
+        
         <h2 class="special-font underline">Pengeluaran Berdasarkan Kategori</h2>
         <div class="row">
             <div class="large-8 columns">
@@ -134,7 +143,7 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
-        <?php if($totalIncomes - $totalExpenses < 0):?>
+        <?php if ($totalIncomes - $totalExpenses < 0):?>
         <div class="row">
             <div class="large-8 large-offset-2 columns">
                 <div class="row" style="background-color: red;">
@@ -147,9 +156,40 @@
                     </div>                    
                 </div>
             </div>
-        </div>
+        </div>       
         <?php endif; ?>
+        
+        <?php if (count($incomes) > 0): ?>
+        
+        <?php        
+            $numberOfIncome = 0;
+            foreach ($incomes as $income) {
+                $totalIncome += $income['Transaction']['amount']; 
+                
+                if ($maxIncome['Transaction']['amount'] < $income['Transaction']['amount']) {
+                    $maxIncome = $income;
+                }
+                
+                $numberOfIncome++;
+            }
+            
+            //$averageExpense = $totalExpense / $numberOfExpense;
+        ?>
+        
+        <script>
+            incomePlotLoaded = true;
+        </script>
+        
+        
+        
+        <?php if (count($dailyIncomes) > 1): ?>
         <div id="income"></div>
+        <?php else: ?>
+        <h5 align="center" style="margin-top: 50px;">Data pendapatan Anda saat ini belum dapat divisualisasikan.</h5>
+        <?php endif; ?>
+        <p>&nbsp;</p>
+        
+<!--        <div id="income"></div>-->
         <h3 class="subheader">Isi kas Anda: <?php echo $this->Aturdoku->currencyFormat($totalIncomes - $totalExpenses); ?></h3>
         <h2 class="special-font underline">Data Pendapatan Terkini</h2>
         
@@ -182,6 +222,11 @@
              <?php } ?>
             </tbody>
         </table>
+        
+        <?php else: ?>
+            <h2 style="color: #cccccc; text-align: center; line-height: 1; margin: 100px 0 100px 0;">Anda belum menyimpan data pendapatan apapun.</h2>
+        <?php endif; ?>
+        
         <h2 class="special-font underline">Pendapatan Berdasarkan Kategori</h2>
         <div class="row">
             <div class="large-8 columns">
@@ -201,42 +246,94 @@
     
     <!-- Akun -->
     <div class="large-3 columns">
-        <h2 class="aturdoku-nav-head aturdoku-bg-purple" id="account">Akun</h2>
+        <h2 class="aturdoku-nav-head aturdoku-bg-purple" id="account">AKUN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <a href="#" data-reveal-id="myModal" class="small expand button purple-button">Tambah Data Akun</a>        
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Data Akun</h2>
+        <h2 class="special-font underline">Data Akun Tunai</h2>
         
         <table>
-        <thead>
-            <tr>
-                <th width="40">No.</th>
-                    <th width="150">Nama Bank</th>
-                    <th width="270">Atas Nama</th>
-                    <th width="150">Saldo</th>
+            <thead>
+                <tr>
+                    <th width="40">No.</th>                        
+                    <th width="300">Atas Nama</th>
+                    <th width="250">Saldo</th>
                     <th width="130">Action</th>
-            </tr>
-        </thead>
+                </tr>
+            </thead>
             <tbody>
                 <?php $nomor = 0; foreach ($accounts as $account) { ?>
                 <tr>
+                    <?php if ($account['Account']['bank_name'] == null) {?>
                     <?php $nomor++; ?>
-                    <td><?php echo $nomor; ?></td>
-                    <td><?php echo $account['Account']['bank_name']?></td>
+                    <td><?php echo $nomor; ?></td>                    
                     <td><?php echo $account['Account']['name']?></td>
-                    <td><?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'])?></td>
+                    <td>
+                        <?php 
+                            $index = 0;
+                            foreach($accountExpenses as $accountExpense) {
+                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) break;
+                                $index++;
+                            }
+                        ?>
+                        <?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'] - $accountExpenses[$index][0]['total'] + $accountIncomes[$index][0]['total'] )?>
+                    </td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
                             <?php echo $this->Html->link('Ubah', array('controller' => 'accounts','action' => 'edit', $account['Account']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
                             <?php echo $this->Html->link('Hapus', array('controller' => 'account','action' => 'delete', $account['Account']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
                         </p>
                     </td>
-                    
+                    <?php } ?>
                 </tr>
              <?php } ?>
             </tbody>
-        </table>  
+        </table>
+        
+        <h2 class="special-font underline">Data Akun Non-Tunai</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th width="40">No.</th>
+                        <th width="150">Nama Bank</th>
+                        <th width="270">Atas Nama</th>
+                        <th width="150">Saldo</th>
+                        <th width="130">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $nomor = 0; foreach ($accounts as $account) { ?>
+                
+                    <?php if ($account['Account']['bank_name'] != null) {?>
+                    <?php $nomor++; ?>
+                <tr>
+                    <td><?php echo $nomor; ?></td>
+                    <td><?php echo $account['Account']['bank_name']?></td>
+                    <td><?php echo $account['Account']['name']?></td>
+                    <td>
+                        <?php 
+                            $index = 0;
+                            foreach($accountExpenses as $accountExpense) {
+                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) break;
+                                $index++;
+                            }
+                        ?>
+                        <?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'] - $accountExpenses[$index][0]['total'] + $accountIncomes[$index][0]['total'] )?>
+                    </td>
+                    <td>
+                        <p align="center" style="margin: 0; padding: 0;">
+                            <?php echo $this->Html->link('Ubah', array('controller' => 'accounts','action' => 'edit', $account['Account']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Hapus', array('controller' => 'account','action' => 'delete', $account['Account']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
+                    </td>
+                </tr>
+                    <?php } ?>
+                
+             <?php } ?>
+            </tbody>
+        </table>
         
         <a href="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Akun Lengkap</a>
     </div>
@@ -247,8 +344,8 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-orange" id="asset">ASET</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
-            <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small expand button'))?>
-            <?php echo $this->Html->link('Export Data Aset', array('controller' => 'assets', 'action' => 'outputtopdf'), array('class' => 'secondary small expand button'))?>
+            <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small orange-button expand button'))?>
+            <?php echo $this->Html->link('Export Data Aset', array('controller' => 'assets', 'action' => 'outputtopdf'), array('class' => 'orange-button small expand button'))?>
         </p>
     </div>
     <div class="large-9 columns">
@@ -351,44 +448,45 @@
             });    
         }
         
-        
-        var barValue = [
-            <?php 
-                foreach ($monthlyIncomes as $income):
-                    echo $income[0]['total']." ,";
-                endforeach;
-            ?>
-        ];
-        var barInfo = [
-            <?php 
-                foreach ($monthlyIncomes as $income):
-                    echo "'".$this->Aturdoku->printBarGraphDateInfo($income[0]['time'])."',";
-                endforeach;
-            ?>
-        ];
-        
-        var monthlyIncomeGraph = $.jqplot('income', [barValue], {
-            // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
-            animate: !$.jqplot.use_excanvas,
-            seriesDefaults:{
-                renderer:$.jqplot.BarRenderer,
-                pointLabels: { show: false },
-                color: '#008000'
-            },
-            axes: {
-                xaxis: {
-                    renderer: $.jqplot.CategoryAxisRenderer,
-                    ticks: barInfo
+        if (incomePlotLoaded) {
+            var barValue = [
+                <?php 
+                    foreach ($monthlyIncomes as $income):
+                        echo $income[0]['total']." ,";
+                    endforeach;
+                ?>
+            ];
+            var barInfo = [
+                <?php 
+                    foreach ($monthlyIncomes as $income):
+                        echo "'".$this->Aturdoku->printBarGraphDateInfo($income[0]['time'])."',";
+                    endforeach;
+                ?>
+            ];
+
+            var monthlyIncomeGraph = $.jqplot('income', [barValue], {
+                // Only animate if we're not using excanvas (not in IE 7 or IE 8)..
+                animate: !$.jqplot.use_excanvas,
+                seriesDefaults:{
+                    renderer:$.jqplot.BarRenderer,
+                    pointLabels: { show: false },
+                    color: '#008000'
+                },
+                axes: {
+                    xaxis: {
+                        renderer: $.jqplot.CategoryAxisRenderer,
+                        ticks: barInfo
+                    }
+                },
+                highlighter: { show: false },
+                grid: {
+                    drawGridLines:true,
+                    gridLineColor: "#ebebeb",
+                    background: "#ffffff",
+                    renderer: $.jqplot.CanvasGridRenderer
                 }
-            },
-            highlighter: { show: false },
-            grid: {
-                drawGridLines:true,
-                gridLineColor: "#ebebeb",
-                background: "#ffffff",
-                renderer: $.jqplot.CanvasGridRenderer
-            }
-        });       
+            });
+        }
             
         var dataExpense = [
             <?php
