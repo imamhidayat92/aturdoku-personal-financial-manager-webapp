@@ -38,14 +38,30 @@
                         <option value="<?php echo $category['Category']['id']?>"<?php if ($category['Category']['id'] == $income['Transaction']['category_id']) echo " selected" ?>><?php echo $category['Category']['name']?></option>
                         <?php endforeach;?>
                     </select>
-                    <p class="clear10px">  </p>
-                  <label>Tanggal (<em>Optional</em>)</label>
-                  <input type="text" class="validate[required] text-input" name="data[Transaction][date]" id="datepicker" value="<?php echo $income['Transaction']['date']?>" readonly />
+                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand aturdoku-button">Atur Kategori</a>
+                    <p class="clear10px"></p>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
                     <!-- ini harus di benerin -->
-                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 30px; display: block;"><?php echo $income['Transaction']['description']?></textarea>
+                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 145px; display: block;"><?php echo $income['Transaction']['description']?></textarea>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Waktu & Penyimpanan Pendapatan</legend>
+            <div class="row">
+                <div class="large-4 columns">
+                    <label>Tanggal (<em>Optional</em>)</label>
+                    <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo $income['Transaction']['date'] ?>" readonly/>
+                </div>
+                <div class="large-8 columns">
+                    <label>Penyimpanan</label>
+                    <select name="data[Transaction][account_id]">
+                        <?php foreach ($accounts as $account): ?>
+                        <option value="<?php echo $account['Account']['id']?>"<?php if ($account['Account']['id'] == $income['Transaction']['account_id']) echo " selected" ?>><?php echo $account['Account']['name']?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
         </fieldset>

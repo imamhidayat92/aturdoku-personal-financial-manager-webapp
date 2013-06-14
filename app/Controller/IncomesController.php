@@ -12,6 +12,8 @@ class IncomesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
+        
+        $this->loadModel('Account');
         $this->loadModel('Transaction');
         $this->loadModel('Category');
         $this->loadModel('User');
@@ -52,6 +54,13 @@ class IncomesController extends AppController {
            )
         ));
         $this->set('categories', $categories);
+        
+        $accounts = $this->Account->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
+            )
+        ));
+        $this->set('accounts', $accounts);
     }
     
     public function edit($income_id) {
@@ -79,6 +88,13 @@ class IncomesController extends AppController {
            )
         ));
         $this->set('categories', $categories);
+        
+        $accounts = $this->Account->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
+            )
+        ));
+        $this->set('accounts', $accounts);
     }
     
     public function delete($income_id) {

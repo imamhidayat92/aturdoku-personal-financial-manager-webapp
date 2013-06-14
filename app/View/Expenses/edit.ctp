@@ -38,6 +38,7 @@
                         <option value="<?php echo $category['Category']['id']?>"<?php if ($category['Category']['id'] == $expense['Transaction']['category_id']) echo " selected" ?>><?php echo $category['Category']['name']?></option>
                         <?php endforeach; ?>
                     </select>
+                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small button secondary expand">Atur Kategori</a>
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
@@ -56,7 +57,7 @@
                     <label>Sumber Dana</label>
                     <select name="data[Transaction][account_id]">
                         <?php foreach ($accounts as $account): ?>
-                        <option value="<?php echo $account['Account']['id']?>"><?php echo $account['Account']['name']?></option>
+                        <option value="<?php echo $account['Account']['id']?>"<?php if ($account['Account']['id'] == $expense['Transaction']['account_id']) echo " selected" ?>><?php echo $account['Account']['name']?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

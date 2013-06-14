@@ -35,14 +35,29 @@
                         <option value="<?php echo $category['Category']['id']?>"><?php echo $category['Category']['name']?></option>
                         <?php endforeach;?>
                     </select>
-                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand">Atur Kategori</a>
-                    <p class="clear10px">  </p>
-                  <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
+                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand aturdoku-button">Atur Kategori</a>
+                    <p class="clear10px">  </p>                  
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>
-                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 30px; display: block; height: 200px;"></textarea>
+                    <textarea class="validate[required] text-input" name="data[Transaction][description]" style="display: block; height: 145px;"></textarea>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Waktu & Penyimpanan Pendapatan</legend>
+            <div class="row">
+                <div class="large-4 columns">
+                    <label>Tanggal (<em>Optional</em>)</label>
+                    <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
+                </div>
+                <div class="large-8 columns">
+                    <label>Penyimpanan</label>
+                    <select name="data[Transaction][account_id]">
+                        <?php foreach ($accounts as $account): ?>
+                        <option value="<?php echo $account['Account']['id']?>"><?php echo $account['Account']['name']?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
         </fieldset>
