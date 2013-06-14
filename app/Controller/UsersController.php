@@ -74,6 +74,15 @@ class UsersController extends AppController {
         ),
     );
     
+    private $defaultAccounts = array(
+        0 => array(
+            'Account' => array(
+                'name' => 'Dompet',
+                'saldo' => 0
+            )
+        )
+    );
+    
 /**
  * add method
  *
@@ -87,6 +96,7 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             $this->User->create();
             $this->request->data['User']['is_active'] = true;
+            $this->request->data['User']['first_time'] = true;
             if ($this->User->save($this->request->data)) {
                 $newId = $this->User->getInsertID();
 
@@ -103,6 +113,15 @@ class UsersController extends AppController {
                     $this->Category->create();
                     $category['Category']['user_id'] = $newId;
                     $this->Category->save($category);
+                }
+                
+                // Generate initial account.
+                $this->loadModel('Account');
+                
+                foreach ($this->defaultAccounts as $account) {
+                    $this->Account->create();
+                    $account['Account']['last_update'] = date('Y-m-d');
+                    $this->Account->save($account);
                 }
 
                 $this->Session->setFlash('Registrasi berhasil. Silakan masuk dengan menggunakan username dan password Anda.', 'flash_success');

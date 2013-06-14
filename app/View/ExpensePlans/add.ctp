@@ -44,7 +44,7 @@
                         <?php 
                         $i = 1;
                         foreach ($this->Aturdoku->months as $month): ?>
-                        <option value="<?php echo $i?>"><?php echo $month?></option>
+                        <option value="<?php echo $i?>"<?php if (date('m') == $i) echo " selected" ?>><?php echo $month?></option>
                         <?php 
                             $i++;
                         endforeach; ?>

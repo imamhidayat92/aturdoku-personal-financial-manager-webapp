@@ -12,6 +12,9 @@ class ExpensePlansController extends AppController {
         
         $plans = $this->paginate('ExpensePlan');
         $this->set('plans', $plans);
+        
+        $this->loadModel('Category');
+        
     }
     
     public function add() {
