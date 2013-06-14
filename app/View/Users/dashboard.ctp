@@ -190,7 +190,7 @@
         <p>&nbsp;</p>
         
 <!--        <div id="income"></div>-->
-        <h3 class="subheader">Isi kas Anda: <?php echo $this->Aturdoku->currencyFormat($totalIncomes - $totalExpenses); ?></h3>
+        <h3 class="subheader">Isi kas Anda: <?php echo $this->Aturdoku->currencyFormat($totalBalance + $totalIncomes - $totalExpenses); ?></h3>
         <h2 class="special-font underline">Data Pendapatan Terkini</h2>
         
         <table>
@@ -271,13 +271,33 @@
                     <td><?php echo $account['Account']['name']?></td>
                     <td>
                         <?php 
-                            $index = 0;
+                            $accountExpenseIndex = 0;
+                            $accountExpenseFound = false;
+                            
                             foreach($accountExpenses as $accountExpense) {
-                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) break;
-                                $index++;
+                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountExpenseFound = true;
+                                    break;
+                                }
+                                $accountExpenseIndex++;
                             }
+                            
+                            $accountIncomeIndex = 0;
+                            $accountIncomeFound = false;
+                            
+                            foreach ($accountIncomes as $accountIncome) {
+                                if ($accountIncome['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountIncomeFound = true;
+                                    break;
+                                }
+                                $accountIncomeIndex++;
+                            }
+                            
+                            $totalBalance = $account['Account']['balance'];
+                            if ($accountExpenseFound) $totalBalance -= $accountExpenses[$accountExpenseIndex][0]['total'];
+                            if ($accountIncomeFound) $totalBalance += $accountIncomes[$accountIncomeIndex][0]['total'];                            
                         ?>
-                        <?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'] - $accountExpenses[$index][0]['total'] + $accountIncomes[$index][0]['total'] )?>
+                        <?php echo $this->Aturdoku->currencyFormat($totalBalance)?>
                     </td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
@@ -314,13 +334,33 @@
                     <td><?php echo $account['Account']['name']?></td>
                     <td>
                         <?php 
-                            $index = 0;
+                            $accountExpenseIndex = 0;
+                            $accountExpenseFound = false;
+                            
                             foreach($accountExpenses as $accountExpense) {
-                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) break;
-                                $index++;
+                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountExpenseFound = true;
+                                    break;
+                                }
+                                $accountExpenseIndex++;
                             }
+                            
+                            $accountIncomeIndex = 0;
+                            $accountIncomeFound = false;
+                            
+                            foreach ($accountIncomes as $accountIncome) {
+                                if ($accountIncome['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountIncomeFound = true;
+                                    break;
+                                }
+                                $accountIncomeIndex++;
+                            }
+                            
+                            $totalBalance = $account['Account']['balance'];
+                            if ($accountExpenseFound) $totalBalance -= $accountExpenses[$accountExpenseIndex][0]['total'];
+                            if ($accountIncomeFound) $totalBalance += $accountIncomes[$accountIncomeIndex][0]['total'];                            
                         ?>
-                        <?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'] - $accountExpenses[$index][0]['total'] + $accountIncomes[$index][0]['total'] )?>
+                        <?php echo $this->Aturdoku->currencyFormat($totalBalance)?>
                     </td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
