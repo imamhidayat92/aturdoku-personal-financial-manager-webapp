@@ -9,7 +9,15 @@ class AccountsController extends AppController {
         ));
         $this->set('accounts', $accounts);
         
-        $this->set('title_for_layout', "");
+        $this->loadModel('Transaction');
+        
+        $accountExpenses = $this->Transaction->query("SELECT SUM(amount) AS 'total', account_id FROM transactions WHERE type = 0 AND transactions.user_id = " . $this->Auth->user('id') . " GROUP BY account_id ORDER BY account_id ASC");
+        $this->set('accountExpenses', $accountExpenses);
+        
+        $accountIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total', account_id FROM transactions WHERE type = 1 AND transactions.user_id = " . $this->Auth->user('id') . " GROUP BY account_id ORDER BY account_id ASC");
+        $this->set('accountIncomes', $accountIncomes);
+        
+        $this->set('title_for_layout', "Daftar Akun");
     }
     
     public function noncash() {

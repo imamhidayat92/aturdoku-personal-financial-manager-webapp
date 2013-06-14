@@ -34,7 +34,36 @@
                     <?php $nomor++; ?>
                     <td><?php echo $nomor; ?></td>                    
                     <td><?php echo $account['Account']['name']?></td>
-                    <td><?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'])?></td>
+                    <td>
+                        <?php 
+                            $accountExpenseIndex = 0;
+                            $accountExpenseFound = false;
+                            
+                            foreach($accountExpenses as $accountExpense) {
+                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountExpenseFound = true;
+                                    break;
+                                }
+                                $accountExpenseIndex++;
+                            }
+                            
+                            $accountIncomeIndex = 0;
+                            $accountIncomeFound = false;
+                            
+                            foreach ($accountIncomes as $accountIncome) {
+                                if ($accountIncome['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountIncomeFound = true;
+                                    break;
+                                }
+                                $accountIncomeIndex++;
+                            }
+                            
+                            $totalBalance = $account['Account']['balance'];
+                            if ($accountExpenseFound) $totalBalance -= $accountExpenses[$accountExpenseIndex][0]['total'];
+                            if ($accountIncomeFound) $totalBalance += $accountIncomes[$accountIncomeIndex][0]['total'];                            
+                        ?>
+                        <?php echo $this->Aturdoku->currencyFormat($totalBalance)?>
+                    </td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
                             <?php echo $this->Html->link('Ubah', array('controller' => 'accounts','action' => 'edit', $account['Account']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
@@ -69,7 +98,36 @@
                     <td><?php echo $nomor; ?></td>
                     <td><?php echo $account['Account']['bank_name']?></td>
                     <td><?php echo $account['Account']['name']?></td>
-                    <td><?php echo $this->Aturdoku->currencyFormat($account['Account']['balance'])?></td>
+                    <td>
+                        <?php 
+                            $accountExpenseIndex = 0;
+                            $accountExpenseFound = false;
+                            
+                            foreach($accountExpenses as $accountExpense) {
+                                if ($accountExpense['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountExpenseFound = true;
+                                    break;
+                                }
+                                $accountExpenseIndex++;
+                            }
+                            
+                            $accountIncomeIndex = 0;
+                            $accountIncomeFound = false;
+                            
+                            foreach ($accountIncomes as $accountIncome) {
+                                if ($accountIncome['transactions']['account_id'] == $account['Account']['id']) {
+                                    $accountIncomeFound = true;
+                                    break;
+                                }
+                                $accountIncomeIndex++;
+                            }
+                            
+                            $totalBalance = $account['Account']['balance'];
+                            if ($accountExpenseFound) $totalBalance -= $accountExpenses[$accountExpenseIndex][0]['total'];
+                            if ($accountIncomeFound) $totalBalance += $accountIncomes[$accountIncomeIndex][0]['total'];                            
+                        ?>
+                        <?php echo $this->Aturdoku->currencyFormat($totalBalance)?>
+                    </td>
                     <td>
                         <p align="center" style="margin: 0; padding: 0;">
                             <?php echo $this->Html->link('Ubah', array('controller' => 'accounts','action' => 'edit', $account['Account']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>

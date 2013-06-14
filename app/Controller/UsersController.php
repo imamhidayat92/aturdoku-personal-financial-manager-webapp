@@ -279,5 +279,8 @@ class UsersController extends AppController {
         
         $accountIncomes = $this->Transaction->query("SELECT SUM(amount) AS 'total', account_id FROM transactions WHERE type = 1 AND transactions.user_id = " . $this->Auth->user('id') . " GROUP BY account_id ORDER BY account_id ASC");
         $this->set('accountIncomes', $accountIncomes);
+        
+        $totalBalance = $this->Transaction->query("SELECT SUM(balance) AS 'total' FROM accounts WHERE user_id = " . $this->Auth->user('id'));
+        $this->set('totalBalance', $totalBalance[0][0]['total']);
     }
 }
