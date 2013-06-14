@@ -143,7 +143,7 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Ringkasan Singkat</h2>
-        <?php if ($totalIncomes - $totalExpenses < 0):?>
+        <?php if ($totalBalance + $totalIncomes - $totalExpenses < 0):?>
         <div class="row">
             <div class="large-8 large-offset-2 columns">
                 <div class="row" style="background-color: red;">

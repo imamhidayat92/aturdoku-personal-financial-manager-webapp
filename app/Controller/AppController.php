@@ -52,16 +52,16 @@ class AppController extends Controller {
     
     public function checkWhetherUserAccountIsExist() {
         $this->loadModel('Account');
-        $numberOfAccount = $this->Account->find('count', array(
-            'conditons' => array(
-                'user_id' => $this->Auth->user('id')
+        $numberOfAccount = $this->Account->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
             )
         ));
         
-        if ($numberOfAccount == 0) {
+        if (count($numberOfAccount) == 0) {
             $this->Session->setFlash("Anda harus menambahkan akun terlebih dahulu.", 'flash_fail');
             $this->redirect(array('controller' => 'users', 'action' => 'dashboard'));
-        }       
+        }
     }
     
     public function isAdministrator() {
