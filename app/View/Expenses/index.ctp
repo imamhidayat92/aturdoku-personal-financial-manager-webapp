@@ -14,6 +14,10 @@
         <p>
             <?php echo $this->Html->link('Tambah Data', array('controller' => 'expenses', 'action' => 'add'), array('class' => 'small alert expand button aturdoku-button'))?>
         </p>
+        <h3 class="aturdoku-nav-subhead">Laporan 3 Bulan Terakhir</h3>
+        <p>
+            <?php echo $this->Html->link('Lihat Laporan', array('controller' => 'expenses', 'action' => 'filter', 'month', '3'), array('class' => 'small success expand button aturdoku-button'))?>
+        </p>
         <h3 class="aturdoku-nav-subhead">Laporan 6 Bulan Terakhir</h3>
         <p>
             <?php echo $this->Html->link('Lihat Laporan', array('controller' => 'expenses', 'action' => 'filter', 'month', '6'), array('class' => 'small success expand button aturdoku-button'))?>

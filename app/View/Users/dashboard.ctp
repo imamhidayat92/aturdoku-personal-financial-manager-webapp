@@ -248,7 +248,8 @@
     <div class="large-3 columns">
         <h2 class="aturdoku-nav-head aturdoku-bg-purple" id="account">AKUN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
-        <a href="#" data-reveal-id="myModal" class="small expand button purple-button">Tambah Data Akun</a>        
+        <a href="#" data-reveal-id="addAccountModal" class="small expand button purple-button">Tambah Data Akun</a>
+        <a href="#" data-reveal-id="transferAccountModal" class="small expand button purple-button">Transfer Dana</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Data Akun Tunai</h2>
@@ -385,7 +386,7 @@
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <p>
             <?php echo $this->Html->link('Tambah Data Aset', array('controller' => 'assets', 'action' => 'add'), array('class' => 'small orange-button expand button'))?>
-            <?php echo $this->Html->link('Export Data Aset', array('controller' => 'assets', 'action' => 'outputtopdf'), array('class' => 'orange-button small expand button'))?>
+            <?php echo $this->Html->link('Export Data Aset', array('controller' => 'assets', 'action' => 'outputtopdf'), array('class' => 'secondary small expand button'))?>
         </p>
     </div>
     <div class="large-9 columns">
@@ -434,7 +435,7 @@
     echo $this->Html->script("plugins/jqplot.dateAxisRenderer.min");
     
     echo $this->Html->script('foundation/foundation');
-    echo $this->Html->script('foundation/foundation.reveal');
+    echo $this->Html->script('foundation/foundation.reveal');    
 ?>
 
 <script>
@@ -637,7 +638,7 @@
     endif;
 ?>
 
-<div id="myModal" class="reveal-modal">
+<div id="addAccountModal" class="reveal-modal">
     <div class="row">        
         <div class="large-12 columns">
             <h1 class="special-font">Tambah Akun</h1>
@@ -648,6 +649,49 @@
               <li><a href="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'cash')) ?>" class="button">Tunai</a></li>
               <li><a href="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'noncash')) ?>" class="secondary button">Non-Tunai</a></li>              
             </ul>
+        </div>        
+    </div>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="transferAccountModal" class="reveal-modal">
+    <div class="row">        
+        <div class="large-10 large-centered columns">
+            <h1 class="special-font">Tambah Data Transfer</h1>
+            <p>
+                Isi formulir di bawah ini untuk menambahkan data transfer Anda.
+            </p>
+            <form class="custom">
+                <fieldset>
+                    <legend>Data Akun</legend>
+                    <div class="large-5 column">                        
+                        <label>Akun Sumber</label>
+                        <select class="medium">
+                            <?php foreach ($accounts as $account) { 
+                                if ($account['Account']['bank_name'] == null){
+                            ?>                                
+                                <option value="<?php echo $account['Account']['id'] ?>"><?php echo $account['Account']['name']?></option>
+                            <?php } else {  ?>
+                                <option value="<?php echo $account['Account']['id'] ?>"><?php echo $account['Account']['bank_name']." - ".$account['Account']['name']?></option>
+                            <?php }                            
+                            } ?>                                                        
+                        </select>                                                                                          
+                    </div>
+                    <div class="large-5 offset-2 columns">
+                        <label>Akun Tujuan</label>
+                        <select class="large">
+                            <?php foreach ($accounts as $account) { 
+                                if ($account['Account']['bank_name'] == null){
+                            ?>                                
+                                <option value="<?php echo $account['Account']['id'] ?>"><?php echo $account['Account']['name']?></option>
+                            <?php } else {  ?>
+                                <option value="<?php echo $account['Account']['id'] ?>"><?php echo $account['Account']['bank_name']." - ".$account['Account']['name']?></option>
+                            <?php }                            
+                            } ?>
+                        </select>
+                    </div>                    
+                </fieldset>
+            </form>
         </div>        
     </div>
     <a class="close-reveal-modal">&#215;</a>
