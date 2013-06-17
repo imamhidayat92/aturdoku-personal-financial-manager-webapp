@@ -28,7 +28,7 @@ class AccountsController extends AppController {
                 $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
             }
             
-            $this->Session->setFlash("", 'fail');
+            $this->Session->setFlash("", 'flash_fail');
         }
         
         $this->set('title_for_layout', "Tambah Akun Baru");
@@ -81,6 +81,31 @@ class AccountsController extends AppController {
     
     public function delete($id) {
         
+    }
+    
+    public function transfer() {        
+        if ($this->request->isPost()) {
+            $sourceAccount = $this->Account->findByid($this->request->data['Account']['sourceId']);
+            $destinationAccount = $this->Account->findByid($this->request->data['Account']['destinationId']);
+            
+            $sourceAccount['Account']['balance'] -= $this->request->data['Account']['amount'];
+            $destinationAccount['Account']['balance'] += $this->request->data['Account']['amount'];
+            
+            if ($this->Account->save($sourceAccount) && $this->Account->save($destinationAccount)) {
+                $this->Session->setFlash("", 'flash_success');
+                $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
+            }
+            else {
+                $this->Session->setFlash("", 'flash_fail');
+            }
+        }
+        
+        $accounts = $this->Account->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id')
+            )
+        ));
+        $this->set('accounts', $accounts);
     }
 }
 ?>

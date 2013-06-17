@@ -121,6 +121,7 @@ class UsersController extends AppController {
                 foreach ($this->defaultAccounts as $account) {
                     $this->Account->create();
                     $account['Account']['last_update'] = date('Y-m-d');
+                    $account['Account']['user_id'] = $newId;
                     $this->Account->save($account);
                 }
 
