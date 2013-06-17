@@ -4,8 +4,7 @@ class Bill extends AppModel {
     public $name = 'Bill';
     
     public $belongsTo = array(
-        'User',
-        'Account'
+        'User',        
     );
     
     public $hasOne = array(

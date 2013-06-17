@@ -15,6 +15,7 @@ class UsersController extends AppController {
         $this->loadModel('Category');
         $this->loadModel('Asset');
         $this->loadModel('Post');
+        $this->loadModel('Bill');
     }
 /**
  * index method
@@ -302,5 +303,12 @@ class UsersController extends AppController {
         
         $totalBalance = $this->Transaction->query("SELECT SUM(balance) AS 'total' FROM accounts WHERE user_id = " . $this->Auth->user('id'));
         $this->set('totalBalance', $totalBalance[0][0]['total']);
+        
+        $bills = $this->Bill->find('all', array(
+           'conditions' => array(
+               'User.id' => $this->Auth->user('id')
+           ) 
+        ));
+        $this->set('bills', $bills);
     }
 }
