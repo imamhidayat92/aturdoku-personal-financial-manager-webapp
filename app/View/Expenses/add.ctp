@@ -54,7 +54,7 @@
                     <label>Sumber Dana</label>
                     <select name="data[Transaction][account_id]">
                         <?php foreach ($accounts as $account): ?>
-                        <option value="<?php echo $account['Account']['id']?>"><?php echo $account['Account']['name']?></option>
+                        <option value="<?php echo $account['Account']['id']?>"><?php if ($account['Account']['bank_name'] != null) echo $account['Account']['bank_name'] . ' - '; echo $account['Account']['name']?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

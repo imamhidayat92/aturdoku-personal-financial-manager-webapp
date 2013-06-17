@@ -9,7 +9,8 @@ class Category extends AppModel {
     
     public $hasMany = array(
         'Transaction',
-        'ExpensePlan'
+        'ExpensePlan',
+        'SubCategory'
     );
 }
 ?>
