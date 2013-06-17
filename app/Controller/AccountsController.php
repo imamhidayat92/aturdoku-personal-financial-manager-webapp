@@ -28,7 +28,7 @@ class AccountsController extends AppController {
                 $this->redirect(array('controller' => 'accounts', 'action' => 'index'));
             }
             
-            $this->Session->setFlash("", 'fail');
+            $this->Session->setFlash("", 'flash_fail');
         }
         
         $this->set('title_for_layout', "Tambah Akun Baru");

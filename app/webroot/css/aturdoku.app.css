@@ -73,6 +73,15 @@ a.orange-button:hover{
     background-color: #e3ba16;
 }
 
+.blue-button{
+    background-color: #13A7C7;
+    border-color: #13A7C7;
+}
+
+a.blue-button:hover{
+    background-color: #0b8099;
+}
+
 .aturdoku-bg-red {
     background-color: red;
     color: white;
@@ -95,6 +104,11 @@ a.orange-button:hover{
 
 .aturdoku-bg-purple{
     background-color: #9e1be0;
+    color: white;
+}
+
+.aturdoku-bg-blue{
+    background-color: #13A7C7;
     color: white;
 }
 
