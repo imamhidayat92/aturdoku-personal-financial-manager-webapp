@@ -13,8 +13,7 @@ class ExpensePlansController extends AppController {
         $plans = $this->paginate('ExpensePlan');
         $this->set('plans', $plans);
         
-        $this->loadModel('Category');
-        
+        $this->loadModel('Category');        
     }
     
     public function add() {
@@ -39,12 +38,21 @@ class ExpensePlansController extends AppController {
         $this->set('categories', $categories);
     }
     
-    public function edit() {
+    public function edit($id) {
         if ($this->request->isPost()) {
-            if ($this->ExpensePlan->save($this->request->isPost())) {
-                
+            if ($this->ExpensePlan->save($this->request->data)) {
+                $this->Session->setFlash("", 'flash_success');
+                $this->redirect(array('controller' => 'expenseplans', 'action' => 'index'));
             }
+            else {
+                $this->Session->setFlash("", 'flash_fail');
+            }            
         }
+        
+        $expensePlan = $this->ExpensePlan->findByid($id);
+        $this->set('expensePlan', $expensePlan);
+        
+        $this->set('title_for_layout', "");
     }
     
     public function delete($expense_plan_id) {

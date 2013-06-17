@@ -47,12 +47,22 @@ class UsersController extends AppController {
                 'description' => '',
                 'category_type' => '1',
             ),
+            'SubCategory' => array(
+                0 => array(
+                    'name' => 'Gaji'
+                )
+            )
         ),
         1 => array(
             'Category' => array(
                 'name' => 'Pemasukan Tambahan',
                 'description' => '',
                 'category_type' => '1',
+            ),
+            'SubCategory' => array(
+                0 => array(
+                    'name' => 'Project'
+                )
             )
         ),
     );
@@ -60,16 +70,101 @@ class UsersController extends AppController {
     private $defaultExpenseCategories = array(
         0 => array(
             'Category' => array(
-                'name' => 'Administrasi Bulanan',
+                'name' => 'Pangan',
                 'description' => '',
                 'category_type' => '0',
+            ),
+            'SubCategory' => array(
+                0 => array(
+                    'name' => 'Harian'
+                ),
+                1 => array(
+                    'name' => 'Makan di Luar'
+                ),
+                2 => array(
+                    'name' => 'Bahan Makanan'
+                )
             )
         ),
         1 => array(
             'Category' => array(
-                'name' => 'Makanan/Minuman',
+                'name' => 'Utilitas',
                 'description' => '',
                 'category_type' => '0',
+            ),
+            'SubCategory' => array(
+                0 => array(
+                    'name' => 'Listrik'
+                ),
+                1 => array(
+                    'name' => 'Air'
+                ),
+                2 => array(
+                    'name' => 'Telepon'
+                ),
+                3 => array(
+                    'name' => 'Internet'
+                )
+            )
+        ),
+        2 => array(
+            'Category' => array(
+                'name' => 'Hiburan',
+                'description' => '',
+                'category_type' => '0',
+            ),
+            'SubCategory' => array(
+                0 => array(
+                    'name' => 'Bioskop'
+                ),
+                1 => array(
+                    'name' => 'Musik'
+                )
+            )
+        ),
+        3 => array(
+            'Category' => array(
+                'name' => 'Kendaraan',
+                'description' => '',
+                'category_type' => '0',
+            ),
+            'SubCategory' => array(
+                0 => array(
+                    'Reparasi'
+                ),
+                1 => array(
+                    'Bensin'
+                ),
+                2 => array(
+                    'Perawatan'
+                )
+            )
+        ),
+        4 => array(
+            'Category' => array(
+                'name' => 'Asuransi/Kesehatan',
+                'description' => '',
+                'category_type' => '0',
+            ),
+            'SubCategory' => array(
+                0 => array(
+                    'Pengeluaran Medis'
+                )
+            )
+        ),
+        5 => array(
+            'Category' => array(
+                'name' => 'Wisata',
+                'description' => '',
+                'category_type' => '0',
+            ),
+            'SubCategory' => array(
+                0 => array(
+                    'Tiket'
+                ),
+                1 => array(
+                    'Oleh-oleh'
+                )
             )
         ),
     );

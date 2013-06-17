@@ -39,11 +39,18 @@
         public function edit($id) {
             if ($this->request->isPost()) {
                 if ($this->SubCategory->save($this->request->data)) {
-                    
+                    $this->Session->setFlash("", 'flash_success');
+                    $this->redirect(array('controller' => 'categories', 'action' => 'index'));
+                }
+                else {
+                    $this->Session->setFlash("", 'flash_fail');
                 }
             }
             
-            $this->set('title_for_layout', "Edit Sub Kategori");            
+            $subCategory = $this->SubCategory->findByid($id);
+            $this->set('subCategory', $subCategory);
+            
+            $this->set('title_for_layout', "Ubah Sub Kategori");            
         }
         
         public function delete($id) {
