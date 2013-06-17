@@ -18,7 +18,9 @@
 
 <script>
     var expensePlotLoaded = false;
+    var expenseCategoryPlotLoaded = false;
     var incomePlotLoaded = false;
+    var incomeCategoryPlotLoaded = false;
 </script>
 
 <div class="row">    
@@ -528,56 +530,60 @@
                 }
             });
         }
-            
-        var dataExpense = [
-            <?php
-                foreach ($expenseCategory as $category):
-            ?>
-                ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
-            <?php
-                endforeach;
-            ?>
-          ];
-          
-        var expenseCategoryGraph = jQuery.jqplot ('expenseCategory', [dataExpense], 
-          { 
-            seriesDefaults: {
-              // Make this a pie chart.
-              renderer: jQuery.jqplot.PieRenderer, 
-              rendererOptions: {
-                // Put data labels on the pie slices.
-                // By default, labels show the percentage of the slice.
-                showDataLabels: true
+
+        if (expenseCategoryPlotLoaded) {
+            var dataExpense = [
+                <?php
+                    foreach ($expenseCategory as $category):
+                ?>
+                    ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
+                <?php
+                    endforeach;
+                ?>
+              ];
+
+            var expenseCategoryGraph = jQuery.jqplot ('expenseCategory', [dataExpense], 
+              { 
+                seriesDefaults: {
+                  // Make this a pie chart.
+                  renderer: jQuery.jqplot.PieRenderer, 
+                  rendererOptions: {
+                    // Put data labels on the pie slices.
+                    // By default, labels show the percentage of the slice.
+                    showDataLabels: true
+                  }
+                }, 
+                legend: { show:true, location: 'e' }
               }
-            }, 
-            legend: { show:true, location: 'e' }
-          }
-        );
+            );
+        }
         
-        var dataIncome = [
-            <?php
-                foreach ($incomeCategory as $category):
-            ?>
-                ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
-            <?php
-                endforeach;
-            ?>
-          ];
-          
-        var incomeCategoryGraph = jQuery.jqplot ('incomeCategory', [dataIncome], 
-          { 
-            seriesDefaults: {
-              // Make this a pie chart.
-              renderer: jQuery.jqplot.PieRenderer, 
-              rendererOptions: {
-                // Put data labels on the pie slices.
-                // By default, labels show the percentage of the slice.
-                showDataLabels: true
+        if (incomeCategoryPlotLoaded) {
+            var dataIncome = [
+                <?php
+                    foreach ($incomeCategory as $category):
+                ?>
+                    ['<?php echo $category['categories']['category']?>', <?php echo $category[0]['total']?>],
+                <?php
+                    endforeach;
+                ?>
+              ];
+
+            var incomeCategoryGraph = jQuery.jqplot ('incomeCategory', [dataIncome], 
+              { 
+                seriesDefaults: {
+                  // Make this a pie chart.
+                  renderer: jQuery.jqplot.PieRenderer, 
+                  rendererOptions: {
+                    // Put data labels on the pie slices.
+                    // By default, labels show the percentage of the slice.
+                    showDataLabels: true
+                  }
+                }, 
+                legend: { show:true, location: 'e' }
               }
-            }, 
-            legend: { show:true, location: 'e' }
-          }
-        );
+            );
+        }
         
     });
 </script>
@@ -631,7 +637,7 @@
     </li>
 </ol>
 
-<script>
+<script>    
     $(document).foundation('joyride', 'start');
 </script>
 <?php 
@@ -661,12 +667,12 @@
             <p>
                 Isi formulir di bawah ini untuk menambahkan data transfer Anda.
             </p>
-            <form class="custom">
+            <form class="custom" method="POST" action="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'transfer')) ?>">
                 <fieldset>
                     <legend>Data Akun</legend>
-                    <div class="large-5 column">                        
+                    <div class="large-4 column">                        
                         <label>Akun Sumber</label>
-                        <select class="medium">
+                        <select class="medium" name="data[Account][sourceId]">
                             <?php foreach ($accounts as $account) { 
                                 if ($account['Account']['bank_name'] == null){
                             ?>                                
@@ -677,9 +683,9 @@
                             } ?>                                                        
                         </select>                                                                                          
                     </div>
-                    <div class="large-5 offset-2 columns">
+                    <div class="large-4 columns">
                         <label>Akun Tujuan</label>
-                        <select class="large">
+                        <select class="large" name="data[Account][destinationId]">
                             <?php foreach ($accounts as $account) { 
                                 if ($account['Account']['bank_name'] == null){
                             ?>                                
@@ -689,10 +695,26 @@
                             <?php }                            
                             } ?>
                         </select>
-                    </div>                    
+                    </div>
+                    <div class="large-4 columns">
+                       <div class="row collapse">
+                            <label>Nominal</label>
+                            <div class="large-9 columns">
+                                <input type="text" class="validate[required,custom[onlyNumberSp]] text-input" name="data[Account][amount]"/>
+                            </div>
+                            <div class="large-3 columns">
+                                <span class="postfix">Rp</span>
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
+                <input type="submit" class="success button" value="Simpan Data"/>
             </form>
         </div>        
     </div>
     <a class="close-reveal-modal">&#215;</a>
 </div>
+
+<script>
+    $(document).foundation();
+</script>
