@@ -391,7 +391,7 @@
         </p>
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Data Aset Terkini</h2>
+        <h2 class="special-font underline">Data Tagihan Belum Terbayar</h2>
         
         <table>
             <thead>
@@ -425,7 +425,7 @@
             </tbody>
         </table>
         
-        <h2 class="special-font underline">Data Aset Terkini</h2>
+        <h2 class="special-font underline">Data Tagihan Terbayar</h2>
         
         <table>
             <thead>
