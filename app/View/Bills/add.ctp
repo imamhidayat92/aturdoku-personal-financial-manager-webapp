@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <label>Jatuh Tempo</label>
-                    <input type="text" name="data[Bill][due_date]" id="datepicker" readonly/>
+                    <input type="text" name="data[Bill][due_date]" id="datepicker" value="<?php echo date('Y-m-d') ?>" readonly/>
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>

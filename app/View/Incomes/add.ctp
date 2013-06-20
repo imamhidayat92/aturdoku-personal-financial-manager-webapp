@@ -9,8 +9,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="large-8 large-offset-2 columns">
+    <div class="large-3 columns">
+        <h2 class="aturdoku-nav-head aturdoku-bg-green" id="expense-tab">PENDAPATAN</h2>
+    </div>
+    <div class="large-9 columns">
         <h2 class="special-font">Tambah Data Pendapatan</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="large-8 large-offset-2 columns">        
         <p class="lead">Isi formulir di bawah ini untuk menambahkan data pendapataan Anda.</p>
         
         <!-- Form Tambah -->
@@ -28,15 +35,7 @@
                         <div class="large-3 columns">
                             <span class="postfix">Rp</span>
                         </div>
-                    </div>
-                    <label>Kategori</label>
-                    <select class="medium" name="data[Transaction][category_id]">
-                        <?php foreach($categories as $category): ?>
-                        <option value="<?php echo $category['Category']['id']?>"><?php echo $category['Category']['name']?></option>
-                        <?php endforeach;?>
-                    </select>
-                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand aturdoku-button">Atur Kategori</a>
-                    <p class="clear10px">  </p>                  
+                    </div>                    
                 </div>
                 <div class="large-8 columns">
                     <label>Deskripsi</label>
@@ -44,12 +43,35 @@
                 </div>
             </div>
         </fieldset>
+            <fieldset>
+            <legend>Klasifikasi Pendapatan</legend>
+            <div class="row">
+                <div class="large-6 columns">
+                    <label>Kategori / Subkategori</label>
+                    <select class="medium" name="data[Transaction][sub_category_id]">
+                    <?php
+                        foreach ($categories as $category): 
+                            foreach ($category['SubCategory'] as $subCategory):
+                    ?>
+                        <option value="<?php echo $subCategory['id']?>"><?php echo $category['Category']['name']?> / <?php echo $subCategory['name'] ?></option>
+                    <?php 
+                            endforeach;
+                        endforeach; 
+                    ?>
+                    </select>
+                </div>
+                <div class="large-6 columns">
+                    <label>Pengaturan</label>
+                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'income')) ?>" class="small button secondary expand">Atur Kategori</a>
+                </div>
+            </div>            
+        </fieldset>
         <fieldset>
             <legend>Waktu & Penyimpanan Pendapatan</legend>
             <div class="row">
                 <div class="large-4 columns">
-                    <label>Tanggal (<em>Optional</em>)</label>
-                    <input type="text" name="data[Transaction][date]" id="datepicker" readonly/>
+                    <label>Tanggal</label>
+                    <input type="text" name="data[Transaction][date]" id="datepicker" value="<?php echo date('Y-m-d'); ?>" readonly/>
                 </div>
                 <div class="large-8 columns">
                     <label>Penyimpanan</label>

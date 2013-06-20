@@ -62,7 +62,7 @@ class UsersController extends AppController {
             ),
             'SubCategory' => array(
                 0 => array(
-                    'name' => 'Project'
+                    'name' => 'Proyek'
                 )
             )
         ),
@@ -131,13 +131,13 @@ class UsersController extends AppController {
             ),
             'SubCategory' => array(
                 0 => array(
-                    'Reparasi'
+                    'name' => 'Reparasi'
                 ),
                 1 => array(
-                    'Bensin'
+                    'name' => 'Bensin'
                 ),
                 2 => array(
-                    'Perawatan'
+                    'name' => 'Perawatan'
                 )
             )
         ),
@@ -149,7 +149,7 @@ class UsersController extends AppController {
             ),
             'SubCategory' => array(
                 0 => array(
-                    'Pengeluaran Medis'
+                    'name' => 'Pengeluaran Medis'
                 )
             )
         ),
@@ -161,10 +161,10 @@ class UsersController extends AppController {
             ),
             'SubCategory' => array(
                 0 => array(
-                    'Tiket'
+                    'name' => 'Tiket'
                 ),
                 1 => array(
-                    'Oleh-oleh'
+                    'name' => 'Oleh-oleh'
                 )
             )
         ),
@@ -198,17 +198,40 @@ class UsersController extends AppController {
 
                 // Generate initial category.
                 $this->loadModel('Category');
+                $this->loadModel('SubCategory');
 
                 foreach ($this->defaultIncomeCategories as $category) {
                     $this->Category->create();
                     $category['Category']['user_id'] = $newId;
                     $this->Category->save($category);
+                    
+                    $newCategoryId = $this->Category->getInsertID();
+                    
+                    foreach ($category['SubCategory'] as $subCategory) {
+                        $newSubCategory = array('SubCategory');
+                        $newSubCategory['SubCategory'] = $subCategory;
+                        $newSubCategory['SubCategory']['category_id'] = $newCategoryId;
+                        
+                        $this->SubCategory->create();
+                        $this->SubCategory->save($newSubCategory);
+                    }
                 }
                 
                 foreach ($this->defaultExpenseCategories as $category) {
                     $this->Category->create();
                     $category['Category']['user_id'] = $newId;
                     $this->Category->save($category);
+                    
+                    $newCategoryId = $this->Category->getInsertID();
+                    
+                    foreach ($category['SubCategory'] as $subCategory) {
+                        $newSubCategory = array('SubCategory');
+                        $newSubCategory['SubCategory'] = $subCategory;
+                        $newSubCategory['SubCategory']['category_id'] = $newCategoryId;
+                        
+                        $this->SubCategory->create();
+                        $this->SubCategory->save($newSubCategory);
+                    }
                 }
                 
                 // Generate initial account.

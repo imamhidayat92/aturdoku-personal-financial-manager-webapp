@@ -193,3 +193,8 @@ ul.aturdoku-top-nav li a.orange {
 ul.aturdoku-top-nav li a:hover {
     color: grey;
 }
+
+/* Overridden jQuery UI Styles */
+.ui-datepicker {
+    z-index: 1000 !important;
+}

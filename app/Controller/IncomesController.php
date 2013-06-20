@@ -6,8 +6,7 @@ class IncomesController extends AppController {
         'limit' => 25,
         'order' => array(
             'id' => 'asc'
-        ),
-        
+        ),        
     );
 
     public function beforeFilter() {
@@ -32,6 +31,10 @@ class IncomesController extends AppController {
     public function add() {
         $this->checkWhetherUserAccountIsExist();
         if($this->request->isPost()){
+            $this->loadModel('SubCategory');
+            $subCategory = $this->SubCategory->findByid($this->request->data['Transaction']['sub_category_id']);
+            
+            $this->request->data['Transaction']['category_id'] = $subCategory['Category']['id'];
             $this->request->data['Transaction']['type'] = 1;
             $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
             if (strlen(trim($this->request->data['Transaction']['date'])) == 0) {

@@ -125,7 +125,7 @@ class CategoriesController extends AppController {
         $transactions = $this->paginate('Transaction');        
         $this->set('transactions', $transactions);
         
-        $this->set('title_for_layout', 'Pendapatan Kategori: ' . $category['Category']['name']);
+        $this->set('title_for_layout', 'Kategori: ' . $category['Category']['name']);
     }
 }
 ?>

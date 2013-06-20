@@ -56,5 +56,20 @@
         public function delete($id) {
             
         }
+        
+        public function view($id) {
+            $this->loadModel('Transaction');
+            $transactions = $this->Transaction->find('all', array(
+                'conditions' => array(
+                    'sub_category_id' => $id
+                )
+            ));
+            $this->set('transactions', $transactions);
+            
+            $subCategory = $this->SubCategory->findByid($id);
+            $this->set('subCategory', $subCategory);
+            
+            $this->set('title_for_layout', "Subkategori: " . $subCategory['SubCategory']['name']);
+        }
     }
 ?>

@@ -63,11 +63,12 @@
             $averageExpense = $totalExpense / $numberOfExpense;
         ?>
         
+        
+        
+        <?php if (count($dailyExpenses) > 1): ?>
         <script>
             expensePlotLoaded = true;
         </script>
-        
-        <?php if (count($dailyExpenses) > 1): ?>
         <div id="plot"></div>
         <?php else: ?>
         <h5 align="center" style="margin-top: 50px;">Data pengeluaran Anda saat ini belum dapat divisualisasikan.</h5>
@@ -116,7 +117,11 @@
     <?php else: ?>
         <h2 style="color: #cccccc; text-align: center; line-height: 1; margin: 100px 0 100px 0;">Anda belum menyimpan data pengeluaran apapun.</h2>
     <?php endif; ?>
-        
+    
+    <?php if (count($expenseCategory) > 0):?>
+        <script>
+            expenseCategoryPlotLoaded = true;
+        </script>
         <h2 class="special-font underline">Pengeluaran Berdasarkan Kategori</h2>
         <div class="row">
             <div class="large-8 columns">
@@ -129,6 +134,7 @@
                 <?php endforeach; ?>
             </div>
         </div>        
+    <?php endif; ?>
     </div>
     <div class="separator"></div>
     
@@ -177,21 +183,20 @@
             
             //$averageExpense = $totalExpense / $numberOfExpense;
         ?>
-        
-        <script>
-            incomePlotLoaded = true;
-        </script>
+                       
         
         
+            <?php /* Unexpected Condition: */ ?>
+            <?php if (count($dailyIncomes) > 1): ?>
+            <script>
+                incomePlotLoaded = true;
+            </script>
+            <div id="income"></div>
+            <?php else: ?>
+            <h5 align="center" style="margin-top: 50px;">Data pendapatan Anda saat ini belum dapat divisualisasikan.</h5>
+            <?php endif; ?>
+            <p>&nbsp;</p>
         
-        <?php if (count($dailyIncomes) > 1): ?>
-        <div id="income"></div>
-        <?php else: ?>
-        <h5 align="center" style="margin-top: 50px;">Data pendapatan Anda saat ini belum dapat divisualisasikan.</h5>
-        <?php endif; ?>
-        <p>&nbsp;</p>
-        
-<!--        <div id="income"></div>-->
         <h3 class="subheader">Isi kas Anda: <?php echo $this->Aturdoku->currencyFormat($totalBalance + $totalIncomes - $totalExpenses); ?></h3>
         <h2 class="special-font underline">Data Pendapatan Terkini</h2>
         
@@ -229,6 +234,10 @@
             <h2 style="color: #cccccc; text-align: center; line-height: 1; margin: 100px 0 100px 0;">Anda belum menyimpan data pendapatan apapun.</h2>
         <?php endif; ?>
         
+        <?php if (count($incomeCategory) > 0): ?>
+        <script>
+            incomeCategoryPlotLoaded = true;
+        </script>
         <h2 class="special-font underline">Pendapatan Berdasarkan Kategori</h2>
         <div class="row">
             <div class="large-8 columns">
@@ -241,7 +250,11 @@
                 <?php endforeach; ?>
             </div>
         </div>
+        <?php endif; ?>
+        
+        <?php if (count($incomes) > 0): ?>
         <a href="<?php echo Router::url(array('controller' => 'incomes', 'action' => 'index')) ?>" class="secondary expand button">Lihat Data Pendapatan Selengkapnya</a>
+        <?php endif; ?>
     </div>
     <p class="clearfix"></p>
     <div class="separator"></div>
@@ -251,7 +264,7 @@
         <h2 class="aturdoku-nav-head aturdoku-bg-purple" id="account">AKUN</h2>
         <h3 class="aturdoku-nav-subhead">Aksi Utama</h3>
         <a href="#" data-reveal-id="addAccountModal" class="small expand button purple-button">Tambah Data Akun</a>
-        <a href="#" data-reveal-id="transferAccountModal" class="small expand button purple-button">Transfer Dana</a>
+        <a href="#" data-reveal-id="transferAccountModal" class="small expand button secondary">Transfer Dana</a>
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Data Akun Tunai</h2>
