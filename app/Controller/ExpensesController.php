@@ -166,7 +166,7 @@ class ExpensesController extends AppController{
     
     public function filter($period, $number){
         if(strcasecmp($period, 'month') == 0) {
-            $expenses = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time' FROM transactions WHERE type = 0 AND user_id = " . $this->Auth->user('id') . " AND date >= DATE_SUB(CURRENT_DATE, INTERVAL " . $number . " MONTH) GROUP BY time ORDER BY date DESC ");
+            $expenses = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time' FROM transactions WHERE type = 0 AND user_id = " . $this->Auth->user('id') . " AND date >= DATE_SUB(CURRENT_DATE, INTERVAL " . $number . " MONTH) GROUP BY time ORDER BY date DESC");
             $this->set('filteredExpenses', $expenses);
             $this->set('number', $number);
             $expensesCategoryGraph = $this->Transaction->query("SELECT SUM(amount) AS 'total', CONCAT(MONTH(date), '-', YEAR(date)) AS 'time', categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE transactions.type = 0 AND transactions.user_id = " . $this->Auth->user('id') . " AND date >= DATE_SUB(CURRENT_DATE, INTERVAL ". $number ." MONTH) GROUP BY category_id ORDER BY date DESC");

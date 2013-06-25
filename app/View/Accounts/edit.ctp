@@ -16,33 +16,56 @@
         <!-- Form Tambah -->
         
         <form id="formID" action="<?php echo Router::url(array('controller' => 'accounts', 'action' => 'edit', $account['Account']['id']))?>" method="POST" class="custom">
-        <fieldset>
-            <legend>Data Akun</legend>
-            <div class="row">
-                <div class="large-5 columns">
-                    <input type="hidden" name="data[Account][id]" value="<?php echo $account['Account']['id']; ?>"/>
-                    <label>Nama Bank</label>
-                    <input type="text" name="data[Account][bank_name]" value="<?php echo $account['Account']['bank_name']?>"/>
-                    <label>Atas Nama</label>
-                    <input type="text" name="data[Account][name]" value="<?php echo $account['Account']['name']?>"/>                                                                                                    
-                    <div class="row collapse">
-                        <label>Saldo Awal</label>
-                        <div class="large-9 columns">
-                            <input type="text" name="data[Account][balance]" value="<?php echo $account['Account']['balance']?>"/>
-                        </div>
-                            <div class="large-3 columns">
-                            <span class="postfix">Rp</span>
-                        </div>
-                    </div>                 
-                </div>                
-                <div class="large-6 columns">
-                    <label>Nomor Rekening</label>
-                    <input type="text" name="data[Account][number]" value="<?php echo $account['Account']['number']?>"/>
-                    <label>Cabang</label>
-                    <input type="text" name="data[Account][branch]" value="<?php echo $account['Account']['branch']?>"/>
+            <?php if($account['Account']['bank_name'] != null){?>
+            <fieldset>
+                <legend>Data Akun</legend>
+                <div class="row">
+                    <div class="large-5 columns">
+                        <input type="hidden" name="data[Account][id]" value="<?php echo $account['Account']['id']; ?>"/>
+                        <label>Nama Bank</label>
+                        <input type="text" name="data[Account][bank_name]" value="<?php echo $account['Account']['bank_name']?>"/>
+                        <label>Atas Nama</label>
+                        <input type="text" name="data[Account][name]" value="<?php echo $account['Account']['name']?>"/>                                                                                                    
+                        <div class="row collapse">
+                            <label>Saldo Awal</label>
+                            <div class="large-9 columns">
+                                <input type="text" name="data[Account][balance]" value="<?php echo $account['Account']['balance']?>"/>
+                            </div>
+                                <div class="large-3 columns">
+                                <span class="postfix">Rp</span>
+                            </div>
+                        </div>                 
+                    </div>                
+                    <div class="large-6 columns">
+                        <label>Nomor Rekening</label>
+                        <input type="text" name="data[Account][number]" value="<?php echo $account['Account']['number']?>"/>
+                        <label>Cabang</label>
+                        <input type="text" name="data[Account][branch]" value="<?php echo $account['Account']['branch']?>"/>
+                    </div>
                 </div>
-            </div>
-        </fieldset>
+            </fieldset>
+            <?php } else { ?>
+            <fieldset>
+                <legend>Data Akun</legend>
+                <div class="row">
+                    <div class="large-7 columns">
+                        <label>Nama</label>
+                        <input type="text" name="data[Account][name]" value="<?php echo $account['Account']['name']?>"/>                                    
+                    </div>                
+                    <div class="large-5 columns">
+                        <div class="row collapse">
+                            <label>Saldo Awal</label>
+                            <div class="large-9 columns">
+                                <input type="text" name="data[Account][balance]" value="<?php echo $account['Account']['balance']?>"/>
+                            </div>
+                                <div class="large-3 columns">
+                                <span class="postfix">Rp</span>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+            </fieldset>
+            <?php } ?>
         <input type="submit" class="success button" value="Simpan Data"/>
     </form>
     </div>

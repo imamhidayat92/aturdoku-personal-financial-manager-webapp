@@ -21,6 +21,10 @@ body {
     border-color: #ebebeb;
 }
 
+.alert-box{
+    margin-bottom: 0;
+}
+
 .header-container {
     width: 1000px;
     height: 450px;
