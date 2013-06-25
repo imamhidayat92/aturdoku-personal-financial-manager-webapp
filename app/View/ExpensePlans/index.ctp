@@ -17,7 +17,7 @@
     </div>
     <div class="large-9 columns">
         <h2 class="special-font underline">Status Rencana Pengeluaran Bulan Ini</h2>
-        
+        <div id="chart3" style="width:720px"></div>
         <table>
             <thead>
                 <tr>
@@ -60,35 +60,65 @@
         <h2 class="special-font underline">Rencana Pengeluaran Sebelumnya</h2>
     </div>
 </div>
-<div id="myModal" class="reveal-modal">
-    <form class="custom" action="<?php echo Router::url(array('controller' => 'expenses', 'action' => 'add'))?>" method="POST">
-        <fieldset>
-            <legend>Rentang Waktu</legend>
-            <div class="row">
-                <div class="large-1 columns">
-                    <label class="right inline">Dari</label>                   
-                </div>
-                <div class="large-3 columns">
-                    <input type="text" name="" class="datepicker"/>
-                </div>
-                <div class="large-1 columns">
-                    <label class="right inline">Sampai</label>
-                </div>
-                <div class="large-3 columns">                   
-                    <input type="text" name="" class="datepicker"/>
-                </div>
-                <div class="large-4 columns">
-                    
-                </div>
-            </div>
-        </fieldset>
-        <input type="submit" class="success button" value="Simpan Data"/>
-    </form>
-    <a class="close-reveal-modal">&#215;</a>
-</div>
+
 <script>
     $(document).ready(function(){
         $(document).foundation();
         $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+        
+          var s1 = [2, 6, 7, 10];
+          var s2 = [7, 5, 3, 4];          
+          plot3 = $.jqplot('chart3', [s1, s2], {
+            // Tell the plot to stack the bars.
+            stackSeries: true,
+            captureRightClick: true,
+            seriesDefaults:{
+              renderer:$.jqplot.BarRenderer,
+              rendererOptions: {
+                  // Put a 30 pixel margin between bars.
+                  barMargin: 30,
+                  // Highlight bars when mouse button pressed.
+                  // Disables default highlighting on mouse over.
+                  highlightMouseDown: true   
+              },
+              pointLabels: {show: true}
+            },
+            series: [
+                {
+                    label: 'Rencana',
+                    color: 'greenyellow'
+                },
+                {
+                    label: 'Realisasi',
+                    color: 'red'
+                }
+            ],
+            axes: {
+              xaxis: {
+                  renderer: $.jqplot.CategoryAxisRenderer
+              },
+              yaxis: {
+                // Don't pad out the bottom of the data range.  By default,
+                // axes scaled as if data extended 10% above and below the
+                // actual range to prevent data points right on grid boundaries.
+                // Don't want to do that here.
+                padMin: 0
+              }
+            },
+            legend: {
+              show: true,
+              location: 'e',
+              placement: 'outside'
+            }      
+          });
+          // Bind a listener to the "jqplotDataClick" event.  Here, simply change
+          // the text of the info3 element to show what series and ponit were
+          // clicked along with the data for that point.
+          $('#chart3').bind('jqplotDataClick', 
+            function (ev, seriesIndex, pointIndex, data) {
+              $('#info3').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+            }
+          );
+        
     });
 </script>

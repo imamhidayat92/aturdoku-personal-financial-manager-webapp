@@ -24,7 +24,13 @@
 </script>
 
 <div class="row">    
-    <?php echo $this->Element('user-navigation'); ?>    
+    <?php echo $this->Element('user-navigation'); ?>
+    
+     <div data-alert class="alert-box" style="background-color: <?php printf( "#%06X\n", mt_rand( 0, 0xFFFFFF )); ?>;">
+      Anda belum membuat rencana pengeluaran bulan ini.
+      <a href="#" class="close">&times;</a>
+    </div>
+    <div class="separator"></div>
     
     <!-- Pengeluaran -->
     <div class="large-3 columns">
@@ -530,7 +536,8 @@
     echo $this->Html->script("plugins/jqplot.dateAxisRenderer.min");
     
     echo $this->Html->script('foundation/foundation');
-    echo $this->Html->script('foundation/foundation.reveal');    
+    echo $this->Html->script('foundation/foundation.reveal');
+    echo $this->Html->script('foundation/foundation.alerts');
 ?>
 
 <script>

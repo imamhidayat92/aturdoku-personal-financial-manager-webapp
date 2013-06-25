@@ -60,7 +60,7 @@
                 $currentMonth = date('m');
                 
                 $startYear = $currentYear;
-                $startMonth = $currentMonth - $number;
+                $startMonth = $currentMonth - $number + 1;
                 if ($startMonth <= 0) {
                     $startYear--;
                     $startMonth += 12;
