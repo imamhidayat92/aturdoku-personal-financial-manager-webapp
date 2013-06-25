@@ -16,7 +16,7 @@
         </p>
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Status Rencana Pengeluaran</h2>
+        <h2 class="special-font underline">Status Rencana Pengeluaran Bulan Ini</h2>
         
         <table>
             <thead>
@@ -56,6 +56,8 @@
                 </tr>
             </tbody>
         </table>        
+        
+        <h2 class="special-font underline">Rencana Pengeluaran Sebelumnya</h2>
     </div>
 </div>
 <div id="myModal" class="reveal-modal">

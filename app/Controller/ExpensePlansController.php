@@ -10,14 +10,26 @@ class ExpensePlansController extends AppController {
         
         $this->paginate['conditions']['user_id'] = $this->Auth->user('id');
         
-        $plans = $this->paginate('ExpensePlan');
+        $dateElements = explode('-', date('Y-m-d'));
+        
+        $plans = $this->ExpensePlan->find('all', array(
+            'conditions' => array(
+                'MONTH(time)' => '\'' . $dateElements[0] . '-' . $dateElements[1] . '-1' . '\''
+            )
+        ));
         $this->set('plans', $plans);
+        
+        $this->loadModel('Transaction');
+        $expenseCategories = $this->Transaction->query("SELECT SUM(amount) AS 'total', date, categories.name AS 'category' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE MONTH(date) = " . date('m') . " AND YEAR(date) = " . date('Y') . " AND type = 0 AND transactions.user_id = " .$this->Auth->user('id') . " GROUP BY category_id");
+        $this->set('expenseCategories', $expenseCategories);
         
         $this->loadModel('Category');        
     }
     
     public function add() {
         if ($this->request->isPost()) {
+            // TODO: Decline save if month < current month.
+            
             $this->request->data['ExpensePlan']['year'] = date('Y');
             $this->request->data['ExpensePlan']['user_id'] = $this->Auth->user('id');
             if ($this->ExpensePlan->save($this->request->data)) {
