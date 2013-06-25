@@ -10,14 +10,27 @@ class ExpensePlansController extends AppController {
         
         $this->paginate['conditions']['user_id'] = $this->Auth->user('id');
         
-        $plans = $this->paginate('ExpensePlan');
+        $dateElements = explode('-', date('Y-m-d'));
+        
+        $plans = $this->ExpensePlan->find('all', array(
+            'conditions' => array(
+                'MONTH(time)' => '\'' . $dateElements[0] . '-' . $dateElements[1] . '-1' . '\'',
+                'Category.user_id' => $this->Auth->user('id')
+            )
+        ));
         $this->set('plans', $plans);
+        
+        $this->loadModel('Transaction');
+        $expenseCategories = $this->Transaction->query("SELECT SUM(amount) AS 'total', date, categories.name AS 'category', categories.id AS 'id' FROM transactions LEFT JOIN categories ON categories.id = transactions.category_id WHERE MONTH(date) = " . date('m') . " AND YEAR(date) = " . date('Y') . " AND type = 0 AND transactions.user_id = " .$this->Auth->user('id') . " GROUP BY category_id");
+        $this->set('expenseCategories', $expenseCategories);
         
         $this->loadModel('Category');        
     }
     
     public function add() {
         if ($this->request->isPost()) {
+            // TODO: Decline save if month < current month.
+            
             $this->request->data['ExpensePlan']['year'] = date('Y');
             $this->request->data['ExpensePlan']['user_id'] = $this->Auth->user('id');
             if ($this->ExpensePlan->save($this->request->data)) {
@@ -52,13 +65,27 @@ class ExpensePlansController extends AppController {
         $expensePlan = $this->ExpensePlan->findByid($id);
         $this->set('expensePlan', $expensePlan);
         
-        $this->set('title_for_layout', "");
+        $this->loadModel('Category');
+        $categories = $this->Category->find('all', array(
+            'conditions' => array(
+                'User.id' => $this->Auth->user('id'),
+                'category_type' => 0
+            )
+        ));
+        $this->set('categories', $categories);
+        
+        $this->set('title_for_layout', "Ubah Rencana Pengeluaran");
     }
     
     public function delete($expense_plan_id) {
         if ($this->ExpensePlan->delete($expense_plan_id)) {
+            $this->Session->setFlash("Data Rencana Pengeluaran Anda Berhasil Dihapus", 'flash_success');
             $this->redirect(array('controller' => 'expenseplans', 'action' => 'index'));
-        }        
+        }
+        else {
+            $this->Session->setFlash("Data Rencana Pengeluaran Anda Gagal Dihapus", 'flash_fail');
+            $this->redirect(array('controller' => 'expenseplans', 'action' => 'index'));
+        }
     }
 }
 ?>

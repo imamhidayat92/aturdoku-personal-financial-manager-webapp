@@ -50,6 +50,7 @@
                 <div class="row">
                     <div class="large-7 columns">
                         <label>Nama</label>
+                        <input type="hidden" name="data[Account][id]" value="<?php echo $account['Account']['id']; ?>"/>
                         <input type="text" name="data[Account][name]" value="<?php echo $account['Account']['name']?>"/>                                    
                     </div>                
                     <div class="large-5 columns">

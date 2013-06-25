@@ -21,8 +21,8 @@
                 <tr>
                     <th width="40">No.</th>
                     <th width="150">Tahun</th>
-                    <th width="280">Nama Aset</th>
-                    <th width="150">Nilai</th>
+                    <th width="250">Nama Aset</th>
+                    <th width="180">Nilai</th>
                     <th width="120">Aksi</th>
                 </tr>
             </thead>

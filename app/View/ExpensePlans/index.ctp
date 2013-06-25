@@ -1,3 +1,8 @@
+<script>
+    var categories = new Array();
+    var plans = new Array();
+    var realization = new Array();          
+</script>
 <div class="row">
     
     <?php echo $this->Element('user-navigation'); ?>
@@ -16,46 +21,55 @@
         </p>
     </div>
     <div class="large-9 columns">
-        <h2 class="special-font underline">Status Rencana Pengeluaran</h2>
-        <div id="chart3" style="width:720px"></div>
+        <h2 class="special-font underline">Status Rencana Pengeluaran Bulan Ini</h2>
+        <div id="chart3" style="width:600px"></div>
+        <p>&nbsp;</p>
         <table>
             <thead>
                 <tr>
                     <th width="40">No.</th>
                     <th width="120">Kategori</th>
-                    <th width="580">Status</th>
+                    <th width="190">Rencana</th>
+                    <th width="190">Realisasi</th>
+                    <th width="200">Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($plans as $plan): ?>
+                <?php foreach ($plans as $plan): 
+                          $amount = 0;
+                          $planAmount = $plan['ExpensePlan']['amount'];
+                ?>
                 <tr>
                     <td><?php echo $plan['ExpensePlan']['id'] ?></td>
                     <td><?php echo $plan['Category']['name'] ?></td>
-                    <td></td>
+                    <td><?php echo $this->Aturdoku->currencyFormat($plan['ExpensePlan']['amount']) ?></td>
+                    <td>
+                        <?php 
+                            foreach ($expenseCategories as $expenseCategory):
+                                if ($plan['ExpensePlan']['category_id'] == $expenseCategory['categories']['id']):
+                                    echo $this->Aturdoku->currencyFormat($expenseCategory[0]['total']);
+                                    $amount = $expenseCategory[0]['total'];
+                                endif;
+                            endforeach;
+                        ?>
+                        <script>
+                            categories.push('<?php echo $plan['Category']['name'] ?>');
+                            realization.push(<?php echo $amount ?>);
+                            plans.push(<?php echo $planAmount - $amount ?>);
+                        </script>
+                    </td>
+                    <td>
+                        <p align="center" style="margin: 0; padding: 0;">
+                            <?php echo $this->Html->link('Ubah', array('controller' => 'expenseplans','action' => 'edit', $plan['ExpensePlan']['id']), array('class' => 'tiny button secondary aturdoku-button')); ?>
+                            <?php echo $this->Html->link('Hapus', array('controller' => 'expenseplans','action' => 'delete', $plan['ExpensePlan']['id']), array('class' => 'tiny button alert aturdoku-button')); ?>
+                        </p>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
-                <tr>
-                    <td>1</td>
-                    <td><em><a href="#">Category Name</a></em></td>
-                    <td>
-                        <div class="progress">
-                            <span class="meter" style="width: 30%; float: left; background-color: red;"></span>
-                            <span class="meter" style="width: 70%; float: left; background-color: greenyellow"></span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><em><a href="#">Category Name</a></em></td>
-                    <td>
-                        <div class="progress">
-                            <span class="meter" style="width: 40%; float: left; background-color: red;"></span>
-                            <span class="meter" style="width: 60%; float: left; background-color: greenyellow"></span>
-                        </div>
-                    </td>
-                </tr>
             </tbody>
         </table>        
+        
+        <h2 class="special-font underline">Rencana Pengeluaran Sebelumnya</h2>
     </div>
 </div>
 
@@ -63,10 +77,8 @@
     $(document).ready(function(){
         $(document).foundation();
         $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
-          var categories = [];
-          var s1 = [2, 6, 7, 10];
-          var s2 = [7, 5, 3, 4];          
-          plot3 = $.jqplot('chart3', [s1, s2], {
+          
+          plot3 = $.jqplot('chart3', [realization, plans ], {
             // Tell the plot to stack the bars.
             stackSeries: true,
             captureRightClick: true,
@@ -81,26 +93,27 @@
               },
               pointLabels: {show: true}
             },
-            series: [
-                {
-                    label: 'Rencana',
-                    color: 'greenyellow'
-                },
+            series: [                
                 {
                     label: 'Realisasi',
                     color: 'red'
+                },
+                {
+                    label: 'Rencana',
+                    color: 'greenyellow'
                 }
             ],
             axes: {
               xaxis: {
                   renderer: $.jqplot.CategoryAxisRenderer,
-                  ticks: ['A', 'B', 'C', 'D']
+                  ticks: categories
               },
               yaxis: {
                 // Don't pad out the bottom of the data range.  By default,
                 // axes scaled as if data extended 10% above and below the
                 // actual range to prevent data points right on grid boundaries.
                 // Don't want to do that here.
+                min: 0,
                 padMin: 0
               }
             },

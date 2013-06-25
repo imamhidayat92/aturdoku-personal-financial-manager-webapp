@@ -498,8 +498,8 @@
             <tr>
                 <th width="40">No.</th>
                 <th width="100">Tahun</th>
-                <th width="150">Nama Aset</th>
-                <th width="150">Nilai</th>
+                <th width="120">Nama Aset</th>
+                <th width="180">Nilai</th>
                 <th width="200">Keterangan</th>
                 <th width="130">Aksi</th>
             </tr>

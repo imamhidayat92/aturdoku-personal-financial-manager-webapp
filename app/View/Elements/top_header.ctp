@@ -5,7 +5,7 @@
     <div class="large-8 columns">
         <ul class="aturdoku-top-nav">
             <li><a href="#" class="red">BERANDA</a></li>
-            <li><a href="#" class="purple">LAYANAN</a></li>
+            <li><a href="http://localhost/forums" target="_blank" class="purple">FORUM</a></li>
             <li><a href="#" class="green">BLOG</a></li>
             <li><a href="#" class="orange">TENTANG KAMI</a></li>
         </ul>
