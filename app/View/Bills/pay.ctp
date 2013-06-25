@@ -28,20 +28,36 @@
                         <div class="large-3 columns">
                             <span class="postfix">Rp</span>
                         </div>
-                    </div>
-                    <label>Kategori</label>
-                    <select class="medium" name="data[Transaction][category_id]">
-                        <?php foreach ($categories as $category): ?>
-                        <option value="<?php echo $category['Category']['id']?>"><?php echo $category['Category']['name']?></option>
-                        <?php endforeach; ?>
-                    </select>
-                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small button secondary expand">Atur Kategori</a>
+                    </div>                    
                 </div>
                 <div class="large-8 columns">
                     <label>Keperluan</label>
                     <textarea class="validate[required] text-input" name="data[Transaction][description]" style="height: 150px;"><?php echo $bill['Bill']['description'];?></textarea>
                 </div>
             </div>
+        </fieldset>
+        <fieldset>
+            <legend>Klasifikasi Pengeluaran</legend>
+            <div class="row">
+                <div class="large-6 columns">
+                    <label>Kategori / Subkategori</label>
+                    <select class="medium" name="data[Transaction][sub_category_id]">
+                    <?php
+                        foreach ($categories as $category): 
+                            foreach ($category['SubCategory'] as $subCategory):
+                    ?>
+                        <option value="<?php echo $subCategory['id']?>"><?php echo $category['Category']['name']?> / <?php echo $subCategory['name'] ?></option>
+                    <?php 
+                            endforeach;
+                        endforeach; 
+                    ?>
+                    </select>
+                </div>
+                <div class="large-6 columns">
+                    <label>Pengaturan</label>
+                    <a href="<?php echo Router::url(array('controller' => 'categories', 'action' => 'expense')) ?>" class="small button secondary expand">Atur Kategori</a>
+                </div>
+            </div>            
         </fieldset>
         <fieldset>
             <legend>Waktu & Sumber Dana</legend>

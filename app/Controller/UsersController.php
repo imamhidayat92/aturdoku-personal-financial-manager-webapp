@@ -328,6 +328,26 @@ class UsersController extends AppController {
     public function dashboard() {
         $this->set('title_for_layout', 'Dashboard');
         
+        $this->loadModel('Bill');
+        $activeBills = $this->Bill->find('all', array(
+            'conditions' => array(
+                'due_date' => date('Y-m-d'),
+                'paid_status' => false,
+                'Bill.user_id' => $this->Auth->user('id')
+            )
+        ));
+        $this->set('activeBills', $activeBills);
+        
+        $this->loadModel('ExpensePlan');
+        $plans = $this->ExpensePlan->find('all', array(
+            'conditions' => array(
+                'Category.user_id' => $this->Auth->user('id'),
+                'MONTH(time)' => date('m'),
+                'YEAR(time)' => date('Y')
+            )
+        ));
+        $this->set('plans', $plans);
+        
         $dailyExpenses = $this->Transaction->query("SELECT date, SUM(amount) AS 'total' FROM transactions WHERE user_id = " . $this->Auth->user('id') . " AND type = 0 GROUP BY date LIMIT 30");
         $this->set('dailyExpenses', $dailyExpenses);
         

@@ -26,11 +26,16 @@
 <div class="row">    
     <?php echo $this->Element('user-navigation'); ?>
     
-     <div data-alert class="alert-box" style="background-color: <?php printf( "#%06X\n", mt_rand( 0, 0xFFFFFF )); ?>;">
-      Anda belum membuat rencana pengeluaran bulan ini.
-      <a href="#" class="close">&times;</a>
+    <?php $numberOfNotifications = 0; ?>
+    <?php foreach($activeBills as $activeBill):?>
+    <div data-alert class="alert-box" style="background-color: <?php printf( "#%06X\n", mt_rand( 0, 0xFFFFFF )); ?>;">
+        Hari ini tagihan <?php echo $activeBill['Bill']['name'] ?> jatuh tempo. <span style="text-align: right;"><a style="color: white; text-decoration: underline;" href="<?php echo Router::url(array('controller' => 'bills', 'action' => 'pay', $activeBill['Bill']['id']))?>">Bayar Sekarang</a></span>
+        <a href="#" class="close">&times;</a>
     </div>
-    <div class="separator"></div>
+    <?php $numberOfNotifications++; endforeach;?>
+    
+    
+    <?php if ($numberOfNotifications > 0): ?><div class="separator"></div><?php endif; ?>
     
     <!-- Pengeluaran -->
     <div class="large-3 columns">

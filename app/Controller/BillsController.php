@@ -68,6 +68,10 @@ class BillsController extends AppController {
         if ($this->request->isPost()) {            
             if ($this->Bill->save(array('Bill' => array('id' => $id, 'paid_status' => true)))) {
                 $insertedBillId = $this->Bill->getInsertID();
+                $this->loadModel('SubCategory');
+                $subCategory = $this->SubCategory->findByid($this->request->data['Transaction']['sub_category_id']);
+
+                $this->request->data['Transaction']['category_id'] = $subCategory['Category']['id'];
                 
                 $this->request->data['Transaction']['type'] = 0;
                 $this->request->data['Transaction']['user_id'] = $this->Auth->user('id');
