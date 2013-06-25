@@ -63,7 +63,7 @@
     $(document).ready(function(){
         $(document).foundation();
         $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
-        
+          var categories = [];
           var s1 = [2, 6, 7, 10];
           var s2 = [7, 5, 3, 4];          
           plot3 = $.jqplot('chart3', [s1, s2], {
@@ -93,7 +93,8 @@
             ],
             axes: {
               xaxis: {
-                  renderer: $.jqplot.CategoryAxisRenderer
+                  renderer: $.jqplot.CategoryAxisRenderer,
+                  ticks: ['A', 'B', 'C', 'D']
               },
               yaxis: {
                 // Don't pad out the bottom of the data range.  By default,
